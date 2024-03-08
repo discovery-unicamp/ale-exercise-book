@@ -1,0 +1,279 @@
+<!DOCTYPE HTML>
+<html lang="en" class="light" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Accessing Peripherals - Controlling the Car - RISC-V ALE Exercise Book v1.0</title>
+
+
+        <!-- Custom HTML head -->
+        
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="favicon.svg">
+        <link rel="shortcut icon" href="favicon.png">
+        <link rel="stylesheet" href="css/variables.css">
+        <link rel="stylesheet" href="css/general.css">
+        <link rel="stylesheet" href="css/chrome.css">
+        <link rel="stylesheet" href="css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="highlight.css">
+        <link rel="stylesheet" href="tomorrow-night.css">
+        <link rel="stylesheet" href="ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+
+        <!-- MathJax -->
+        <script async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    </head>
+    <body class="sidebar-visible no-js">
+    <div id="body-container">
+        <!-- Provide site root to javascript -->
+        <script>
+            var path_to_root = "";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('light')
+            html.classList.add(theme);
+            var body = document.querySelector('body');
+            body.classList.remove('no-js')
+            body.classList.add('js');
+        </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            var body = document.querySelector('body');
+            var sidebar = null;
+            var sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+            }
+            sidebar_toggle.checked = sidebar === 'visible';
+            body.classList.remove('sidebar-visible');
+            body.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded affix "><a href="title-page.html">RISC-V ALE Exercise Book</a></li><li class="chapter-item expanded affix "><a href="ch00-00-introduction.html">Introduction</a></li><li class="chapter-item expanded "><a href="ch01-00-getting-started.html"><strong aria-hidden="true">1.</strong> Getting Started</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch01-01-code-generation-tools.html"><strong aria-hidden="true">1.1.</strong> Code Generation Tools</a></li><li class="chapter-item expanded "><a href="ch01-02-code-generation-tools.html"><strong aria-hidden="true">1.2.</strong> Automating the compilation process with Makefiles</a></li></ol></li><li class="chapter-item expanded "><a href="ch02-00-getting-started-with-the-simulator.html"><strong aria-hidden="true">2.</strong> Getting Started with the Simulator</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch02-01-running-hello-world.html"><strong aria-hidden="true">2.1.</strong> Running the Hello World program</a></li><li class="chapter-item expanded "><a href="ch02-02-using-assistant.html"><strong aria-hidden="true">2.2.</strong> Using the Assistant to check a Simple Symbol Calculator program</a></li><li class="chapter-item expanded "><a href="ch02-03-debugging-a-program.html"><strong aria-hidden="true">2.3.</strong> Debugging a program</a></li></ol></li><li class="chapter-item expanded "><a href="ch03-00-data-representation.html"><strong aria-hidden="true">3.</strong> Data Representation on Modern Computers</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch03-01-base-conversion-c.html"><strong aria-hidden="true">3.1.</strong> Number Base Conversion in C</a></li></ol></li><li class="chapter-item expanded "><a href="ch04-00-assembly-object-executable-files.html"><strong aria-hidden="true">4.</strong> Assembly, object and executable files</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch04-01-organization-elf-file.html"><strong aria-hidden="true">4.1.</strong> Organization of an ELF file</a></li></ol></li><li class="chapter-item expanded "><a href="ch05-00-bit-manipulation-instruction-encoding.html"><strong aria-hidden="true">5.</strong> Bit Manipulation and Instruction Encoding</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch05-01-bit-masking-shift-operations.html"><strong aria-hidden="true">5.1.</strong> Bit Masking and Shift Operations</a></li><li class="chapter-item expanded "><a href="ch05-02-riscv-instruction-encoding.html"><strong aria-hidden="true">5.2.</strong> RISC-V Instruction Encoding</a></li></ol></li><li class="chapter-item expanded "><a href="ch06-00-assembly-user-level-programming.html"><strong aria-hidden="true">6.</strong> Assembly User-level Programming</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch06-01-square-root.html"><strong aria-hidden="true">6.1.</strong> Square Root</a></li><li class="chapter-item expanded "><a href="ch06-02-gps.html"><strong aria-hidden="true">6.2.</strong> GPS</a></li><li class="chapter-item expanded "><a href="ch06-03-hamming-code.html"><strong aria-hidden="true">6.3.</strong> Hamming Code</a></li><li class="chapter-item expanded "><a href="ch06-04-image-on-canvas.html"><strong aria-hidden="true">6.4.</strong> Image on Canvas</a></li><li class="chapter-item expanded "><a href="ch06-05-apply-filter.html"><strong aria-hidden="true">6.5.</strong> Applying a Filter to an Image</a></li><li class="chapter-item expanded "><a href="ch06-06-linked-list.html"><strong aria-hidden="true">6.6.</strong> Custom Search on a Linked List</a></li><li class="chapter-item expanded "><a href="ch06-07-abi-linked-list.html"><strong aria-hidden="true">6.7.</strong> ABI-compliant Linked List Custom Search</a></li><li class="chapter-item expanded "><a href="ch06-08-abi-recursive-binary-tree.html"><strong aria-hidden="true">6.8.</strong> ABI-compliant Recursive Binary Tree Search</a></li></ol></li><li class="chapter-item expanded "><a href="ch07-00-assembly-system-level-programming.html"><strong aria-hidden="true">7.</strong> Assembly System-level Programming</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch07-01-peripheral-controlling-the-car.html" class="active"><strong aria-hidden="true">7.1.</strong> Accessing Peripherals - Controlling the Car</a></li><li class="chapter-item expanded "><a href="ch07-02-peripheral-using-serial-port.html"><strong aria-hidden="true">7.2.</strong> Accessing Peripherals - Using Serial Port</a></li><li class="chapter-item expanded "><a href="ch07-03-interrupts-midi-player.html"><strong aria-hidden="true">7.3.</strong> External Interrupts - MIDI Player</a></li><li class="chapter-item expanded "><a href="ch07-04-interrupts-controlling-the-car.html"><strong aria-hidden="true">7.4.</strong> Software Interrupts - Controlling the Car</a></li></ol></li><li class="chapter-item expanded "><a href="ch08-00-final-projects.html"><strong aria-hidden="true">8.</strong> Final Projects</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch08-01-driving-through-the-city.html"><strong aria-hidden="true">8.1.</strong> Driving Through the City</a></li></ol></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <!-- Track and set sidebar scroll position -->
+        <script>
+            var sidebarScrollbox = document.querySelector('#sidebar .sidebar-scrollbox');
+            sidebarScrollbox.addEventListener('click', function(e) {
+                if (e.target.tagName === 'A') {
+                    sessionStorage.setItem('sidebar-scroll', sidebarScrollbox.scrollTop);
+                }
+            }, { passive: true });
+            var sidebarScrollTop = sessionStorage.getItem('sidebar-scroll');
+            sessionStorage.removeItem('sidebar-scroll');
+            if (sidebarScrollTop) {
+                // preserve sidebar scroll position when navigating via links within sidebar
+                sidebarScrollbox.scrollTop = sidebarScrollTop;
+            } else {
+                // scroll sidebar to current active section when navigating via "next/previous chapter" buttons
+                var activeSection = document.querySelector('#sidebar .active');
+                if (activeSection) {
+                    activeSection.scrollIntoView({ block: 'center' });
+                }
+            }
+        </script>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </label>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">RISC-V ALE Exercise Book v1.0</h1>
+
+                    <div class="right-buttons">
+                        <a href="print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+                        <a href="https://github.com/discovery-unicamp/ale-exercise-book" title="Git repository" aria-label="Git repository">
+                            <i id="git-repository-button" class="fa fa-github"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h2 id="accessing-peripherals---controlling-the-car"><a class="header" href="#accessing-peripherals---controlling-the-car">Accessing Peripherals - Controlling the Car</a></h2>
+<h3 id="instructions"><a class="header" href="#instructions">Instructions</a></h3>
+<p>In this activity, you must control a car to move it from a parking lot to the entrance of the Test Track (shown in the picture below) in, at most, 180 seconds. The car is an external device connected to the RISC-V processor and can be controlled by syscalls or MMIO.</p>
+<div style="text-align:center">
+<img alt="car" src="img/ch07_01_01.png"/>
+<p><span class="caption">Figure 7.1.1: Car Simulation</span></p>
+</div>
+<ul>
+<li>In this exercise, you must use only MMIO to control the car. The MMIO specifications for the peripherals of the simulator can be seen <a href="https://docs.google.com/document/d/1AE_ESrJnxzMO_WpN2yoZTyB5fGPl8wrpAzT7bij1QJk/edit?usp=sharing">in this document</a>.
+<ul>
+<li>You only need to use MMIO to control the steering wheel, engine, brakes and get coordinates.</li>
+<li>The entrance to the Test Track is placed at:
+<ul>
+<li>x: 73, y: 1, z: -19</li>
+</ul>
+</li>
+<li>The base address is shown at the table "Memory Map" (see example below)</li>
+</ul>
+</li>
+<li>The car will be considered to have reached its destination when it reaches a point inside a radius of 15 meters from the Test Track entrance. Your code must call the exit syscall to finalize the execution.</li>
+</ul>
+<h3 id="infrastructure"><a class="header" href="#infrastructure">Infrastructure</a></h3>
+<p>In order to use the car, first you must enable the device 'Self-Driving Car' on the RISC-V simulator. This can be done on the tab 'Hardware' and selecting the device ‘Self-Driving Car’ as shown in the picture below.</p>
+<p>After adding the device, its base address will be listed on the table:</p>
+<div style="text-align:center">
+<img alt="peripheral_table" src="img/ch07_01_02.png"/>
+<p><span class="caption">Figure 7.1.2: Memory Map Table</span></p>
+</div>
+<p>The car can be accessed through 'Self-driving car', on the left bar, as shown in the picture below. The car icon can take a while to appear for the first time.</p>
+<div style="text-align:center">
+<img alt="car menu" src="img/ch07_01_03.png"/>
+<p><span class="caption">Figure 7.1.3: Car Menu Tab</span></p>
+</div>
+<p>Note that, after adding the device, the car will be placed in an arbitrary position. <strong>Use the Assistant</strong> to place the car inside the parking lot.</p>
+<p>In addition to that, you can test moving the car manually using the arrow keys or WASD. To do so, enable the option ‘Enable debug controls’ on the simulator, as demonstrated below.</p>
+<div style="text-align:center">
+<img alt="car debug" src="img/ch07_01_04.png"/>
+<p><span class="caption">Figure 7.1.4: Debug Controls</span></p>
+</div>
+<h3 id="notes-and-tips"><a class="header" href="#notes-and-tips">Notes and Tips</a></h3>
+<ul>
+<li>Check the <a href="https://docs.google.com/document/d/1AE_ESrJnxzMO_WpN2yoZTyB5fGPl8wrpAzT7bij1QJk/edit?usp=sharing">ALE Peripheral MMIO Manual</a> for information about the Self Driving Car peripheral.</li>
+<li>The starting point and destination are <strong>fixed</strong>. <mark style="background:transparent;color:red">You have to use the assistant to place the car at the starting point (there is a button on the assistant that can be used for that)</mark>.</li>
+<li>The steering wheel direction values range from -127 to 127, negative values steer to the left and positive values to the right.</li>
+<li>For debugging purposes, you can control the car when the rest fails, using the keys WASD or arrow keys, with the option ‘‘Enable debug controls’’ enabled. However, this option can't be enabled while your code is running on the simulator.</li>
+<li>You can test your code using the simulator's assistant from this <a href="https://riscv-programming.org/ale/#select_url_content=TjRJZ3RnaGdsZ2RnK2dCd2djd0tZZ0Z3aEFHaEJBWndLZ0lCY0laUzRDQmpBSnlnVk14Q2pBUUhzN1NBQ1lBVlFDU2NBQktvQU5nbFIwY1BBSUpFUzVTbkFESzlScVFDK1BBR1owT1lIZ0IwUUFPZ0QwWURnQk1BcnVOUUVMaFltUXFrekFLd0tuak1OazV1UGdBWkRob0ljUUFsVkNEdFBRTWpVMHRyZTBkbkdnNFlHRlFhVWlnczcxOFFBRzUtUUs1ZUNMb0V3eE56QzFRQUQxSlVHR0lzNXh0VUFEY29HaWNMQWdsZE9Cc0dQcGhrT0dxaXZ4aC1HbkZYSGdCUkpvQjJPQUJHSG1iV21Cc0NlVVYzRlhVR0ptQi1IaDVNOXRJNk96eXVBQW9BU211WVc5dUNPeWs2Qjh5dDhmcVFBQllrTXgyS0E4QUM4UEJ5QUhjZUVKUkJJQWE4QUFZQUhqQkFCWUFIenJhUTBFaW9IZ2JNemJERHlHZ0RSUlRIZ0FCV2tqREIwa2l4d0F0RHdBTUpaUjRjY1RpV0RJSGpnOG04aUIwYkVXZkVFN0VBSXpvQkp1UHlWZGxJcEN5NG9BbmxKWWFaRlpydFFzUUR3b0RaRFNCcW5CWUZCRUJ4aW5kbGtScllyU044UFRBdVFnR0pBNkxyVEFUVktncXRMeFJ3TFFGOHBFZUp4aVBrc3JMalZxc3FxUWJjTldudnFSOWFoM1Nhc3FZTFZiVFA4YkJCV2pOcFk3blV0WE83UFR4dmI3LWRLZ3lBQ1FCeE1OM0NNME94ME9odFhnSnFCSm1BcG9zd0RNLUhoS2xWcTI0aFFqaG1yanljMDdFRUpEZlMzVzIyRDRlanV2QjJXN2lnRXpIdllITG5nMmNKMk1DanN4b1VpclJ3dnlnQUlWMWdoc1Y1eXdRU3RxMXRCTlRIZU13c2lXZm9BR3M0UjRPQTRRSlBoWmpzR05kUUFXVnNCeFVETVVORGl3cHdDQlFWQWdKdGFWVEZrVXgzMVVjaFNEc1lwYnkwZTlIMEhiOVBIZlQ5VUU0djhBSW8yMTdUUEVBb0pna1VhQVErRmtOaFZEZ0ZtWVlxSGNWcFhtQUpvYVcyQUFPQUFHTXdBRlpaRjFHa0FDWXpBQU5sa0FBdkdrdVcyYlROTE1iU3RGa05TYVYwN1lOa01teUFHWTlMTXN4TktzdHpISzBGai1IQ3pNZUVVd1JLR2tIcElsZUQ0VUw0ZTliaWdYUlhsbVRjQ25nY1FPR1FNeEhDbWNFZUZRN1RQbFNuNTJPZlY5dUstVWQrTUEwd2p5SEVjVkFnMFN6RmdISTZCRUFBVkxDUWtRZ0FwVlFBSGtBRGt6RElCZ3BuUzNWTXVsTXhzcXlPQTh1UUFCdExLblFuSEsxdnl3cTJtUUVxZVcyQUJkVzlLdFl5TG5KNFBUdFBLdTlJc2NYZ2VqRExoRUkyczdnWG5GNmVCSE9KRUtSSGd3Z2lhSllrcUlGNzNCU0Y3aHlQSWNvSVphbUxCVjRBY3FTN0lwaHBHLVZRYnBkRmdQRzRHbFpCam5oRGJUQzVMa2tSRlJWcVBxS25GSkhaQjZkTVhkWVcwellBREVlWjUzbFdaQUttU0FnQVdJQm9Hd0NiQVA1VEcrNkdJU1I2RXpBZ0d3YkRnVm95Q0F5TGJsTWZsMkNnWlpKMm95cVpMa3lyYm5SN2d6QkhkeHVDaHJXZmhIUmk2RnplVzN6YVZrYUJtUXdFSDExQTFhY1VnUGp0K2RiaDBHajdlQVBSb0hFT0JVR2xjUWpQRko1eVd1K2RNZm5iR29TZ0pXVmY5alhUQ1phVTRORkVHT0Y0YlVlRDZnT1M3NnVneGJnK25DRjFHQWFEMERDRVoxSkt2aEQtczZHbXNOcUFZOGpYSjRMVGRJTW5oRTlNaXllR3NuaGJQc2tLWFBVbmgzTTh5ZWZMOGdLZ3RYa0wwNUQ3YkV6MjliUHRsKzIzdTFHcHliUG52MHRlQUJDVjRJRVJhQnk5ZHA1NEdJTUFIQ3JONTNuLTd1UGR4U3UwVnV0Q2lFMG93RTBjRkZDUXVSV2cyRWdqOUlCbWN3R21BZ1hvWDJNREhCNUR4b2dzMi0wd3hEbStMb1RrcUFrSHptdXBWZTRCQWhUNFZRU0FBQVZFdzVoTENvajhBbWhOUVFFMXV3c040Y3d2QkN4N2JVUExpVFBzOElSNGJHOG1ZUEVlbHZKZVZIbVlieUd3ekthUzBqdld5QUJPTXdHd05IYVQwbmlWT0lkZEFmVmVIOVhnOEp0SWxIRkF1SGcza3pLV1BGQUFha2NlOEZLOXRiam9Vd2poTkkrRkNJMkdJa1FNaWdrcUs0SHFIUkJpVEVCRkFKNE0tVit3RElRRUVjTEVWNDkxSHI0T29iUXdxK1VLSjhKWVpOVllsZEJCWVZXS29QcXF3bVM1TjRjWWNLb2x5RWh6dm9mWGFxMTFxSFdLbUNVcXE4S3J1SitCZkQ2OEk1RERnZ0xxTXcraERDTFQ3aXRYSytWM2o0TU1iZlhRUEJYaTlMN2tWWTY3U3lxdU1BZEU0UjhZblNJV1dSdFpaclMxbnoxSGpmYUpkeE9pOEJzRW9SQ1dFcXhnbW1nQVIxdHE4Y2dkQjN4bUNhS2NoTVh6M2hNT01qd1J4aXozbWZOMUQ4cDBaaGRULUlZWUM0RmJ6UkdlRXNoQ3BHbGtZWEdSbWQwanhuUk1sZ014SlV2a0VaSmt4UExyQ0FBSk1BYlFOSlhnVXQrVTBXNnRMSVc2Z1pjQVg1bGxRcG1CNEFBRVNVQlFBWXRRakNncjdGV1JaRktoV2VIcGJJTVZpS29Vc3ZGV1lkbDd3YVFVcHVXUVZpLWdieDFQbWE4VlZ2QnNUd20ySHBMcEZ6UVN1ekFiTVRJd29TREgybVZxNUJacnNtTk1uUHRaQSs4VFdaeklCd0JBMUEyQS0wdnNIRTFCQ25hNW1UbmFpaHN5cnBVSnhZNExKeUFja3NNcm13VkFIQk5ROEJpR0xka05nZUNWS2lTSEZCanFscVdwRkIwS1pycTdYNXJqVTZtMVpiS29ldTFONnIrZnEtNTJzZGtRcU80aGhoMUswR1lSVXNCQUxZMy1rOURPSURzNEV4Z0pFT0Exc0hEbUtRaWhMWkRzSWFXd3RxUUNtSUIxWlVDbmVJVWd4UXpxSVV6b3JkZGs2bkRUb0lIYXUrOTk5M1owUFp1N2RHMXRJWFNEVzJ2d3BSS3AtV1FIWGJvaUZMR1ZXTVRVVXhmWVlRR3FzVENiRThTRlpYb0RrZXY0VzZrYXJQQk1CNXhtejhIdnVWdVNSeDhKTDFtR3ZjZW1ERzBvQm5RWVhaTzFjeUYxeEN0b3VsZHBneDBUcFE5MEdXaUZhTmtOZlgyUlVlVkZTSVdYVzdIcVZZLWJMb0RmT1Z0enNlQ1ltN0IrMUF5cmdDTWU3ZHlqZ2lJWUI1V1ZwUEZOTlIxMEVNQnFNb3dDZzNES0Y0TTBYSW1vY29MZ2dEd01FSTVkRGt1QUlpUHRzbXpEOENpQ0VNdzlBNDZ0REdvcUx3Y0M3TWhGZUt4amdpcDNnNkVmSEpoVFpZUUROQzJOc2NqY1JneVpRa2doZGtJNTNpeWdnQVNNd21KN3lHT3VwUXdSd04xamhidHJnRzBXUUNiSUV3S0FMMWs0Q0NsY0t6QVlyZHBTSnlFd0k4T3dxQThEM0ZxOExYa2pYazZ0YUsxQWFZd3N1VmRlYXoxbXJmVzZzUUM1a05scjFYMnVrVUVGTmticzJJQllRV3pOc2J3dFZDcmJhK3QwaS1CVnR0QWdLeHYyTkNaanNra29xRGdUUlZzbmZjSkpSMHNCV2gwRGdQRmNReldXQ2N3Mkx6UG1CV0h0d0gwS2dKNWs2S0JvQllNWlBTSUJuSWdBSUxxV2drUU8ybGNoOTBQbzlJcXZESEVLTWNZVUJKalRGbUQ0VkhlVm1BWURCMlpMUXBPdEJBQQ==" target="_blank">link</a>.</li>
+</ul>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="ch07-00-assembly-system-level-programming.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next prefetch" href="ch07-02-peripheral-using-serial-port.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="ch07-00-assembly-system-level-programming.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next prefetch" href="ch07-02-peripheral-using-serial-port.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="elasticlunr.min.js"></script>
+        <script src="mark.min.js"></script>
+        <script src="searcher.js"></script>
+
+        <script src="clipboard.min.js"></script>
+        <script src="highlight.js"></script>
+        <script src="book.js"></script>
+
+        <!-- Custom JS scripts -->
+
+
+    </div>
+    </body>
+</html>

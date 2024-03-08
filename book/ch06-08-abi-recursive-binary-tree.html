@@ -1,0 +1,275 @@
+<!DOCTYPE HTML>
+<html lang="en" class="light" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>ABI-compliant Recursive Binary Tree Search - RISC-V ALE Exercise Book v1.0</title>
+
+
+        <!-- Custom HTML head -->
+        
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="favicon.svg">
+        <link rel="shortcut icon" href="favicon.png">
+        <link rel="stylesheet" href="css/variables.css">
+        <link rel="stylesheet" href="css/general.css">
+        <link rel="stylesheet" href="css/chrome.css">
+        <link rel="stylesheet" href="css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="highlight.css">
+        <link rel="stylesheet" href="tomorrow-night.css">
+        <link rel="stylesheet" href="ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+
+        <!-- MathJax -->
+        <script async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    </head>
+    <body class="sidebar-visible no-js">
+    <div id="body-container">
+        <!-- Provide site root to javascript -->
+        <script>
+            var path_to_root = "";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('light')
+            html.classList.add(theme);
+            var body = document.querySelector('body');
+            body.classList.remove('no-js')
+            body.classList.add('js');
+        </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            var body = document.querySelector('body');
+            var sidebar = null;
+            var sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+            }
+            sidebar_toggle.checked = sidebar === 'visible';
+            body.classList.remove('sidebar-visible');
+            body.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded affix "><a href="title-page.html">RISC-V ALE Exercise Book</a></li><li class="chapter-item expanded affix "><a href="ch00-00-introduction.html">Introduction</a></li><li class="chapter-item expanded "><a href="ch01-00-getting-started.html"><strong aria-hidden="true">1.</strong> Getting Started</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch01-01-code-generation-tools.html"><strong aria-hidden="true">1.1.</strong> Code Generation Tools</a></li><li class="chapter-item expanded "><a href="ch01-02-code-generation-tools.html"><strong aria-hidden="true">1.2.</strong> Automating the compilation process with Makefiles</a></li></ol></li><li class="chapter-item expanded "><a href="ch02-00-getting-started-with-the-simulator.html"><strong aria-hidden="true">2.</strong> Getting Started with the Simulator</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch02-01-running-hello-world.html"><strong aria-hidden="true">2.1.</strong> Running the Hello World program</a></li><li class="chapter-item expanded "><a href="ch02-02-using-assistant.html"><strong aria-hidden="true">2.2.</strong> Using the Assistant to check a Simple Symbol Calculator program</a></li><li class="chapter-item expanded "><a href="ch02-03-debugging-a-program.html"><strong aria-hidden="true">2.3.</strong> Debugging a program</a></li></ol></li><li class="chapter-item expanded "><a href="ch03-00-data-representation.html"><strong aria-hidden="true">3.</strong> Data Representation on Modern Computers</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch03-01-base-conversion-c.html"><strong aria-hidden="true">3.1.</strong> Number Base Conversion in C</a></li></ol></li><li class="chapter-item expanded "><a href="ch04-00-assembly-object-executable-files.html"><strong aria-hidden="true">4.</strong> Assembly, object and executable files</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch04-01-organization-elf-file.html"><strong aria-hidden="true">4.1.</strong> Organization of an ELF file</a></li></ol></li><li class="chapter-item expanded "><a href="ch05-00-bit-manipulation-instruction-encoding.html"><strong aria-hidden="true">5.</strong> Bit Manipulation and Instruction Encoding</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch05-01-bit-masking-shift-operations.html"><strong aria-hidden="true">5.1.</strong> Bit Masking and Shift Operations</a></li><li class="chapter-item expanded "><a href="ch05-02-riscv-instruction-encoding.html"><strong aria-hidden="true">5.2.</strong> RISC-V Instruction Encoding</a></li></ol></li><li class="chapter-item expanded "><a href="ch06-00-assembly-user-level-programming.html"><strong aria-hidden="true">6.</strong> Assembly User-level Programming</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch06-01-square-root.html"><strong aria-hidden="true">6.1.</strong> Square Root</a></li><li class="chapter-item expanded "><a href="ch06-02-gps.html"><strong aria-hidden="true">6.2.</strong> GPS</a></li><li class="chapter-item expanded "><a href="ch06-03-hamming-code.html"><strong aria-hidden="true">6.3.</strong> Hamming Code</a></li><li class="chapter-item expanded "><a href="ch06-04-image-on-canvas.html"><strong aria-hidden="true">6.4.</strong> Image on Canvas</a></li><li class="chapter-item expanded "><a href="ch06-05-apply-filter.html"><strong aria-hidden="true">6.5.</strong> Applying a Filter to an Image</a></li><li class="chapter-item expanded "><a href="ch06-06-linked-list.html"><strong aria-hidden="true">6.6.</strong> Custom Search on a Linked List</a></li><li class="chapter-item expanded "><a href="ch06-07-abi-linked-list.html"><strong aria-hidden="true">6.7.</strong> ABI-compliant Linked List Custom Search</a></li><li class="chapter-item expanded "><a href="ch06-08-abi-recursive-binary-tree.html" class="active"><strong aria-hidden="true">6.8.</strong> ABI-compliant Recursive Binary Tree Search</a></li></ol></li><li class="chapter-item expanded "><a href="ch07-00-assembly-system-level-programming.html"><strong aria-hidden="true">7.</strong> Assembly System-level Programming</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch07-01-peripheral-controlling-the-car.html"><strong aria-hidden="true">7.1.</strong> Accessing Peripherals - Controlling the Car</a></li><li class="chapter-item expanded "><a href="ch07-02-peripheral-using-serial-port.html"><strong aria-hidden="true">7.2.</strong> Accessing Peripherals - Using Serial Port</a></li><li class="chapter-item expanded "><a href="ch07-03-interrupts-midi-player.html"><strong aria-hidden="true">7.3.</strong> External Interrupts - MIDI Player</a></li><li class="chapter-item expanded "><a href="ch07-04-interrupts-controlling-the-car.html"><strong aria-hidden="true">7.4.</strong> Software Interrupts - Controlling the Car</a></li></ol></li><li class="chapter-item expanded "><a href="ch08-00-final-projects.html"><strong aria-hidden="true">8.</strong> Final Projects</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch08-01-driving-through-the-city.html"><strong aria-hidden="true">8.1.</strong> Driving Through the City</a></li></ol></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <!-- Track and set sidebar scroll position -->
+        <script>
+            var sidebarScrollbox = document.querySelector('#sidebar .sidebar-scrollbox');
+            sidebarScrollbox.addEventListener('click', function(e) {
+                if (e.target.tagName === 'A') {
+                    sessionStorage.setItem('sidebar-scroll', sidebarScrollbox.scrollTop);
+                }
+            }, { passive: true });
+            var sidebarScrollTop = sessionStorage.getItem('sidebar-scroll');
+            sessionStorage.removeItem('sidebar-scroll');
+            if (sidebarScrollTop) {
+                // preserve sidebar scroll position when navigating via links within sidebar
+                sidebarScrollbox.scrollTop = sidebarScrollTop;
+            } else {
+                // scroll sidebar to current active section when navigating via "next/previous chapter" buttons
+                var activeSection = document.querySelector('#sidebar .active');
+                if (activeSection) {
+                    activeSection.scrollIntoView({ block: 'center' });
+                }
+            }
+        </script>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </label>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">RISC-V ALE Exercise Book v1.0</h1>
+
+                    <div class="right-buttons">
+                        <a href="print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+                        <a href="https://github.com/discovery-unicamp/ale-exercise-book" title="Git repository" aria-label="Git repository">
+                            <i id="git-repository-button" class="fa fa-github"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h2 id="abi-compliant-recursive-binary-tree-search"><a class="header" href="#abi-compliant-recursive-binary-tree-search">ABI-compliant Recursive Binary Tree Search</a></h2>
+<h3 id="instructions"><a class="header" href="#instructions">Instructions</a></h3>
+<p>In this activity, you must write a program in RISC-V assembly language that has a ABI-compliant recursive function <strong>int recursive_tree_search(Node *root, int val)</strong>. Your code will be linked to a code in C that calls the <strong>recursive_tree_search</strong> function and expects the return value to be the depth of the value if the searched value is present on the tree, 0 if not.</p>
+<div style="text-align:center">
+<img src="img/ch06_08_01.png" alt="linked list"/>
+<p><span class="caption">Figure 6.8.1: Binary Tree</span></p>
+</div>
+<p>The image above shows an example of a binary tree. If the value 361 was being searched, 3 would be the return value of the function, as it is the depth of the value in the tree.</p>
+<p>Each tree node is a struct that contains a value on its first position, pointers to the left child and right child on the second and third positions, respectively. In case one of the children does not exist, the pointer will be NULL</p>
+<p><strong>lib.h</strong>:</p>
+<pre><code class="language-c">typedef struct Node {
+    int val;
+    struct Node *left, *right;
+} Node;
+
+int recursive_tree_search(Node *root_node, int val);
+void puts ( const char *str );
+char *gets ( char *str );
+int atoi (const char *str);
+char *itoa ( int value, char *str, int base );
+void exit(int code);
+</code></pre>
+<h3 id="input"><a class="header" href="#input">Input</a></h3>
+<p>Your function will receive the address of the root of the tree on register a0 and the value being searched on register a1.</p>
+<h3 id="output"><a class="header" href="#output">Output</a></h3>
+<p>Your function must return on the register a0 the depth of the value if the searched value is present on the tree, 0 otherwise.</p>
+<h3 id="examples"><a class="header" href="#examples">Examples</a></h3>
+<div class="table-wrapper"><table><thead><tr><th style="text-align: left">Test Case</th><th style="text-align: center">Input</th><th style="text-align: center">Output</th></tr></thead><tbody>
+<tr><td style="text-align: left">1</td><td style="text-align: center">12</td><td style="text-align: center">1</td></tr>
+<tr><td style="text-align: left">2</td><td style="text-align: center">562</td><td style="text-align: center">3</td></tr>
+<tr><td style="text-align: left">3</td><td style="text-align: center">-40</td><td style="text-align: center">0</td></tr>
+</tbody></table>
+</div>
+<h3 id="notes-and-tips"><a class="header" href="#notes-and-tips">Notes and Tips</a></h3>
+<ul>
+<li>The root node has depth 1.</li>
+<li>The fields of the binary tree node struct are VAL, LEFT and RIGHT, in this order. VAL is a signed int value stored on the node and LEFT and RIGHT are pointers to the node's children. If a node doesn't have one of these - children, the respective pointer will be NULL.</li>
+<li>To check if the received value is on the current node, the comparison VAL = received value must be made.</li>
+<li>A NULL pointer is represented by the value 0.</li>
+<li>All nodes will have different values.</li>
+<li>The utility functions implemented in exercise <a href="ch06-07-abi-linked-list.html">6.7</a> are necessary in this exercise.</li>
+<li>You can test your code using the simulator's assistant from this <a href="https://riscv-programming.org/ale/#select_url_content=TjRJZ3RnaGdsZ2RnK2dCd2djd0tZZ0Z3aEFHaEJBWndLZ0lCY0laUzRDQmpBSnlnVk14Q2pBUUhzN1NBQ1lBVlFDU2NBQktvQU5nbFIwY1BBSUpFUzVTbkFESzlScVFDK1BBR1owT1lIZ0IwUUFPZ0QwWURnQk1BcnVOUUVMaFltUXFrekFLd0tuak1OazV1UGdBWkRob0ljUUFsVkNEdFBRTWpVMHRyZTBkbkdnNFlHRlFhVWlnczcxOFFBRzUtUUs1ZVlCNWlNQWNJVWk0NFRNb0RjVWM2SGgxOVF4TnpLMXNISnd0YStzYTZJdE15bUg4YWNWY2VBRkVBRHdBMk9BQU9IbFJsMGxRWUd3SjVSWGNWZFFZbVlIOGVIaGF5T2pzOHJnQUtBRW9ybUJ1Ymdqc3BPamZwbDhlS1FBQllrTXgyS0E4QUM4UEJ5QUhjZUVKUkJJLXM5VEN0cERRU0tnZUtzekJzTVBJQUVLQ0FDMG1YWTRpZ0hoNE1Sb2Rqb3hBQWJyamliQUlIUUFKNDhBQXFkRlF1TlVxRTVOQkJwbGUwMk1wSDgwcHVqbDRBcmlNTGhxRVJZUWkwVmlsUUIxeStvUEJMUnllUUtNQUlaZ1FkZ0lJT2VTc3FrcjE4dFF2QUFSaHp1WEJTQUxjYkNEZWEwRGs2QTFVSEEzVEJPVnpQZDdkWjh2Z3JicllReTd4QndYYkpxUzdReW1YWUQ5V0R6WkN6QkFiRFpQVTVTT2pZMERUQUJoUXdJS0R6ZkpaVXc0UjFmUWhjbUEwSGh3R0VBUGo0N2FCZHU0WmdGN200TWFCUU15TmlUMlpWZnFMSmJnUVlPaGpnTmdhRUdlWVlqVWNGQUcwQUF3QVhRZFZabkdhenFhWCtaWHBZejA1bk4yWDg5MEVBY1ZGMGpmMkVEQUgwZUFnZUZvRjRaZEtRYlJ4bWtURjlYMlhRc1UyUVo1bHpJR3dPRHNVaGlUc1hSZEdrU1VUQ3ZJRUVLZ013a0pRaDgwT2tPaHNOdy1DU2tJMTgzd2ZKQzRBdzBoTFFyUzhtT0JGaU9HUU9CWUU0dUJmM1NPQ1p5Z1hRS1BCRDh2M0VIOC0zRFFEWGg0QVZTRVpUNHZUc1ZCYzFmTlNOTDBTSUNCMDRjdmkwV1JnRS1SczRCRk9oeEM1SWt0TlFMUlRPNHI1MnhJeDh5eklTdFgxTVhseXg0QUJHSGhuZ0FSMjBzaFRWZVZ0VE5Rd0pvTlFDTElpZ1VoSXoySHpUSnVVd2dvQUptTVdWY0N5dm9nb0ttWWlxSXI1cWtnemtRMTBPeHUyYkdBaVdlQ0FjQmRGVG9VSENBekM5TmczaGhXRVhWNmhnd0FHbHpLcGlxODNPWThGQzJMVXNNb3JVei1NQzNMUW9pOHRvdGl5cjRxcEVNa3JzRkswdTg1Ykt1eWtBQUZaVm55d3EyM092b0FHWXlwMm5qcXZyV3FSSWFrMHNoYXRxT29IWUNSdjZ6cWh1QnNhVkltMThwcUJHYmVMbTBpRnRPM3laMVdzZ2VFZWpiSXFhbUtLdmd5aUVvTzVMcVJPcGFVYjhrQXlRQUZoUEY2OGFZZ0FEV24tQVorNjNvVGRoUHZxeHJUVCs5ck91NjhHQnVoTUcrb2hycFhQYlM5WlN2WFF1RkMrTW9WaEttR0toQUFlV0VncFBWV0FHb2RaVWo1WDNqZGQwTEFVNzczQkFOcEdEWkg5dzlMMWozUFdRN2ZTNzBqeUNpOWRMekJHdkxKNHFHWUM5R0FCSmdDZ0xSV2VLdmFFRVM0blV2Uzh0eWFZazNOeVcwOHp6Wm5qVklvVTNUdmQ5UGlwdVlBYW9GTDZlZCswTC1vRm9HeGVGMFhScmVLSE01aHBpNGNianlIMExYOXczRU5jbkctRlUreTZvZEt0SFR4UjZQVXdsdDduNTVPS004TFlMVWlwNG5iOENDOXAxZUdRSU41eFZiWFRNazBMUE9YdnZaN1RuZ0FFSllSUEEzaXZqZUFscU9YME82WDh0cDlYc2o5bVFVRmlybHpwbmtWbFVRVlZZOERWbkNVNmE4ZUJRRDFqZkI2Tnd0N0ZseERySitQdGo0ejFJQVFJOFVBenpyek1zVmVCTzlZVFBId2JpQUFWTUZhK1BBTENoWHZ1V0FnWklncHd4dUkzRWMyb3h6ajFNRjNTSWNCaUdtSG5yQ1loVXBLcnhtVEhlV0VvOHpCV3lESHNYdWNSeEkzSDBuUVQ0RE1BRGkyOVVCRWhEc1FyUVpnZUFBQkVPRHdoZ0NtWXNQQXVRWVU2RXRWU3JEZUE5Q01Bb053eWhlQTdGeUpoVTBJQ0lBOEJCQUtYUTBJUTd3bGdPaGVFWmgrQlJCQ0dZZWdJbzlnQUhrWFJlRnlLUUVKSVE5elpsZURvUUpSaU9ERm1oS1lIWTZ3TmpqbXNhWWZzenc1aFFCb0FBYTA4ZElWQXJ3MVl1SDdHWU1xQUJOREN0d0tEQVhFQVFEZ1BCMG5HSnNMeFhFUzFZRElBVER2VUVEUWVDZ1NPTlNHQTVUVUQ5TWFLWTh4UEFFQUdIZ1VZTldIaXZHb0I4WDRnSkJqZ21oUENRS1lNTVM0bDVFU1NVeE10NE9wcElNUmtySms4dG93R1FPRW9wendRVFZOcWZVc3dETjJ5TndtakxQVWtpYll1MFBLZ040aHM0ek9tQkJ3Y2dQY1lDSmtmdkRjMEp0WUFWaTFpZVdRdVVUelh5OXZHSFlTaGhsd0daSkVTS0twM2E1VmtKZFdRWklBRHNHeGFWVTBlcklSNnF3Z3JVcHVySUFBbkxTdWwzS05qWVBiUEdVbDRodEw0cGhRN0lDd0F0QmV3c0ZRZ0FpdGpOeHY1bGp6SnFGcFBJakpVQWVUZHFZQXdjSzRDSXZuTHdsVVZ3UUR6aVlPS1RBd1ZaQ21GRmFZSWtlVTdVZ0VjTG9HVU5yVEFBREpqVWhsS3JnUG9EQmtBZ2c5VVNiMXZxNEQ1UkFMSzNWeDVUQVJ2OVh3b2NGcllqZnh0VlN2b0RxYlUwcjZHNjBOZlFmWFhPZWdHLVZVQmczNXZEZGNxbXBnWTFYaWxSUEVBRWFvMUp2TlphdE5SSU0zMnNpSTZuZzlMR1c1cDJSV2tBQUE1ZmdJUVFpdGtEV1drTlBiSzN6amdKZEd0WHQ2M3hxTGFhMkVyYlUzV3FKQ3l6TjNhYlhVMTNhWVBOczZSMWpvblNXa0FRYVoyZXJQZU9wZHNiVUFOb2pkV2tBTGJUQnR1M1JqRjFXYWQzc3BkU2UyOW83NzJYdXZVTzRERjdhM0VUMVkyNjVpNjMxbW8tVnVudFI2UUMtcDROZFR0cnJCMm5zTGZPMVlrN1MzbHR3eEd1bEQ2NjB3WWpRUmhERzZrTldwN1ZUSDkrNmlTOG9IZTYwOUVIQ05YdW5lQjg5NUhvTnh0Zy1Pc2pOSGsyZm9ZMHg4UVBiNlVDb0F6aG9EZkhRTThZNDRwcUQwTGVEUndnRFFWQWdGS0N5QVFIQUw4eXhaQUJKMkJLM2dFQlNXTmdnQzZFTWpoTE5PQXBTdElUSVpjcGtrQXhuYXNMbTRDUFhjLUp6ejdsdk8rYkE2OVZHM21xWitmWS1UTHpMNnlRaGVpNEZxamtXUFVCWXVrbCtMcVcraWtlUzZGbUwxeTZWeGVVeUFkc1FxWml5M2x2LUdGU3NlQWJHQWFBeG84S2pWSXQxdnJLRlFKMExEeDRxSzdTQzl4elozUmM4ZWh1TGNXeUV4Yml4aFh3RDdQRzZ6NldFMU5yN1ZIbFR3SlZXMHNqYkdXQUJhT09yWUVKa29MQWNWeFZtRm1VbVdDUndvVkNWUlJlU1NzbFRnekN3RG1IWWVjQkJwczNkZUJOMHp5eGV0b3NvTThMRndFclB6RnMzQWV6ckp6U09CZWFDZWhFM05QYWQwN3dXRWxub0NBN3N5S1VIbUNEZzdGSzYrUkgxbWdjZzl1d1FhT1pTSVVmZEc5RHd6ZGhQdXdoaHpwLVluaENjazNSSlRDVU9ENjBNd2pTSE1PRE4zMFBUbysyNEVic0ROR2JUbWVCdDRtRU02MXRjVkx0VW1iVXpjeXhkUURZYTcwWG9WMU80akNtUU9tVFV3SnA5UXZLY2k2UFByNVllY2swTXp3eUdUbjRjY0U0K1I4RDFIdDNMVFdtZU96NjVWdmtzTXdtN2JtektPSFBtaWR6YVYzODczZGdjOXpnaTcrUXJzemY5MWFHME0zVzd0Z1VaOEk4VXJaQVIrSmRIckhFc3lzM0NSc25NMjI1eUFvVzlPOFlWTUxmVUVFRWdFZUhQQWp4WjV1TC1VS2R4ZUMrc2dacEV2bldad1Y2cjZsQzBzZVhjaDE5ZG8wVktvUTcxdDlXZU13b3JaV0Q4VE5vdk5vLWdEajhUSlB2Tk0tZ0JELUhEeHhmeS01eVQ3QTdLc1Bma3J5MXZiTTMwWlFFLWxYZ0FNVDNiRlR2WTlVQmhyV3Bsck9FRW5JZUF1aHduaE9nN3RjV2xmYkd2dy1GZ0Z4QWd4NEZwaHp5K0daQTRDZ0g2V29ISUNuRkwwcW5SUjRGRlJ3V0hVVEI0QkRqT1hpVE1EbVM1R2V5bFZlRzhCZ0pnQ1p6YkJBRlNSd1ZueWV4NzA4QzhGSU9lQUFISXlvZUltRFVsVElSOEVkR2dvQWlGblJuc3Y4Nkk2QTNzY0ZPSm50VXBNbGJRWEVtUW9CV1J3VnFCYkl4Um5ndlVEVXFCZlZaQlJWWGhuWnY5cEJSdHI0SnRDVUt3OFYtbDJ3cjhnUjR4QzhQRllRRVErUWRoU0JGaHV4RXgtaFRCTUpkQXlRTmdKUXpCOWc1d0lVZkM0WmhGRnhyQzFRZUJpUnN4bmdqeExEMDQrQTBvcEJsY0lBRUFpY0lnbW9MQndnOWhTQXlSN2dSUXdBYTEtQ1lWUklnSWJDQUF4UDhjSWtSRjBLSXA1UzdWNUdnRm5kc1VZSnNKb0ZvTDBEZ2RvYVFNaVRKVXNCRUVTRW8tSXVHSlBULWJNWE1RRldNSkdaOEpBMmNMSWRHSHdsVU13LVVMa0tRRDhEVkI0UElIZ0RBbmVOclNiU2dWQXlJSEJlNFI0WGdOWTBoUE5XUUVoTURMMkhRUTRyMmRzRkFnVUJrR1F1UXFWQlEwVUcwUTRuZ1U0amdRMWRRdHZYZ1RRcjJhQTJBbFpUQ0k0WjRYYktZOS1Ub0VoZTRIZ09HTVVELUVoTkFkQlVLVzRjRXQ0cUV1R0ZBaG9HQXB2U1kzZ1dFaUUrNEdFbEVraENRanhFRWxBK1haRXVFKzRFekxZbDBRZ1hFT0dmNC1wUXc1NEZBdndyMldZN0tLOEN3bmNGVUd3Z0tYWUJ3bnc1d2tBVnc5d3p3N3cyQ2Rrc3ZWMFFJMVVSRVVJMU1jSXlJaXlHSTlSUG9lSXhJaG9VMEZJdklaMERJaDJBQ0hJOHpQUVA4UGs0STRveHdVbzdNQ28xMUotTXdhMU9HZW96RXVnR0NWb0Zvam9kbzRzSTFOVWJvcTAzb3IyZm9zb29ZMS1MT0E0QWJNQVdBV1FTQVpZR0JGaGRTUlJIZ0FBV1FhQkJETUYwQlRCZUJUTkJENnczSEZqSVdlQmpON1I0RWpNK0Vsd1lSVWtsMUxKRE1nSkJXa1RKbFQzV3lKU2p4dXdJRGpQVXowQXdnT0MrMzZ4K3orMGVseUorTWlGa0UtUzlpbXpsZ2FuNlJGbkFQR0puRS1WM2h3UTZ3MktCQzRKUlZ6SnNBR3lHMkd6ME9Hd214MEhoRk8xeEdlSFR4YkxGVnV6djBleWNCZTNFQkVQK1cyRTZWeEdYSjRFVmd4eXB6WE8rd3hWa0J3THlEd05RQUlPTDBGR0lQQnktaEJHTElZUndWWExadzUxRGxmUERrbnpRTk1ubk45RGRpRDB0eGd2bkdXRGdyTUZISk1PNUtxeGdFNGhtSkRtbnpLZ1poTlBZa0l0aEFaaERrLVJjaFprRE9kQU1uUjA0bGtBb3N3aXp3bW1HSnNKV0R5UmpGd0JBQmFGLUdRRXdGQUE0Q1lGTkFJQkVvRXF5Q0VzRWdJQWdEa0V3Q2Nqd0VFckxUa29nQnJDVW9lRlFCVXBrclVwSUFnRjBTMHUwbDBwZ0Zrb01zS09NcDB1a3JNdjB2a3NFQ3N0TXZNdmtxVE1jcHN1Y29nRlVEY3RVb0VnTXY0RGN2LUdUQkRDNldhRStRcVJkQTRHV0RjcEN2Y0FxVVFGSUwyRmRKbXhZQlBHV0RwVUtJeW95czByd0hSUkVnRkRDalhBb0RRQllGeWt1bWpUd0FJQUlNMUU2UkV2TWhUV1pHSjBrb3dCbFMwQzBDQUE=" target="_blank">link</a>.</li>
+</ul>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="ch06-07-abi-linked-list.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next prefetch" href="ch07-00-assembly-system-level-programming.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="ch06-07-abi-linked-list.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next prefetch" href="ch07-00-assembly-system-level-programming.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="elasticlunr.min.js"></script>
+        <script src="mark.min.js"></script>
+        <script src="searcher.js"></script>
+
+        <script src="clipboard.min.js"></script>
+        <script src="highlight.js"></script>
+        <script src="book.js"></script>
+
+        <!-- Custom JS scripts -->
+
+
+    </div>
+    </body>
+</html>

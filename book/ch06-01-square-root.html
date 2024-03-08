@@ -1,0 +1,312 @@
+<!DOCTYPE HTML>
+<html lang="en" class="light" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Square Root - RISC-V ALE Exercise Book v1.0</title>
+
+
+        <!-- Custom HTML head -->
+        
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="favicon.svg">
+        <link rel="shortcut icon" href="favicon.png">
+        <link rel="stylesheet" href="css/variables.css">
+        <link rel="stylesheet" href="css/general.css">
+        <link rel="stylesheet" href="css/chrome.css">
+        <link rel="stylesheet" href="css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="highlight.css">
+        <link rel="stylesheet" href="tomorrow-night.css">
+        <link rel="stylesheet" href="ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+
+        <!-- MathJax -->
+        <script async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    </head>
+    <body class="sidebar-visible no-js">
+    <div id="body-container">
+        <!-- Provide site root to javascript -->
+        <script>
+            var path_to_root = "";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('light')
+            html.classList.add(theme);
+            var body = document.querySelector('body');
+            body.classList.remove('no-js')
+            body.classList.add('js');
+        </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            var body = document.querySelector('body');
+            var sidebar = null;
+            var sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+            }
+            sidebar_toggle.checked = sidebar === 'visible';
+            body.classList.remove('sidebar-visible');
+            body.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded affix "><a href="title-page.html">RISC-V ALE Exercise Book</a></li><li class="chapter-item expanded affix "><a href="ch00-00-introduction.html">Introduction</a></li><li class="chapter-item expanded "><a href="ch01-00-getting-started.html"><strong aria-hidden="true">1.</strong> Getting Started</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch01-01-code-generation-tools.html"><strong aria-hidden="true">1.1.</strong> Code Generation Tools</a></li><li class="chapter-item expanded "><a href="ch01-02-code-generation-tools.html"><strong aria-hidden="true">1.2.</strong> Automating the compilation process with Makefiles</a></li></ol></li><li class="chapter-item expanded "><a href="ch02-00-getting-started-with-the-simulator.html"><strong aria-hidden="true">2.</strong> Getting Started with the Simulator</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch02-01-running-hello-world.html"><strong aria-hidden="true">2.1.</strong> Running the Hello World program</a></li><li class="chapter-item expanded "><a href="ch02-02-using-assistant.html"><strong aria-hidden="true">2.2.</strong> Using the Assistant to check a Simple Symbol Calculator program</a></li><li class="chapter-item expanded "><a href="ch02-03-debugging-a-program.html"><strong aria-hidden="true">2.3.</strong> Debugging a program</a></li></ol></li><li class="chapter-item expanded "><a href="ch03-00-data-representation.html"><strong aria-hidden="true">3.</strong> Data Representation on Modern Computers</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch03-01-base-conversion-c.html"><strong aria-hidden="true">3.1.</strong> Number Base Conversion in C</a></li></ol></li><li class="chapter-item expanded "><a href="ch04-00-assembly-object-executable-files.html"><strong aria-hidden="true">4.</strong> Assembly, object and executable files</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch04-01-organization-elf-file.html"><strong aria-hidden="true">4.1.</strong> Organization of an ELF file</a></li></ol></li><li class="chapter-item expanded "><a href="ch05-00-bit-manipulation-instruction-encoding.html"><strong aria-hidden="true">5.</strong> Bit Manipulation and Instruction Encoding</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch05-01-bit-masking-shift-operations.html"><strong aria-hidden="true">5.1.</strong> Bit Masking and Shift Operations</a></li><li class="chapter-item expanded "><a href="ch05-02-riscv-instruction-encoding.html"><strong aria-hidden="true">5.2.</strong> RISC-V Instruction Encoding</a></li></ol></li><li class="chapter-item expanded "><a href="ch06-00-assembly-user-level-programming.html"><strong aria-hidden="true">6.</strong> Assembly User-level Programming</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch06-01-square-root.html" class="active"><strong aria-hidden="true">6.1.</strong> Square Root</a></li><li class="chapter-item expanded "><a href="ch06-02-gps.html"><strong aria-hidden="true">6.2.</strong> GPS</a></li><li class="chapter-item expanded "><a href="ch06-03-hamming-code.html"><strong aria-hidden="true">6.3.</strong> Hamming Code</a></li><li class="chapter-item expanded "><a href="ch06-04-image-on-canvas.html"><strong aria-hidden="true">6.4.</strong> Image on Canvas</a></li><li class="chapter-item expanded "><a href="ch06-05-apply-filter.html"><strong aria-hidden="true">6.5.</strong> Applying a Filter to an Image</a></li><li class="chapter-item expanded "><a href="ch06-06-linked-list.html"><strong aria-hidden="true">6.6.</strong> Custom Search on a Linked List</a></li><li class="chapter-item expanded "><a href="ch06-07-abi-linked-list.html"><strong aria-hidden="true">6.7.</strong> ABI-compliant Linked List Custom Search</a></li><li class="chapter-item expanded "><a href="ch06-08-abi-recursive-binary-tree.html"><strong aria-hidden="true">6.8.</strong> ABI-compliant Recursive Binary Tree Search</a></li></ol></li><li class="chapter-item expanded "><a href="ch07-00-assembly-system-level-programming.html"><strong aria-hidden="true">7.</strong> Assembly System-level Programming</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch07-01-peripheral-controlling-the-car.html"><strong aria-hidden="true">7.1.</strong> Accessing Peripherals - Controlling the Car</a></li><li class="chapter-item expanded "><a href="ch07-02-peripheral-using-serial-port.html"><strong aria-hidden="true">7.2.</strong> Accessing Peripherals - Using Serial Port</a></li><li class="chapter-item expanded "><a href="ch07-03-interrupts-midi-player.html"><strong aria-hidden="true">7.3.</strong> External Interrupts - MIDI Player</a></li><li class="chapter-item expanded "><a href="ch07-04-interrupts-controlling-the-car.html"><strong aria-hidden="true">7.4.</strong> Software Interrupts - Controlling the Car</a></li></ol></li><li class="chapter-item expanded "><a href="ch08-00-final-projects.html"><strong aria-hidden="true">8.</strong> Final Projects</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch08-01-driving-through-the-city.html"><strong aria-hidden="true">8.1.</strong> Driving Through the City</a></li></ol></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <!-- Track and set sidebar scroll position -->
+        <script>
+            var sidebarScrollbox = document.querySelector('#sidebar .sidebar-scrollbox');
+            sidebarScrollbox.addEventListener('click', function(e) {
+                if (e.target.tagName === 'A') {
+                    sessionStorage.setItem('sidebar-scroll', sidebarScrollbox.scrollTop);
+                }
+            }, { passive: true });
+            var sidebarScrollTop = sessionStorage.getItem('sidebar-scroll');
+            sessionStorage.removeItem('sidebar-scroll');
+            if (sidebarScrollTop) {
+                // preserve sidebar scroll position when navigating via links within sidebar
+                sidebarScrollbox.scrollTop = sidebarScrollTop;
+            } else {
+                // scroll sidebar to current active section when navigating via "next/previous chapter" buttons
+                var activeSection = document.querySelector('#sidebar .active');
+                if (activeSection) {
+                    activeSection.scrollIntoView({ block: 'center' });
+                }
+            }
+        </script>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </label>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">RISC-V ALE Exercise Book v1.0</h1>
+
+                    <div class="right-buttons">
+                        <a href="print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+                        <a href="https://github.com/discovery-unicamp/ale-exercise-book" title="Git repository" aria-label="Git repository">
+                            <i id="git-repository-button" class="fa fa-github"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h2 id="square-root"><a class="header" href="#square-root">Square Root</a></h2>
+<h3 id="instructions"><a class="header" href="#instructions">Instructions</a></h3>
+<p>Write a program in RISC-V assembly language that computes the approximated square root of integers.</p>
+<p>To perform read and write of data from/to the terminal, you must use the read and write syscalls (similarly to exercise 4.1, but now in assembly language)</p>
+<p><em>read</em> syscall example:</p>
+<pre><code class="language-riscvasm">    li a0, 0  # file descriptor = 0 (stdin)
+    la a1, input_address #  buffer to write the data
+    li a2, 1  # size (reads only 1 byte)
+    li a7, 63 # syscall read (63)
+    ecall
+
+input_address: .skip 0x10  # buffer
+</code></pre>
+<p><em>write</em> syscall example:</p>
+<pre><code class="language-riscvasm">    li a0, 1            # file descriptor = 1 (stdout)
+    la a1, string       # buffer
+    li a2, 19           # size
+    li a7, 64           # syscall write (64)
+    ecall
+string:  .asciz "Hello! It works!!!\n"
+</code></pre>
+<h3 id="input"><a class="header" href="#input">Input</a></h3>
+<ul>
+<li>Four 4-digit decimal numbers separated by spaces (' '), followed by a newline character ('\n'). The whole input takes up 20 bytes.
+<ul>
+<li>String Format - "<strong>DDDD DDDD DDDD DDDD\n</strong>"</li>
+<li><strong>D</strong>: a decimal digit, (0-9)</li>
+</ul>
+</li>
+</ul>
+<h3 id="output"><a class="header" href="#output">Output</a></h3>
+<p>For each 4-digit number read, you must compute its approximate square root and write its value to STDOUT using 4-digits and each square root must be separated by a space (' ') and the last one is followed by a newline character ('\n'), so the output will also take up 20 bytes.</p>
+<ul>
+<li>String Format - "<strong>DDDD DDDD DDDD DDDD\n</strong>"</li>
+<li><strong>D</strong>: a decimal digit, (0-9)</li>
+</ul>
+<h3 id="examples"><a class="header" href="#examples">Examples</a></h3>
+<div class="table-wrapper"><table><thead><tr><th style="text-align: left">Test Case</th><th style="text-align: center">Input</th><th style="text-align: center">Output</th></tr></thead><tbody>
+<tr><td style="text-align: left">1</td><td style="text-align: center">0400 5337 2240 9166</td><td style="text-align: center">0020 0073 0047 0095</td></tr>
+</tbody></table>
+</div>
+<h3 id="notes-and-tips"><a class="header" href="#notes-and-tips">Notes and Tips</a></h3>
+<ul>
+<li>
+<p>The usage of <a href="https://en.wikipedia.org/wiki/Methods_of_computing_square_roots#Babylonian_method">Babylonian method</a> with 10 iterations is recommended. Considering that we want to compute the square root of a number y, the basic idea of this method is:</p>
+<ul>
+<li>
+<p>Compute an initial guess for the square root:
+$$
+k=\frac{y}{2}
+$$</p>
+</li>
+<li>
+<p>Approximate your estimative, k, to the real value of the square root by applying the following equation:</p>
+<p>$$
+k'=\frac{k+\frac{y}{k}}{2}
+$$</p>
+</li>
+<li>
+<p>Each time the above equation is applied is considered "one iteration". For this exercise, use 10 iterations.</p>
+</li>
+</ul>
+</li>
+<li>
+<p>For this exercise, approximate solutions are accepted.</p>
+<ul>
+<li>Solutions with an absolute error smaller than 10 will be considered correct.</li>
+</ul>
+</li>
+<li>
+<p>Other methods to square root approximation can be used, as long as:</p>
+<ul>
+<li>It used only integers. Floating point numbers or the RISC-V square root instruction cannot be used.</li>
+<li>The approximation is as or more precise than the suggested method.</li>
+</ul>
+</li>
+<li>
+<p>You can test your code using the simulator's assistant from this <a href="https://riscv-programming.org/ale/#select_url_content=TjRJZ3RnaGdsZ2RnK2dCd2djd0tZZ0Z3aEFHaEJBWndLZ0lCY0laUzRDQmpBSnlnVk14Q2pBUUhzN1NBQ1lIZ0tvQkpPQUFsVUFHd1NvNk9IZ0VFaUpjcFRnQmxlbzE0QmZIZ0RNNkhNRHdBNklBSFFCNk1Cd0FtQVZ3bW9DbHdzVElWUzVnRllFekFiaE1ZTms1dVBnQVpEaG9JQ1FBbFZGRFNYUU1qVXd0ck8wZG5TeG9PR0JoVUdsSW9QSjgtRUVDWUlKb0pOeDRBVVFBUEFEWTRBRVllVkViU1ZCaGJBZ1VsRDFVTkJpWStJSjRlWEpneU9uc2lyZ0FLQUVvSm1DbXBnbnRwT2xYS3paNVNBQXNTYzNzb0hnQmVIZ0tBZDBFUmNTa1pKYk1tbVJvU1ZCNW04emFNRHcxQUJIZXdRT2ctV0ljRGlrTXdyQTZiSnk4Q0dKYTYzVkFQU0xST0lKTGlrZmFUVFluTTR6QXBGRXF6Y3dJZXdFWTVMRkY0K0ZCUWxUWWtFYzVRY3dRV3kyT0E5TWh2RGFITklBWVNNQ0NndFdLZVRNT0JabXpnMXdBZk90aFpzR2R4ekJDUE53Q1VLMVJEU1BZNkJzMmVZMEFVR0RRNExsMkpMVUh6blBpVm5xMWJvNVBLcHZ3OU5BSkhCVU9DSkFCUFFHa2VZLWJUeXBuNjB3eHMwWExrOHgwQ3oxcEFBcVRwNEhTV29LZEZKV3N0VFp1STdDYy10Qk1TZ3BDRHlmeHFhbVpnQURBQVdSdU5uZ0FWZ0F6RjJBT3c4QUJNQTliUEFBbkcxbXMwVE16Y1BXMG0yQisyMjcydXp3MjgzKzIzUngzcDFWWnpIRHZ4YlVnSVhBOVBZWU9TOHFIVHV6aitDSFFSZ1dGSXdlZUFXWTlIRHZIT2R6ZWZ5NnpmTXdNeklRZFpWak5WaXhDTXRVQXJDUXF4ckFEQlRWQnNRRWJQc0IwSE5wdHg0WnNKd0FEa0hjY2R4bk9VMzFRdHRzTFhGdG1tbzVwbTJvN3RkMExjaStIdlU5ejB2YVVZQnZFbHhRZmFobnlTVk1QME9MOGlWdkRsRTMtSjFrT0ZZRE15N0ZqSU1ra3NFQmd1Q0VOck9TMVRNQWN1MGJURDhJN1VkVjJiWWRDSmJmQzJtWS1jVVBuRnROMGJVZE1MYlpvTzJvZ2NiTkl1ZGdIWWgxT0t2SGlqa2stekJPNFY4MVZFelp4TlpTU0V6LWJUVXdVMERtMlU0VW9OTEIxWUxCZURxeVMxaXpEYVh0RzBJMGRyTm80eXFPYmF5U0wzTWo3S2JGc09pM1VkcUpjdWpSMXNocVVMOC1pT0l2SUxlTHZmckh5RXlMaFdpcVpZcENzNEVxVEpEa3BBRURlQjNPeU10VTZEc3MwLUxGc0trQWV4TXRjQnc3VENoMUhCalczUTdxNXlhanNuTGFEejF5YzVvbE5JaURlckN3THVPRzh3d3FmQ0tSS2pCRXBqMExnZUNXSkVlRXVHNW1uOGFHZUFBSGh1TnBHM2hxQUFHb01iV1lCVXlodWdLRnNJeGF6Uk0wTFJrQ0FlbTBtYTRybTM4RnRrdWNBQU1WcDRBQVNZQW9HMEptZXBVczQxSTAzS3RMMit5cGdKdnBpWUFnQnRSc0FGMWVaUThXaWJBV3NwYmFlVzV5OUw3QnArMmFSdllBU0FlRTFqcHJuR2JYM2xIOXpEMFdBWWpnYlZIRjRHNUZTdUZWY2RZalV2RTlxV3pBQSszbkVkOHBaZEorTE9UOWgySkZJQWdRZUZLSGtBSjJ3Zmh1Tkc1eWdQUUlhdDhPQThqZ2daZURnQkNaT2NjMW5nb2ZnQUNCaHVUT25YOTdZYy1NSndZR1FFNFM3QnVnSWFobUdzM1JwSGJscmFQb2F4NHVUYzJlUHVSK0RHcTlEOHdzN3JxT3BhZ1dXWTdkRXV4OFR0RWxqWG40QUNvczBiTlpMQWg4dW5RSUFCYU5vYWMyQ2FEVnhUVnZiTUcyWUR0cmV6R0RtNHQ0Uk9jb1lBSXdrRGh2N1JKN2MwdlFLWlUwOXE2UldxQWpRbWg0RXpBQTRnblZBZ0lPWmIyME9ZSGdBQVJEZ2R3WUItMjVEd0lNSEJqUkhFeko3ZlFoaGpDS0hjQ29YZ1hSQ2oyRzRrakNBUEJqZ1FqMEZjRG1keFlCRXp1T1lBUXNSd2gtUWhKVFZBQUI1YiszaENpa0g0ZUVKWXY5LTRyRjBEdzNCSEJ1UlhETUYwVm9iUXRTMzFoQ0FKVVN3YWhRQm9BQWF4WVRJVkFLeEVhdUNWT1lKbXFZSm9XeUZFcldBK0l3Q3dEa0pBUm93OURpR21OQnNBQXNwVFk0MXMtN0xDQ1NjTFVoTWpDckI0THZKWVhpZUNueDRPNG1BYXdNWXBOZ09KSnhVeC1wQ1NXSTBPUVFZZkdiRWFHaVJvTThHQmdGV09ZQWc2a3F4TEVzTk9BZ0dOTEF6U0RHaUlNbFMyQTFMcVhsUnB6VFdrelRUZ1VodXZSbTdIQjRJWFhDYXctRXdKOUJJQWdxQVk1dHc3bEFoR3ljZTZJMXd1akllcXBoUXpGQWpJUXc3Y2JnUkpDUkFiK0JBQ2tMMkRza29NdHpMNGpKSUFBT1FnQzhwWXh5dUJyQUFENC1NNkhRRTVQQVZTbzFtVkEteCtnWWhMSmp0ZkhnY3pUVGhnUkRrbmc1TUNaVXlRaVVxWW5jWURVaWRta0FJOG9vWkVOSUxpdEVaaHlVeG5sS3N5RzZ5dTVvd1J0czVzdXlNa3JIZHZaS0dBQTNHSUljemd1TW9Fc1JzY2hVWnRrdmxNV0FwTEo1QWpETEFaQVN3dVVTQldGU2JrYWh5QzZtYkhJQUE1STJEVjZTZUFhcjFjdlRZeEtKVTNCVlF3SnVTeHpsYWlJWDBTMXdUYW41UGxTc1oxU3JiQXF2QlBpZFZlcnRXNnYxUnFtRjhwNFU4QVhqaWhodFQ0STBGUUFLdVE1OWZXN2cxWElZMVlhQ0FScWpZS3BKRjhlQVpJMWZHcGV6SWhTdmljZmNCb0xSMmg2bnpiZ0VBTXdiYklFd0tBRGdUQUtRRURyVld2SU5hNEFrQWdQSVRBWVo3Q29Ed05XcUF5QU8wRUFnQ0tIdDRZQjF0cUhTT2lBR0NKMTlxblRBZHRuYUFCaUM3KzJ0dVhUT3p0UWdOMUxwWGFPZ0orNnQySG9nR29FOWc3aDJkb0VDZTNvbHl5d0VBNERhWTRoUVRIZnc0STBFOVQ3cURrRk1ZZ0RncmlaQndIbFgybGdqWkdpOWxYZEI2RDQ2OEN1TFBCQ1lFOXNLQm9CWUNkRUEyZzhBRUNETFFHSWl5NjFZWkFJbkRseGpuQ0VlME5vSUFB" target="_blank">link</a>.</p>
+</li>
+</ul>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="ch06-00-assembly-user-level-programming.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next prefetch" href="ch06-02-gps.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="ch06-00-assembly-user-level-programming.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next prefetch" href="ch06-02-gps.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="elasticlunr.min.js"></script>
+        <script src="mark.min.js"></script>
+        <script src="searcher.js"></script>
+
+        <script src="clipboard.min.js"></script>
+        <script src="highlight.js"></script>
+        <script src="book.js"></script>
+
+        <!-- Custom JS scripts -->
+
+
+    </div>
+    </body>
+</html>

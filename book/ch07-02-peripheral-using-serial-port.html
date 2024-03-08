@@ -1,0 +1,285 @@
+<!DOCTYPE HTML>
+<html lang="en" class="light" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Accessing Peripherals - Using Serial Port - RISC-V ALE Exercise Book v1.0</title>
+
+
+        <!-- Custom HTML head -->
+        
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="favicon.svg">
+        <link rel="shortcut icon" href="favicon.png">
+        <link rel="stylesheet" href="css/variables.css">
+        <link rel="stylesheet" href="css/general.css">
+        <link rel="stylesheet" href="css/chrome.css">
+        <link rel="stylesheet" href="css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="highlight.css">
+        <link rel="stylesheet" href="tomorrow-night.css">
+        <link rel="stylesheet" href="ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+
+        <!-- MathJax -->
+        <script async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    </head>
+    <body class="sidebar-visible no-js">
+    <div id="body-container">
+        <!-- Provide site root to javascript -->
+        <script>
+            var path_to_root = "";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('light')
+            html.classList.add(theme);
+            var body = document.querySelector('body');
+            body.classList.remove('no-js')
+            body.classList.add('js');
+        </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            var body = document.querySelector('body');
+            var sidebar = null;
+            var sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+            }
+            sidebar_toggle.checked = sidebar === 'visible';
+            body.classList.remove('sidebar-visible');
+            body.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded affix "><a href="title-page.html">RISC-V ALE Exercise Book</a></li><li class="chapter-item expanded affix "><a href="ch00-00-introduction.html">Introduction</a></li><li class="chapter-item expanded "><a href="ch01-00-getting-started.html"><strong aria-hidden="true">1.</strong> Getting Started</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch01-01-code-generation-tools.html"><strong aria-hidden="true">1.1.</strong> Code Generation Tools</a></li><li class="chapter-item expanded "><a href="ch01-02-code-generation-tools.html"><strong aria-hidden="true">1.2.</strong> Automating the compilation process with Makefiles</a></li></ol></li><li class="chapter-item expanded "><a href="ch02-00-getting-started-with-the-simulator.html"><strong aria-hidden="true">2.</strong> Getting Started with the Simulator</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch02-01-running-hello-world.html"><strong aria-hidden="true">2.1.</strong> Running the Hello World program</a></li><li class="chapter-item expanded "><a href="ch02-02-using-assistant.html"><strong aria-hidden="true">2.2.</strong> Using the Assistant to check a Simple Symbol Calculator program</a></li><li class="chapter-item expanded "><a href="ch02-03-debugging-a-program.html"><strong aria-hidden="true">2.3.</strong> Debugging a program</a></li></ol></li><li class="chapter-item expanded "><a href="ch03-00-data-representation.html"><strong aria-hidden="true">3.</strong> Data Representation on Modern Computers</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch03-01-base-conversion-c.html"><strong aria-hidden="true">3.1.</strong> Number Base Conversion in C</a></li></ol></li><li class="chapter-item expanded "><a href="ch04-00-assembly-object-executable-files.html"><strong aria-hidden="true">4.</strong> Assembly, object and executable files</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch04-01-organization-elf-file.html"><strong aria-hidden="true">4.1.</strong> Organization of an ELF file</a></li></ol></li><li class="chapter-item expanded "><a href="ch05-00-bit-manipulation-instruction-encoding.html"><strong aria-hidden="true">5.</strong> Bit Manipulation and Instruction Encoding</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch05-01-bit-masking-shift-operations.html"><strong aria-hidden="true">5.1.</strong> Bit Masking and Shift Operations</a></li><li class="chapter-item expanded "><a href="ch05-02-riscv-instruction-encoding.html"><strong aria-hidden="true">5.2.</strong> RISC-V Instruction Encoding</a></li></ol></li><li class="chapter-item expanded "><a href="ch06-00-assembly-user-level-programming.html"><strong aria-hidden="true">6.</strong> Assembly User-level Programming</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch06-01-square-root.html"><strong aria-hidden="true">6.1.</strong> Square Root</a></li><li class="chapter-item expanded "><a href="ch06-02-gps.html"><strong aria-hidden="true">6.2.</strong> GPS</a></li><li class="chapter-item expanded "><a href="ch06-03-hamming-code.html"><strong aria-hidden="true">6.3.</strong> Hamming Code</a></li><li class="chapter-item expanded "><a href="ch06-04-image-on-canvas.html"><strong aria-hidden="true">6.4.</strong> Image on Canvas</a></li><li class="chapter-item expanded "><a href="ch06-05-apply-filter.html"><strong aria-hidden="true">6.5.</strong> Applying a Filter to an Image</a></li><li class="chapter-item expanded "><a href="ch06-06-linked-list.html"><strong aria-hidden="true">6.6.</strong> Custom Search on a Linked List</a></li><li class="chapter-item expanded "><a href="ch06-07-abi-linked-list.html"><strong aria-hidden="true">6.7.</strong> ABI-compliant Linked List Custom Search</a></li><li class="chapter-item expanded "><a href="ch06-08-abi-recursive-binary-tree.html"><strong aria-hidden="true">6.8.</strong> ABI-compliant Recursive Binary Tree Search</a></li></ol></li><li class="chapter-item expanded "><a href="ch07-00-assembly-system-level-programming.html"><strong aria-hidden="true">7.</strong> Assembly System-level Programming</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch07-01-peripheral-controlling-the-car.html"><strong aria-hidden="true">7.1.</strong> Accessing Peripherals - Controlling the Car</a></li><li class="chapter-item expanded "><a href="ch07-02-peripheral-using-serial-port.html" class="active"><strong aria-hidden="true">7.2.</strong> Accessing Peripherals - Using Serial Port</a></li><li class="chapter-item expanded "><a href="ch07-03-interrupts-midi-player.html"><strong aria-hidden="true">7.3.</strong> External Interrupts - MIDI Player</a></li><li class="chapter-item expanded "><a href="ch07-04-interrupts-controlling-the-car.html"><strong aria-hidden="true">7.4.</strong> Software Interrupts - Controlling the Car</a></li></ol></li><li class="chapter-item expanded "><a href="ch08-00-final-projects.html"><strong aria-hidden="true">8.</strong> Final Projects</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch08-01-driving-through-the-city.html"><strong aria-hidden="true">8.1.</strong> Driving Through the City</a></li></ol></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <!-- Track and set sidebar scroll position -->
+        <script>
+            var sidebarScrollbox = document.querySelector('#sidebar .sidebar-scrollbox');
+            sidebarScrollbox.addEventListener('click', function(e) {
+                if (e.target.tagName === 'A') {
+                    sessionStorage.setItem('sidebar-scroll', sidebarScrollbox.scrollTop);
+                }
+            }, { passive: true });
+            var sidebarScrollTop = sessionStorage.getItem('sidebar-scroll');
+            sessionStorage.removeItem('sidebar-scroll');
+            if (sidebarScrollTop) {
+                // preserve sidebar scroll position when navigating via links within sidebar
+                sidebarScrollbox.scrollTop = sidebarScrollTop;
+            } else {
+                // scroll sidebar to current active section when navigating via "next/previous chapter" buttons
+                var activeSection = document.querySelector('#sidebar .active');
+                if (activeSection) {
+                    activeSection.scrollIntoView({ block: 'center' });
+                }
+            }
+        </script>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </label>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">RISC-V ALE Exercise Book v1.0</h1>
+
+                    <div class="right-buttons">
+                        <a href="print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+                        <a href="https://github.com/discovery-unicamp/ale-exercise-book" title="Git repository" aria-label="Git repository">
+                            <i id="git-repository-button" class="fa fa-github"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h2 id="accessing-peripherals---using-serial-port"><a class="header" href="#accessing-peripherals---using-serial-port">Accessing Peripherals - Using Serial Port</a></h2>
+<h3 id="instructions"><a class="header" href="#instructions">Instructions</a></h3>
+<p>In this activity, you will communicate with the Serial Port device via MMIO. You will need to read a stream of bytes from the Serial Port and then perform an operation on top of the data read.</p>
+<p>Interactions with Serial Port can be done through two memory addresses:</p>
+<ul>
+<li>base+0x00: storing the value 1 triggers a write, writing the byte that is stored at base+0x01. The byte at base+0x00 is set to 0 when write is complete.</li>
+<li>base+0x02: storing the value 1 triggers a read, reading one byte and storing it at base+0x03. The byte at base+0x02 is set to 0 when read is complete.</li>
+</ul>
+<p>There will be 4 different sets of operations to perform:</p>
+<ul>
+<li><strong>Operation</strong> 1: read a string and write it back to Serial Port
+<ul>
+<li><strong>Input</strong>: 1\n{string with variable size}\n</li>
+<li><strong>Output</strong>: {string with variable size}\n</li>
+</ul>
+</li>
+<li><strong>Operation 2</strong>: read a string and write it back to Serial Port reversed
+<ul>
+<li><strong>Input</strong>: 2\n{string with variable size}\n</li>
+<li><strong>Outpu</strong>t: {string with variable size reversed}\n</li>
+</ul>
+</li>
+<li><strong>Operation 3</strong>: read a number in decimal representation and write it back in hexadecimal representation.
+<ul>
+<li><strong>Input</strong>: 3\n{decimal number with variable size}\n</li>
+<li><strong>Output</strong>: {number in hexadecimal}\n</li>
+</ul>
+</li>
+<li><strong>Operation 4</strong>: read a string that represents an algebraic expression, compute the expression and write the result to Serial Port.
+<ul>
+<li><strong>Input</strong>: 4\n{number with variable size} {operator} {number with variable size}\n</li>
+<li><strong>Output</strong>: {operation result in decimal representation}\n</li>
+<li>Operator can be <strong>+</strong> (add) , <strong>-</strong> (sub), <strong>*</strong> (mul) or <strong>/</strong> (div)</li>
+</ul>
+</li>
+</ul>
+<h3 id="examples"><a class="header" href="#examples">Examples</a></h3>
+<div class="table-wrapper"><table><thead><tr><th style="text-align: left">Test Case</th><th style="text-align: left">Input</th><th style="text-align: left">Output</th></tr></thead><tbody>
+<tr><td style="text-align: left">1</td><td style="text-align: left">1</br>Random String</td><td style="text-align: left">Random String</td></tr>
+<tr><td style="text-align: left">2</td><td style="text-align: left">2</br>Random String</td><td style="text-align: left">gnirtS desreveR</td></tr>
+<tr><td style="text-align: left">3</td><td style="text-align: left">3</br>1876</td><td style="text-align: left">754</td></tr>
+<tr><td style="text-align: left">4</td><td style="text-align: left">4</br>244 + 67</td><td style="text-align: left">311</td></tr>
+<tr><td style="text-align: left">5</td><td style="text-align: left">4</br>2340 / 50</td><td style="text-align: left">46</td></tr>
+</tbody></table>
+</div>
+<h3 id="notes-and-tips"><a class="header" href="#notes-and-tips">Notes and Tips</a></h3>
+<ul>
+<li>Check the <a href="https://docs.google.com/document/d/1AE_ESrJnxzMO_WpN2yoZTyB5fGPl8wrpAzT7bij1QJk/edit?usp=sharing">ALE Peripheral MMIO Manual</a> for information about the Serial Port peripheral.</li>
+<li>You can debug your program reading from STDIN and writing to STDOUT. Before testing with the Assistant, the functions responsible for IO need to be changed in order to interact with the Serial Port.</li>
+<li>The final version of your program can't use syscalls except for the exit syscall.</li>
+<li>You can use the program stack to store strings with variable sizes.</li>
+<li>You can test your code using the simulator's assistant from this <a href="https://riscv-programming.org/ale/#select_url_content=TjRJZ3RnaGdsZ2RnK2dCd2djd0tZZ0Z3aEFHaEJBWndLZ0lCY0laUzRDQmpBSnlnVk14Q2pBUUhzN1NBQ1lBVlFDU2NBQktvQU5nbFIwY1BBSUpFUzVTbkFESzlScVFDK1BBR1owT1lIZ0IwUUFPZ0QwWURnQk1BcnVOUUVMaFltUXFrekFLd0tuak1OazV1UGdBWkRob0ljUUFsVkNEdFBRTWpVMHRyZTBkbkdnNFlHRlFhVWlnczcxOFFBRzUtUUs1ZUFta29TTVJLaE1NVGN3dFVBQTlTVkJoaUxPY2JWQUEzS0JvbkMycUdPcmlpdnhoLUduRlhIZ0JSTm9CMk9BQW1IbmJPbUJzQ2VVVjNGWFVHSm1CLUhoNU03dEk2T3p5dUFBb0FTZ3VZSzZ1Q095azZWN0tQcDlTQUFMRWhtT3hRSGdBWGg0T1FBN2p3aEtJSkw4bnFZVnRJYUNSVUR4Vm1ZTmhoNURRUm9vWU1nZUFBRkdvSVlIU1NJSEFDMGlPSVpKNHFocWtVcGxWTUx3QnhsSS1uNVYwY3ZEb3NRYU1QaFBEQ0VXaTR1NC0wdVFOQkJETU54eWVRSzNUTUNEc0JHQlR6RmNWNVN1RnFGNG1YNmNBQVJ1SU9OYlpPSW9OYWJYYnJRRFBqd1FXQ0lXWUlEWWJIQk9tUTBZRFBhWUFNS0dCQlFCYjVMS21IQ216NXdhRUFQajR5YzlSc3FaakY3Z1ZKckRucDRZdElkam9IMjlxclFPUVlORGdtWFlzZFFRYWNwRmVpdUxWeDBzaXpmRDAwSEVjRlFFRG80Z0Fub1M3blljVnBrMFhrOVh3VkEtUUcyeUgrNllBQ3J0bmdBUmg0VHdBanJPeUZxWG9uKzh2aU94SENQVDVFb0tRSnh1Ty0ycnFaOThaLUZFS0RZbWxVTzVZR1FIOVpsd0Q5bWotUFpBT0Fza3dLdmJ0UG1BYTVvekhWdGREc0dCTlN5UWtuZ2dIQnJSZWRNZUFnTXhnTEFWNW9SaGExeUlZU2ppUG5KREwyTFJkaTJYWDEtVURZTjN5UW5jOXkyRTh6M2pHQkx3Z3BDYjBDZTlVRWZKMFh6ZlVNUzArVXdOakFtSUJta2FvYkRaT0RRTUZjU2xNLUVCa0FDYmhWQjRmb0NERkRTb2dRZ3pESlFwc2tERk9CTU93a1M4SUlvaVNMSWlpcUtoR2k2TFlLaW1LVWxqUFRZejBPTlhMaUZLM0VCZHpJSGdBR1lqMVBkc0wwUXBUSkx2VnNaTHNKOTVKNHhURE5NWkt3UDNBQU9WWUFEWTdLVEpDak5XQUJXQUFXZXJJTWN0Q1hMY25DWUU4d2ppS2hETmZQby16QXI4eGorM0N6NUl1VkgwWXZYWXI0c1MzaFdyUzRUTXZzcUtWVE1XOEVHazJUbjFmWmJHdWFkci1BMlZyMW9BYWg0R3JWZzZzNnl2M2I5OUlhd3lCeWM5RFhLd3ZxQnU4NGJTS0NoanFKNFdqSnA0VUtTeG1xNDVxdWFLMTI0OXNTdkRCSzkyYWphTXF5TVNQcExIS0RyeW82aXBSeURUQXVtQU5tUzFxQUFZZUFzSGhtcHBwN1B2SnVyM3M2MUQyQiszcVBLUEx5aHBHa0h4dkI0V3B1WWhjUFUrRVZTMWlVY3FESUJoV1JoQUJ0VXdva0VWUUl3WkFBMVJObWprT2dhRkJUbzhnclZCOWRNQkFER1FPZ0lEQU1BUU5NQUJkWk1aYnR2WTRGZ1FORHhoWmNQWnNXQU94cDJRTm1JcGRkczRwYlNiNDlHa3JxN2I1dFZmYkRvS3VTVHBqejZBQU0zcGdBQVNZQWpYbDZoZEpWZ092YzktZG5mbmZ3czd4cFNzNExvdUlBVjB2eSs5dUFxNXJtQTY4NTc2ZXIrdm44TUdueXhiQmlHeHZGc0xKY0ZZc1pldFFoVzBWa0RvUjROV1FDQWlBYUFBYXk1SVBwRXRrQUZHcU1CYlFuUStuTHNUbzZCNGEyT0Z0KzNIZmdrQlhibjgxWlkwdWhxaExwWHlWVjB3eXdCQTRCU0hnMjhJaWtGVUlmQ2M0aHJSZ0NjQVFPUWg4VEpzRWdIUVpBWEFFQ3kzTEFnYXdOQVhadTNmdTNUMld3LWE3UURrSEo0SWNlQmh4TU94U09pMWthYmxqcXRYRVdWOGE3UlRrVE5PeDA0cG5TenFwZndCY0Y3ZjJYbVNNdS00SzZCZzJOWE1DdmMrRk4wR0pwSmViY0pFZDJrZDNPUm4wdXJjd0h1NUxVQU5CYkEwaGdGVVdrTm9ZUlJuck1OK29wVkVxRjlsNk1oLTRLRU1uM0RUTnhzaFhGdVBEblFoYVNOZUZLWDRrbFNxYkNkcGdrNFErYmhKTW1IWjNLb0l3dXRpcUQ3ZzBmWEVzamRnRExscEcwUnN0aFVDR2dTWjNGNHlTKzdkUXdvUGZSLU1SNUExR3NGSWFFMUo1UTJtcFl6ME1zT0MtQmJsd0E0LThRQTNVUGd5UStBQXFRK0ZnWFpTek5EWXoyclRPNnIzOWs0eWdUd1hGdUtvWjRtbVJabW1FSWtaTWtoRGl3VGtMbVFzOXhCNUZtck9sb1F1QWt6N0V6TDJCUXFoeVZqa0kzb1g0MDZBUzQ2OEFBSndoS1RudEtTWERDb1oyaVlaTE9GTW00YklRSjNIUUJkV2wwbElCMHN1WnpRVmR4NE1DaVpvS05oRlBrZWszYTdSclp3QUdKRVBKeUxPNnlITHBzb2xjS0Nsb3EwVnpaeXBTOUc0UXFZRElXeGk2azFJYVJMVmlmSnJHbGhCWEFWS3BDZG16STdQc3BaUnpSazhIZHR5OWFmTFZTN01GY3NqeElxQ0dpakpWc3k1Z2M1azNMdWRzMVVVZEdHOFdlU3cxeEh6N2xoTytSRTM1LWlBVkF2aVFTNUs0TGdDUXJ0dENyK3NMTm5WMFJkYXdNa3pXb1VvQlFYWmNXSzZBNHJ4Y1MwRnlVaVVTdEpac3dwc2lVbWVtMGRTMzZ0TCtyMHNNZFUwR0ppSjRzdk1iTkpweWtmSGF0WExvV0FkUjh3T0Y0RENWTVFOM2hLUnpOd1BNOHBTRHJ4NG5BVXQ0aFNERkdkdE1oNXpiVzN0dEZXTW5nRDkraXJ4cHYybmdVQmRCSGtSajJwd1phQ0FxeHBwMmdBaERDRlptWXpveTNnRHhUcFdxVnprWGJDMjJkYmJWU09ESkNDU0N1Z3VCSGhscENHRSs0U2pqcDRBQUhsaEcrQWdENm9BM1J1c1JhdG4xQjEyMkhUZEtWZTZaM2ZHUFNyS0F6c3gwOWtna09uRU1Jbmh3WjRQMHc1eEVHWlBDM2UyQWdMak5Vd2FRcld6d0JIMTVGcGdIVU9ETHRWNXdZNVVwZWVicFY0RWJNTFdLRnJZQ05kaHJlYUNzSHdzNEFIRUFPb0VKQVhPRFdnekE4QUFDSWNEaERBTzAtb2VBVGc0QldMMGU0Q09OQ01NZkpRSGh0aHRGeUZmTFV6NklBOEdCR0tYUVVJQzV3bTloSnN3LUFvZ2hEVkdLRnVxQUFEeTFvdkM1RklGWmtJVHhiVDJrS1JaQ1RVbU9EK2loS1lkbzZ3TmoxcmlLWU5NVHg1akRGM3JTTVVMd24wdURUR1lMT3lab1pNVm5sY0dWVHduNnlFZ0cwSDl5WXl5Y1o0QUFXUmJzQ013dWc3VFBBcXlDUE0tNURCVVJRN2xpQWJRZUJNaWZqd082KzRYakVUdWstS1dtWEFRQnFEZUlKNHJUOXl5RmFSc0diYlNuVnZHVExpbSsrWVIyaW9JR1owZ3hzandPdmFYUUpiU0VJalZCNERUREFrRTFzd2ltejFuZ3Mzb1BnenM5dk1keDJjVDduTzJkUzd0MkVDSGlaSGR5QzFwSHZQY1h0UTk3bjFQdlhaUTM5czZBUFJ4UGY3QzlsS29QREtmZnExVm1jMkZKdmZmcGw5c085MlljUURoOFdiTkpYS3l5M2ZVcUViVnhNblpQNkU4WEY0aER0ck40SFllbnE5NmRwZzU2T3hWQm4yaXJ6OEtVTExueEwwM3llRGU5Ymo2WDJWUS1WK3huSllaWVFEc0IxbUVMUE9RQUZJRHcxVEhSTy1taXVlQnBqdlNzeUNtVFY1QVYtdFZ4SUVaZ1JqaWpMVGhYSFdtU3VKdXdBY2prRTd0VVZ1NkEyOVFISVlPLVdidVpMSFJJYW9SdmVjd2xOeUJjM2hoTGZXNXlmaFhYZDBuYzB6ZDhiR1AtUWZlVUw5M2RBUC1ZVmZpRlhxanVpZjBuaTUreC11R3F1SHgyVHVMNnpreEt6ZjFLWHg0VHBTMmJpY2NkSjlud0VXaHFPMEpHMUtGWW9XdXk0QkFEY0l0eUJNQ2dGYVNKQWc0LWg5WkZIMTdBZ0VBNUNZQm5LZ1BBSStvRElBWHhBQ01LLTdocjluekFlZkpBSUNpYjM3T2RmYy1OLWI0QUdMbjRQeHZyZkotQkQzOHYwZjYtSit5dXY4UDhmeGZxaHYrUDdiNzhEZjVkQVFDMmhMd2NDTmkwZzd6V2djQnREZjRFQ1FIdUE3ejFEN3lCcjA2emdzQTB4ckEzNjRHNEc3NTRCQnl1UmlqSGd0b1VCb0FzQWJETlFnQmFCNEFFQVRpMENSRGlEVDRZREFDMEVnRDlCREFrZ3o3akMxRERoVEErQThGMmpNQVlCVUUxUmFBU0ZhQkFB" target="_blank">link</a>.</li>
+</ul>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="ch07-01-peripheral-controlling-the-car.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next prefetch" href="ch07-03-interrupts-midi-player.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="ch07-01-peripheral-controlling-the-car.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next prefetch" href="ch07-03-interrupts-midi-player.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="elasticlunr.min.js"></script>
+        <script src="mark.min.js"></script>
+        <script src="searcher.js"></script>
+
+        <script src="clipboard.min.js"></script>
+        <script src="highlight.js"></script>
+        <script src="book.js"></script>
+
+        <!-- Custom JS scripts -->
+
+
+    </div>
+    </body>
+</html>
