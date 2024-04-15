@@ -12,7 +12,7 @@ In this activity, you must control a car to move it from a parking lot to the en
 
 </div>
 
-- In this exercise, you must use only MMIO to control the car. The MMIO specifications for the peripherals of the simulator can be seen [in this document](https://docs.google.com/document/d/1AE_ESrJnxzMO_WpN2yoZTyB5fGPl8wrpAzT7bij1QJk/edit?usp=sharing).
+- In this exercise, you must use only MMIO to control the car. The MMIO specifications for the peripherals of the simulator can be seen in the [ALE Peripheral MMIO Manual](appendix_ale-peripherals-mmio-manual.md#self-driving-car).
   - You only need to use MMIO to control the steering wheel, engine, brakes and get coordinates.
   - The entrance to the Test Track is placed at:
     - x: 73, y: 1, z: -19
@@ -57,7 +57,7 @@ In addition to that, you can test moving the car manually using the arrow keys o
 
 ### Notes and Tips
 
-- Check the [ALE Peripheral MMIO Manual](https://docs.google.com/document/d/1AE_ESrJnxzMO_WpN2yoZTyB5fGPl8wrpAzT7bij1QJk/edit?usp=sharing) for information about the Self Driving Car peripheral.
+- Check the [ALE Peripheral MMIO Manual](appendix_ale-peripherals-mmio-manual.md#self-driving-car) for information about the Self Driving Car peripheral.
 - The starting point and destination are **fixed**. <mark style="background:transparent;color:red">You have to use the assistant to place the car at the starting point (there is a button on the assistant that can be used for that)</mark>.
 - The steering wheel direction values range from -127 to 127, negative values steer to the left and positive values to the right.
 - For debugging purposes, you can control the car when the rest fails, using the keys WASD or arrow keys, with the option ‘‘Enable debug controls’’ enabled. However, this option can't be enabled while your code is running on the simulator.

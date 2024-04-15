@@ -4,7 +4,7 @@
 
 In this activity, you must write a program in RISC-V assembly language that reads an image in PGM format from a file, applies an edge detection filter and shows the result on screen using the canvas peripheral.
 
-The first step of this exercise is to read an image in the PGM format and store its content in a matrix (exactly as done in exercise 7.4). After that, you must apply the following filter on the image:
+The first step of this exercise is to read an image in the PGM format and store its content in a matrix (exactly as done in exercise 6.4). After that, you must apply the following filter on the image:
 
 $$
 w = \begin{bmatrix}

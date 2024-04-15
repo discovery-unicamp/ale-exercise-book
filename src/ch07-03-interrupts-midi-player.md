@@ -2,7 +2,7 @@
 
 ### Instructions
 
-In this activity, you must implement a library that will be used by a [MIDI](https://en.wikipedia.org/wiki/MIDI) audio player. The peripherals used in this activity are the MIDI Synthesizer and General Purpose Timer (GPT), and their description can be found in the [ALE Peripheral MMIO Manual](https://docs.google.com/document/d/1AE_ESrJnxzMO_WpN2yoZTyB5fGPl8wrpAzT7bij1QJk/edit?usp=sharing).
+In this activity, you must implement a library that will be used by a [MIDI](https://en.wikipedia.org/wiki/MIDI) audio player. The peripherals used in this activity are the MIDI Synthesizer and General Purpose Timer (GPT), and their description can be found in the [ALE Peripheral MMIO Manual](appendix_ale-peripherals-mmio-manual.md).
 Your library will have three main functionalities:
 
 1. Implement a _\_start_ function, that initializes the program's stack (see Notes and Tips for more information on how to do that), sets interrupts, and calls the _main_ function (using the jal instruction), available in the provided application.
@@ -21,7 +21,7 @@ Your library will have three main functionalities:
 
 ### Notes and Tips
 
-- Check the [ALE Peripheral MMIO Manual](https://docs.google.com/document/d/1AE_ESrJnxzMO_WpN2yoZTyB5fGPl8wrpAzT7bij1QJk/edit?usp=sharing) for information about the MIDI Synthesizer and General Purpose Timer peripherals.
+- Check the [ALE Peripheral MMIO Manual](appendix_ale-peripherals-mmio-manual.md#midi-synthesizer) for information about the MIDI Synthesizer and General Purpose Timer peripherals.
 - To allocate the stacks, you can declare two arrays in your program. When initializing the stack pointer (SP), remember that RISC-V stacks are full-descending.
 - You must implement all the functions in a single file lib.s, in RISC-V assembly language.
 - We provide our application in the file [midi-player.c](https://github.com/discovery-unicamp/ale-exercise-book/reference_code/ch07-03/midi-player.c), that uses your library and mustn't be changed. This file must be uploaded with the .s library file.

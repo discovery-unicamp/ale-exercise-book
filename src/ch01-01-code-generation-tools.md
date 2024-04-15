@@ -3,14 +3,10 @@
 This exercise is a tutorial that guides the student to generate executable files from source files.
 It requires the students to perform, step-by-step, all the code generation steps, including compilation, assembling, and linking.
 
-### Prerequisites
-
-- Read and get familiar with the concepts and commands discussed in sections 3.1 to 3.6 of the ALE Manual. These sections cover the basics of generating and inspecting object and executable code.
-
 ### Instructions
 
 Perform the following program compilation process step-by-step, i.e., generating the assembly language code and then the object code for each source file and finally calling the linker to put all the object files together and produce the executable file named prog.x.
-You must use the clang-15 compiler and generate code for the RISC-V R32 architecture, as in sections 3.1 to 3.6 of the ALE Manual.
+You must use the clang-15 compiler and generate code for the RISC-V R32 architecture.
 
 The program is composed of two source files: [file1.c](https://github.com/discovery-unicamp/ale-exercise-book/reference_code/ch01-01/file1.c) and [file2.c](https://github.com/discovery-unicamp/ale-exercise-book/reference_code/ch01-01/file2.c). The following listings show the file contents.
 
@@ -75,3 +71,24 @@ Once the compilation is complete, you must:
 ### Notes and Tips
 
 - Remember to use the RISC-V 32 compilation tools, otherwise you might not be able to correctly compile file2.c (Notice that this file contains assembly instructions for RISC-V processors).
+- Compilation process of a C program consists of 3 main steps:
+- Compiling: C files are translated to assembly language;
+  ```
+  clang-15 --target=riscv32 -march=rv32g -mabi=ilp32d -mno-relax prog.c -S -o prog.s
+  ```
+- Assembling: reads assembly files and produces object files;
+  ```
+  as prog.s -o prog.o
+  ```
+  ```
+  clang-15 --target=riscv32 -march=rv32g -mabi=ilp32d -mno-relax prog.s -c -o prog.o
+  ```
+- Linking: read multiple object files and links them and also links with library code, producing the final executable file.
+  ```
+  ld.lld prog.o module1.o module2.o -o prog.x
+  ```
+- You can inspect the object files or executable files using disassembler tools such as _llvm-dump_
+
+```
+llvm-objdump -D prog.o
+```

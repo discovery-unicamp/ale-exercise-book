@@ -37,7 +37,7 @@ There will be 4 different sets of operations to perform:
 
 ### Notes and Tips
 
-- Check the [ALE Peripheral MMIO Manual](https://docs.google.com/document/d/1AE_ESrJnxzMO_WpN2yoZTyB5fGPl8wrpAzT7bij1QJk/edit?usp=sharing) for information about the Serial Port peripheral.
+- Check the [ALE Peripheral MMIO Manual](appendix_ale-peripherals-mmio-manual.md#serial-port) for information about the Serial Port peripheral.
 - You can debug your program reading from STDIN and writing to STDOUT. Before testing with the Assistant, the functions responsible for IO need to be changed in order to interact with the Serial Port.
 - The final version of your program can't use syscalls except for the exit syscall.
 - You can use the program stack to store strings with variable sizes.

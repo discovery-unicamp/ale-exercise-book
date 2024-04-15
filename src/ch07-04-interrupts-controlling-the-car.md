@@ -64,7 +64,7 @@ You **can** implement the system calls listed below. In case your code doesn't u
 
 ### Notes and Tips
 
-- Check the [ALE Peripheral MMIO Manual](https://docs.google.com/document/d/1AE_ESrJnxzMO_WpN2yoZTyB5fGPl8wrpAzT7bij1QJk/edit?usp=sharing) for information about the Self Driving Car peripheral.
+- Check the [ALE Peripheral MMIO Manual](appendix_ale-peripherals-mmio-manual.md#self-driving-car) for information about the Self Driving Car peripheral.
 - If you are not using the assistant, you must configure the simulator in a similar way as done for [Exercise 7.1](ch07-01-peripheral-controlling-the-car.md). However, with a small difference: the option “_Enable Operating System_” must stay disabled.
 - You mustn't call the exit _syscall_ (as there isn't an operating system, it doesn't exist).
 - The _syscall_ operation code must be passed via register a7, as done in previous exercises.

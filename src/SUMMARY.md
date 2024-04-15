@@ -27,7 +27,6 @@
 - [Assembly, object and executable files](ch04-00-assembly-object-executable-files.md)
   - [Organization of an ELF file](ch04-01-organization-elf-file.md)
 
-
 ## Bit Manipulation and Instruction Encoding
 
 - [Bit Manipulation and Instruction Encoding](ch05-00-bit-manipulation-instruction-encoding.md)
@@ -58,3 +57,8 @@
 
 - [Final Projects](ch08-00-final-projects.md)
   - [Driving Through the City](ch08-01-driving-through-the-city.md)
+
+## Appendix
+
+- [Appendix](appendix.md)
+  - [ALE Peripherals MMIO Manual](appendix_ale-peripherals-mmio-manual.md)

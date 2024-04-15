@@ -5,7 +5,25 @@ This exercise requires students to use the ALE simulator interactive commands to
 ### Prerequisites
 
 - Get familiar with the concepts of instructions, registers and labels.
-- Get familiar with the concepts and commands discussed in Section 4.2 of the ALE Manual.
+
+### Debugging Tutorial
+
+The ALE simulator has an interactive interface that allows the user to control the execution of the program and inspect the registers and memory values. This interface is similar to the interface provided by the GDB debugger and allows the user to debug the code execution.
+
+To enable the interactive execution interface, just click on the arrow beside the RUN button and select the "Debug" option. After clicking on this button, the simulator will open an interactive terminal where you can type commands to control the execution and/or inspect the state of the memory and register of the RISC-V processor.
+
+We recommend using the commands listed on the table below, but a complete list of the commands can be obtained using the "help" command on the interactive terminal.
+
+| Command                       | Description                                                                                                                                                                                                                                 |
+| :---------------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| symbols                       | Shows the address of the symbols (e.g., \_start, loop, end, result) of the program. The address is shown in the hexadecimal representation (e.g., 0x11180).                                                                                 |
+| until \<address\>             | Executes the instructions until a certain address. The address must be provided in the hexadecimal representation (e.g., 0x11180).                                                                                                          |
+| step [n=1]                    | Executes the next **n** instructions.                                                                                                                                                                                                       |
+| peek r \<register\>           | Shows the value stored on the register \<register\> (e.g., _peek r x1_ or _peek r mtval_). The value is shown in the hexadecimal representation. The command _peek r all_ shows the values of all the registers.                            |
+| peek m \<address\>            | Shows the value stored on the memory word associated with the address \<address\>. The value is shown in the hexadecimal representation.                                                                                                    |
+| poke r \<register\> \<value\> | Modifies the content of the register \<register\> with the value \<value\>. For instance, the command _poke r x1 0xff_ stores the value 0xff in the register x1.                                                                            |
+| poke m \<address\> \<value\>  | Modifies the content of the memory position associated with the address \<address\> with the value \<value\>. For instance, the command _poke m 0x800 0xfe_ stores the value 0xfe in the memory position associated with the address 0x800. |
+| run                           | Executes the program continuously until the execution ends due to an exit syscall or execution of invalid instructions.                                                                                                                     |
 
 ### Instructions
 
@@ -84,4 +102,4 @@ This program receives as input the value of its RA in register a0 and produces a
 
 ### Notes and Tips
 
-- To see the complete list of commands available in the interactive mode you can execute the "help" command. For this particular exercise, we suggest using the commands listed in Table 4.1 of the ALE Manual.
+- To see the complete list of commands available in the interactive mode you can execute the "help" command.
