@@ -145,7 +145,7 @@ The ALE simulator expects a break line character ('\n') to print the content wri
 ### Instructions
 
 You must write a C program that implements a simple calculator. The calculator must read a string from the Standard Input with the following format: **s1 op s2**, where **s1** and **s2** are symbols that have a value associated to them and **op** is the operation to be performed.
-The result of the operation must be written to the Standard Output, i.e., file descriptor equals to 1.
+The result of the operation must converted to its corresponding symbol and then written to the Standard Output, *i.e.*, file descriptor 1.
 
 The symbols to be considered are the characters '0', '1', '2', '3', '4', '5', '6', '7', '8', and '9', and the values associated to them are zero, one, two, ..., and nine.
 

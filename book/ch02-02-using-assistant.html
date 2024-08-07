@@ -295,7 +295,7 @@ int main()
 <p>The ALE simulator expects a break line character ('\n') to print the content written to the standard output on the terminal. This way, you must add a break line at the end of your buffer or call the function <strong>write</strong> again with a string that has the break line character. The example above shows a program that prints a string with 5 characters ending with a break line.</p>
 <h3 id="instructions"><a class="header" href="#instructions">Instructions</a></h3>
 <p>You must write a C program that implements a simple calculator. The calculator must read a string from the Standard Input with the following format: <strong>s1 op s2</strong>, where <strong>s1</strong> and <strong>s2</strong> are symbols that have a value associated to them and <strong>op</strong> is the operation to be performed.
-The result of the operation must be written to the Standard Output, i.e., file descriptor equals to 1.</p>
+The result of the operation must converted to its corresponding symbol and then written to the Standard Output, <em>i.e.</em>, file descriptor 1.</p>
 <p>The symbols to be considered are the characters '0', '1', '2', '3', '4', '5', '6', '7', '8', and '9', and the values associated to them are zero, one, two, ..., and nine.</p>
 <p>The arithmetic operations are represented by the symbols '+' (addition), '-' (subtraction) and '*' (multiplication).</p>
 <h3 id="examples"><a class="header" href="#examples">Examples</a></h3>
