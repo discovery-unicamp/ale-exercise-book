@@ -71,24 +71,3 @@ Once the compilation is complete, you must:
 ### Notes and Tips
 
 - Remember to use the RISC-V 32 compilation tools, otherwise you might not be able to correctly compile file2.c (Notice that this file contains assembly instructions for RISC-V processors).
-- Compilation process of a C program consists of 3 main steps:
-- Compiling: C files are translated to assembly language;
-  ```
-  clang-15 --target=riscv32 -march=rv32g -mabi=ilp32d -mno-relax prog.c -S -o prog.s
-  ```
-- Assembling: reads assembly files and produces object files;
-  ```
-  as prog.s -o prog.o
-  ```
-  ```
-  clang-15 --target=riscv32 -march=rv32g -mabi=ilp32d -mno-relax prog.s -c -o prog.o
-  ```
-- Linking: read multiple object files and links them and also links with library code, producing the final executable file.
-  ```
-  ld.lld prog.o module1.o module2.o -o prog.x
-  ```
-- You can inspect the object files or executable files using disassembler tools such as _llvm-dump_
-
-```
-llvm-objdump -D prog.o
-```

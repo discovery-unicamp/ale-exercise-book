@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>RISC-V ALE Exercise Book v1.0</title>
+        <title>RISC-V ALE Exercise Book v1.0.1</title>
         <meta name="robots" content="noindex">
 
 
@@ -144,7 +144,7 @@
                         </button>
                     </div>
 
-                    <h1 class="menu-title">RISC-V ALE Exercise Book v1.0</h1>
+                    <h1 class="menu-title">RISC-V ALE Exercise Book v1.0.1</h1>
 
                     <div class="right-buttons">
                         <a href="print.html" title="Print this book" aria-label="Print this book">
@@ -252,25 +252,7 @@ void _start() {
 <h3 id="notes-and-tips"><a class="header" href="#notes-and-tips">Notes and Tips</a></h3>
 <ul>
 <li>Remember to use the RISC-V 32 compilation tools, otherwise you might not be able to correctly compile file2.c (Notice that this file contains assembly instructions for RISC-V processors).</li>
-<li>Compilation process of a C program consists of 3 main steps:</li>
-<li>Compiling: C files are translated to assembly language;
-<pre><code>clang-15 --target=riscv32 -march=rv32g -mabi=ilp32d -mno-relax prog.c -S -o prog.s
-</code></pre>
-</li>
-<li>Assembling: reads assembly files and produces object files;
-<pre><code>as prog.s -o prog.o
-</code></pre>
-<pre><code>clang-15 --target=riscv32 -march=rv32g -mabi=ilp32d -mno-relax prog.s -c -o prog.o
-</code></pre>
-</li>
-<li>Linking: read multiple object files and links them and also links with library code, producing the final executable file.
-<pre><code>ld.lld prog.o module1.o module2.o -o prog.x
-</code></pre>
-</li>
-<li>You can inspect the object files or executable files using disassembler tools such as <em>llvm-dump</em></li>
 </ul>
-<pre><code>llvm-objdump -D prog.o
-</code></pre>
 <div style="break-before: page; page-break-before: always;"></div><h2 id="automating-the-compilation-process-with-makefiles"><a class="header" href="#automating-the-compilation-process-with-makefiles">Automating the compilation process with Makefiles</a></h2>
 <p>This exercise requires students to reason about the compilation process and automate this process with Makefiles.</p>
 <h3 id="instructions-1"><a class="header" href="#instructions-1">Instructions</a></h3>
@@ -315,7 +297,7 @@ make prog.x
 <h4 id="_start-function-and-exit-syscall"><a class="header" href="#_start-function-and-exit-syscall">_start function and exit syscall</a></h4>
 <p>Besides linking the code from multiple object files (.o), the linker must register the address of the entry function of the program on the header of the executable file so that the operating system's <em>loader</em> knows where to start the execution of the program once it starts. By default, in C and C++, the program's entry point is defined by the function called <strong>_start</strong>. This is a short function that invokes the function main() and after main returns, it invokes the <strong>exit</strong> syscall. to inform the operating system that the program has finished.</p>
 <p>When generating the executable files, C and C++ compilers link an object file that has the implementation of this function. However, the RISC-V compiler used here doesn't link to such file (nor LibC), thi way, it is necessary to include an implementation of the function.</p>
-<p>The following code shows a possible implementations to the function <strong>exit</strong> and the function <strong>_start</strong>. In this example, the function exit consists of a sequence of instructions in assembly language that copies the value of function parameter (code) to the register a0, puts the value 93 on register a7 and generates a software interrupt (ecall instruction). The software interrupt redirects the execution flow to the operating system, which will use the value on register a7 to determine which syscall was requested and the value on register a0 as a parameter to the call.</p>
+<p>The following code shows possible implementations to the function <strong>exit</strong> and the function <strong>_start</strong>. In this example, the function exit consists of a sequence of instructions in assembly language that copies the value of function parameter (code) to the register a0, puts the value 93 on register a7 and generates a software interrupt (ecall instruction). The software interrupt redirects the execution flow to the operating system, which will use the value on register a7 to determine which syscall was requested and the value on register a0 as a parameter to the call.</p>
 <pre><code class="language-c">void exit(int code)
 {
   __asm__ __volatile__(
@@ -334,7 +316,7 @@ void _start()
   exit(ret_code);
 }
 </code></pre>
-<p>The <strong>_start</strong> function code simply calls the <strong>main</strong> function, which is implemented by the user, and, after main's return, invoker the <strong>exit</strong> function passing the <strong>main</strong> return value as a parameter.</p>
+<p>The <strong>_start</strong> function code simply calls the <strong>main</strong> function, which is implemented by the user, and, after main's return, invokes the <strong>exit</strong> function passing the <strong>main</strong> return value as a parameter.</p>
 <p>You can copy and paste these two functions on your C programs that will be executed on the ALE simulator. Alternatively, you can put them in a file called start.c and compile/assemble/link the file with your program.</p>
 <h4 id="read-and-write-syscalls"><a class="header" href="#read-and-write-syscalls">read and write syscalls</a></h4>
 <p>In general, programs that execute in computer systems that have an operating system don't have direct access to the system's peripherals (e.g., monitor, keyboard, mouse, ...), in other words, that can't interact directly with these devices. In this case, all interactions with these devices are done via system calls (<em>syscalls</em>).</p>
@@ -344,7 +326,7 @@ void _start()
 <li>Invoke the <strong>write</strong> or <strong>read</strong> syscall passing as argument the file descriptor of the file and a buffer to write or read data; and, finally</li>
 <li>Invoke the operating system with the close syscall to close the file.</li>
 </ol>
-<p>There are three special file descriptors that are always available and don't have to be opened or closed: STDIN, STDOUT and STDERR. The Values of the file descriptors STDIN, STDOUT e STDERR are 0, 1 e 2, respectively.</p>
+<p>There are three special file descriptors that are always available and don't have to be opened or closed: STDIN, STDOUT and STDERR. The Values of the file descriptors STDIN, STDOUT and STDERR are 0, 1 e 2, respectively.</p>
 <p>These file descriptors correspond to the standard input, standard output and error output of the program. When the program writes to standard output or error output, the operating system shows what was written on the terminal; where the program is being executed. In case the program reads from standard input, the operating system (i) waits until the user types something in the standard input and press ENTER, and (ii) returns to the program what was typed in the terminal.</p>
 <p>The following code shows the implementation of a function in C that contains code in RISC-V assembly language to invoke the syscall <strong>read</strong>. This function contains a set of RISC-V instructions that adjust the parameters and invoke the operating system to perform the read operation through the read syscall.</p>
 <pre><code class="language-c">/* read
@@ -384,7 +366,7 @@ int main()
   return 0;
 }
 </code></pre>
-<p>The following code shows a possible C implementation of the function write. This C function, contains a code in RISC-V assembly language to invoke the system call (syscall) <strong>write</strong>. It invokes the operating system to write <strong>__n</strong> bytes from the buffer <strong>__buf</strong> on the file (or device) indicated by the file descriptor, parameter <strong>__fd</strong>. When <strong>__fd</strong> = 1, this function writes to the standard output (stdout).</p>
+<p>The following code shows a possible C implementation of the function write. This C function contains a code in RISC-V assembly language to invoke the system call (syscall) <strong>write</strong>. It invokes the operating system to write <strong>__n</strong> bytes from the buffer <strong>__buf</strong> on the file (or device) indicated by the file descriptor, parameter <strong>__fd</strong>. When <strong>__fd</strong> = 1, this function writes to the standard output (stdout).</p>
 <pre><code class="language-c">/* write
  * Parameters:
  *  __fd:  files descriptor where that will be written.
@@ -424,7 +406,8 @@ int main()
 </code></pre>
 <p>The ALE simulator expects a break line character ('\n') to print the content written to the standard output on the terminal. This way, you must add a break line at the end of your buffer or call the function <strong>write</strong> again with a string that has the break line character. The example above shows a program that prints a string with 5 characters ending with a break line.</p>
 <h3 id="instructions-3"><a class="header" href="#instructions-3">Instructions</a></h3>
-<p>You must write a C program that implements a simple calculator. The calculator must read a string from the Standard Input with the following format: <strong>s1 op s2</strong>, where <strong>s1</strong> and <strong>s2</strong> are symbols that have a value associated to them and <strong>op</strong> is the operation to be performed.</p>
+<p>You must write a C program that implements a simple calculator. The calculator must read a string from the Standard Input with the following format: <strong>s1 op s2</strong>, where <strong>s1</strong> and <strong>s2</strong> are symbols that have a value associated to them and <strong>op</strong> is the operation to be performed.
+The result of the operation must be written to the Standard Output, i.e., file descriptor equals to 1.</p>
 <p>The symbols to be considered are the characters '0', '1', '2', '3', '4', '5', '6', '7', '8', and '9', and the values associated to them are zero, one, two, ..., and nine.</p>
 <p>The arithmetic operations are represented by the symbols '+' (addition), '-' (subtraction) and '*' (multiplication).</p>
 <h3 id="examples"><a class="header" href="#examples">Examples</a></h3>

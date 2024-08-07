@@ -12,7 +12,7 @@ Besides linking the code from multiple object files (.o), the linker must regist
 
 When generating the executable files, C and C++ compilers link an object file that has the implementation of this function. However, the RISC-V compiler used here doesn't link to such file (nor LibC), thi way, it is necessary to include an implementation of the function.
 
-The following code shows a possible implementations to the function **exit** and the function **\_start**. In this example, the function exit consists of a sequence of instructions in assembly language that copies the value of function parameter (code) to the register a0, puts the value 93 on register a7 and generates a software interrupt (ecall instruction). The software interrupt redirects the execution flow to the operating system, which will use the value on register a7 to determine which syscall was requested and the value on register a0 as a parameter to the call.
+The following code shows possible implementations to the function **exit** and the function **\_start**. In this example, the function exit consists of a sequence of instructions in assembly language that copies the value of function parameter (code) to the register a0, puts the value 93 on register a7 and generates a software interrupt (ecall instruction). The software interrupt redirects the execution flow to the operating system, which will use the value on register a7 to determine which syscall was requested and the value on register a0 as a parameter to the call.
 
 ```c
 void exit(int code)
@@ -34,7 +34,7 @@ void _start()
 }
 ```
 
-The **\_start** function code simply calls the **main** function, which is implemented by the user, and, after main's return, invoker the **exit** function passing the **main** return value as a parameter.
+The **\_start** function code simply calls the **main** function, which is implemented by the user, and, after main's return, invokes the **exit** function passing the **main** return value as a parameter.
 
 You can copy and paste these two functions on your C programs that will be executed on the ALE simulator. Alternatively, you can put them in a file called start.c and compile/assemble/link the file with your program.
 
@@ -48,7 +48,7 @@ The organization of the Linux operating system is strongly based on the concept 
 2. Invoke the **write** or **read** syscall passing as argument the file descriptor of the file and a buffer to write or read data; and, finally
 3. Invoke the operating system with the close syscall to close the file.
 
-There are three special file descriptors that are always available and don't have to be opened or closed: STDIN, STDOUT and STDERR. The Values of the file descriptors STDIN, STDOUT e STDERR are 0, 1 e 2, respectively.
+There are three special file descriptors that are always available and don't have to be opened or closed: STDIN, STDOUT and STDERR. The Values of the file descriptors STDIN, STDOUT and STDERR are 0, 1 e 2, respectively.
 
 These file descriptors correspond to the standard input, standard output and error output of the program. When the program writes to standard output or error output, the operating system shows what was written on the terminal; where the program is being executed. In case the program reads from standard input, the operating system (i) waits until the user types something in the standard input and press ENTER, and (ii) returns to the program what was typed in the terminal.
 
@@ -96,7 +96,7 @@ int main()
 }
 ```
 
-The following code shows a possible C implementation of the function write. This C function, contains a code in RISC-V assembly language to invoke the system call (syscall) **write**. It invokes the operating system to write **\_\_n** bytes from the buffer **\_\_buf** on the file (or device) indicated by the file descriptor, parameter **\_\_fd**. When **\_\_fd** = 1, this function writes to the standard output (stdout).
+The following code shows a possible C implementation of the function write. This C function contains a code in RISC-V assembly language to invoke the system call (syscall) **write**. It invokes the operating system to write **\_\_n** bytes from the buffer **\_\_buf** on the file (or device) indicated by the file descriptor, parameter **\_\_fd**. When **\_\_fd** = 1, this function writes to the standard output (stdout).
 
 ```c
 /* write
@@ -145,6 +145,7 @@ The ALE simulator expects a break line character ('\n') to print the content wri
 ### Instructions
 
 You must write a C program that implements a simple calculator. The calculator must read a string from the Standard Input with the following format: **s1 op s2**, where **s1** and **s2** are symbols that have a value associated to them and **op** is the operation to be performed.
+The result of the operation must be written to the Standard Output, i.e., file descriptor equals to 1.
 
 The symbols to be considered are the characters '0', '1', '2', '3', '4', '5', '6', '7', '8', and '9', and the values associated to them are zero, one, two, ..., and nine.
 

@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>Code Generation Tools - RISC-V ALE Exercise Book v1.0</title>
+        <title>Code Generation Tools - RISC-V ALE Exercise Book v1.0.1</title>
 
 
         <!-- Custom HTML head -->
@@ -143,7 +143,7 @@
                         </button>
                     </div>
 
-                    <h1 class="menu-title">RISC-V ALE Exercise Book v1.0</h1>
+                    <h1 class="menu-title">RISC-V ALE Exercise Book v1.0.1</h1>
 
                     <div class="right-buttons">
                         <a href="print.html" title="Print this book" aria-label="Print this book">
@@ -239,25 +239,7 @@ void _start() {
 <h3 id="notes-and-tips"><a class="header" href="#notes-and-tips">Notes and Tips</a></h3>
 <ul>
 <li>Remember to use the RISC-V 32 compilation tools, otherwise you might not be able to correctly compile file2.c (Notice that this file contains assembly instructions for RISC-V processors).</li>
-<li>Compilation process of a C program consists of 3 main steps:</li>
-<li>Compiling: C files are translated to assembly language;
-<pre><code>clang-15 --target=riscv32 -march=rv32g -mabi=ilp32d -mno-relax prog.c -S -o prog.s
-</code></pre>
-</li>
-<li>Assembling: reads assembly files and produces object files;
-<pre><code>as prog.s -o prog.o
-</code></pre>
-<pre><code>clang-15 --target=riscv32 -march=rv32g -mabi=ilp32d -mno-relax prog.s -c -o prog.o
-</code></pre>
-</li>
-<li>Linking: read multiple object files and links them and also links with library code, producing the final executable file.
-<pre><code>ld.lld prog.o module1.o module2.o -o prog.x
-</code></pre>
-</li>
-<li>You can inspect the object files or executable files using disassembler tools such as <em>llvm-dump</em></li>
 </ul>
-<pre><code>llvm-objdump -D prog.o
-</code></pre>
 
                     </main>
 
