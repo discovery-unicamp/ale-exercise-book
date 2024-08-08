@@ -8,7 +8,7 @@ It requires the students to perform, step-by-step, all the code generation steps
 Perform the following program compilation process step-by-step, i.e., generating the assembly language code and then the object code for each source file and finally calling the linker to put all the object files together and produce the executable file named prog.x.
 You must use the clang-15 compiler and generate code for the RISC-V R32 architecture.
 
-The program is composed of two source files: [file1.c](https://github.com/discovery-unicamp/ale-exercise-book/reference_code/ch01-01/file1.c) and [file2.c](https://github.com/discovery-unicamp/ale-exercise-book/reference_code/ch01-01/file2.c). The following listings show the file contents.
+The program is composed of two source files: [file1.c](https://github.com/discovery-unicamp/ale-exercise-book/blob/main/reference_code/ch01-01/file1.c) and [file2.c](https://github.com/discovery-unicamp/ale-exercise-book/blob/main/reference_code/ch01-01/file2.c). The following listings show the file contents.
 
 ```c
 extern void write(int __fd, const void *__buf, int __n);

@@ -56,7 +56,7 @@ result:
   .word 0
 ```
 
-This program receives as input the value of its RA in register a0 and produces as output the values ​​in registers a1, a2, and a3. Assume the program has received your RA as input and answer the following questions:
+This program receives as input the value of your RA in register a0 and produces as output the values ​​in registers a1, a2, and a3. Assume the program has received your RA as input and answer the following questions:
 
 1. What are the values ​​of the following registers in hexadecimal representation when the execution reaches the "end" label?
 

@@ -54,7 +54,7 @@ void exit(int code);
 
 ### Input
 
-Test Case index and specific input depending on the test case (check example.c).
+Test Case index and specific input depending on the test case (check [example.c](https://github.com/discovery-unicamp/ale-exercise-book/blob/main/reference_code/ch06-07/example.c)).
 
 ### Output
 

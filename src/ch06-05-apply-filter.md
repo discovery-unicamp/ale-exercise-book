@@ -6,13 +6,13 @@ In this activity, you must write a program in RISC-V assembly language that read
 
 The first step of this exercise is to read an image in the PGM format and store its content in a matrix (exactly as done in exercise 6.4). After that, you must apply the following filter on the image:
 
-$$
+<p>$$
 w = \begin{bmatrix}
-    -1 & -1 & -1 \\
-    -1 & 8 & -1 \\
-    -1 & -1 & -1
+-1 &amp; -1 &amp; -1 \\\
+-1 &amp; 8 &amp; -1 \\\
+-1 &amp; -1 &amp; -1
 \end{bmatrix}
-$$
+$$</p>
 
 Assuming w the filter matrix above, Minthe matrix representing the input image and Mout the matrix representing the output image. The basic idea of applying the filter is that each Mout pixel[i, j] is defined as:
 

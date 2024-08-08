@@ -214,7 +214,7 @@ Your library will have three main functionalities:</p>
 <li>Check the <a href="appendix_ale-peripherals-mmio-manual.html#midi-synthesizer">ALE Peripheral MMIO Manual</a> for information about the MIDI Synthesizer and General Purpose Timer peripherals.</li>
 <li>To allocate the stacks, you can declare two arrays in your program. When initializing the stack pointer (SP), remember that RISC-V stacks are full-descending.</li>
 <li>You must implement all the functions in a single file lib.s, in RISC-V assembly language.</li>
-<li>We provide our application in the file <a href="https://github.com/discovery-unicamp/ale-exercise-book/reference_code/ch07-03/midi-player.c">midi-player.c</a>, that uses your library and mustn't be changed. This file must be uploaded with the .s library file.</li>
+<li>We provide our application in the file <a href="https://github.com/discovery-unicamp/ale-exercise-book/blob/main/reference_code/ch07-03/midi-player.c">midi-player.c</a>, that uses your library and mustn't be changed. This file must be uploaded with the .s library file.</li>
 <li>All functions must follow the ABI.</li>
 <li>All functions must be <a href="https://en.wikipedia.org/wiki/Thread_safety"><em>thread-safe</em></a>. Right now, you <strong>don't</strong> need to understand this concept. Just ensure that your code <strong>doesn't</strong> use global variables (the only exceptions are the variables _system_time, the program and ISR stacks). Use only local variables, allocated on the stack or on registers.</li>
 <li><strong>Simulator configuration</strong>:
