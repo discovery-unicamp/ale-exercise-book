@@ -93,7 +93,7 @@ This program receives as input the value of your RA in register a0 and produces 
    - a2:
    - a3:
 
-6. What are the values ​​of the following registers in hexadecimal representation when the contents of a1 and a2 are different from 0 and have the same value?
+6. What are the values ​​of the following registers in hexadecimal representation when the contents of a1 and a2 are different from 0 and have the same value for the first time?
 
    - a0:
    - a3:
