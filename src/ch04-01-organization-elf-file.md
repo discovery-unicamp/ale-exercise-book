@@ -104,7 +104,7 @@ To make your job easier, we will discuss how to read the ELF file given above. T
 00000220  02 00 00 00 00 00 00 00  00 00 00 00 10 01 00 00  |................|
 00000230  50 00 00 00 05 00 00 00  04 00 00 00 04 00 00 00  |P...............|
 00000240  10 00 00 00<mark style="background: green"> </mark><mark style="background:transparent;color: orange">18 00 00 00  03 00 00 00 00 00 00 00</mark>  |................|
-00000250  <mark style="background:transparent;color: orange">00 00 00 00 60 01 00 00  2a 00 00 00 00 00 00 00</mark>  |....`...*.......|
+00000250  <mark style="background:transparent;color: orange">00 00 00 00</mark> <mark style="background:gray;color: orange">60 01 00 00</mark>  <mark style="background:transparent;color: orange">2a 00 00 00 00 00 00 00</mark>  |....`...*.......|
 00000260  <mark style="background:transparent;color: orange">00 00 00 00 01 00 00 00  00 00 00 00</mark><mark style="background: green"> </mark>22 00 00 00  |............"...|
 00000270  03 00 00 00 00 00 00 00  00 00 00 00 8a 01 00 00  |................|
 00000280  18 00 00 00 00 00 00 00  00 00 00 00 01 00 00 00  |................|
@@ -120,9 +120,9 @@ To make your job easier, we will discuss how to read the ELF file given above. T
 
 3. e_shstrndx contains the value 4, indicating that Section Header number 4 (counting from 0) is the header of shstrtab, which stores the information about the names of the sections. We colored its content in <mark style="background:transparent;color:orange">orange</mark>.
 
-4. The sh_offset field of Section Header 4 (orange number with gray background) stores the address of shstrtab: 0x00000160.
+4. The sh_offset field of Section Header 4 (<mark style="background:gray;color: orange">orange number with gray background</mark>) stores the address of shstrtab: 0x00000160.
 
-5. The sh_name field of Section Header 4 is the offset (from the beginning of the shstrtab section) to the string representing the section's name. For example, Section Header number 1 has an offset of 0x1 (highlighted in cyan), so its name is the string at position 0x00000160 + 0x1. In other words, this is the Header of the ".text" section, which stores the executable's instructions.
+5. The sh_name field of Section Header 4 is the offset (from the beginning of the shstrtab section) to the string representing the section's name. For example, Section Header number 1 has an offset of 0x1 (highlighted in <mark style="background:transparent;color: lightblue">cyan</mark>), so its name is the string at position 0x00000160 + 0x1. In other words, this is the Header of the ".text" section, which stores the executable's instructions.
 
 6. Our objective is to find the ".symtab" and ".strtab" sections, which respectively store the addresses and names of the symbols.
 
@@ -140,11 +140,11 @@ To make your job easier, we will discuss how to read the ELF file given above. T
 
     - .symtab: (offsets to .strtab are highlighted in blue, addresses in red)
     <pre><code>
-    00000110  <mark style="background: blue">00 00 00 00 00 00 00 00</mark>  <mark style="background: red">00 00 00 00 00 00 00 00</mark>  |................|
-    00000120  <mark style="background: blue">01 00 00 00 e0 10 01 00</mark>  <mark style="background: red">00 00 00 00 00 00 01 00</mark>  |................|
-    00000130  <mark style="background: blue">05 00 00 00 c8 10 01 00</mark>  <mark style="background: red">00 00 00 00 00 00 01 00</mark>  |................|
-    00000140  <mark style="background: blue">0a 00 00 00 f8 10 01 00</mark>  <mark style="background: red">00 00 00 00 00 00 01 00</mark>  |................|
-    00000150  <mark style="background: blue">11 00 00 00 b4 10 01 00</mark>  <mark style="background: red">00 00 00 00 10 00 01 00</mark>  |................|
+    00000110  <mark style="background: blue">00 00 00 00</mark> <mark style="background: red">00 00 00 00</mark>  00 00 00 00 00 00 00 00  |................|
+    00000120  <mark style="background: blue">01 00 00 00</mark> <mark style="background: red">e0 10 01 00</mark>  00 00 00 00 00 00 01 00  |................|
+    00000130  <mark style="background: blue">05 00 00 00</mark> <mark style="background: red">c8 10 01 00</mark>  00 00 00 00 00 00 01 00  |................|
+    00000140  <mark style="background: blue">0a 00 00 00</mark> <mark style="background: red">f8 10 01 00</mark>  00 00 00 00 00 00 01 00  |................|
+    00000150  <mark style="background: blue">11 00 00 00</mark> <mark style="background: red">b4 10 01 00</mark>  00 00 00 00 10 00 01 00  |................|
     </code></pre>
     - .strtab:
     <pre><code>
