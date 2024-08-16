@@ -112,7 +112,7 @@ To make your job easier, we will discuss how to read the ELF file given above. T
 00000294
 </code></pre>
 
-1. First, we must identify the values of fields e_shoff, e_shnum, and e_shstrndx (see their description on the Wikipedia page related to the ELF format), which are colored in <mark style="background:transparent;color: purple">purple</mark>, <mark style="background:transparent;color:blue">blue</mark>, and <mark style="background:transparent;color:red">red</mark>, respectively.
+1. First, we must identify the values of fields e_shoff, e_shnum, and e_shstrndx (see their description on the [Wikipedia page](https://en.wikipedia.org/wiki/Executable_and_Linkable_Format) related to the ELF format), which are colored in <mark style="background:transparent;color: purple">purple</mark>, <mark style="background:transparent;color:blue">blue</mark>, and <mark style="background:transparent;color:red">red</mark>, respectively.
 
    - The value of the e_shoff field is 0x000001a4 (recall the little-endian representation), indicating that the Section Headers start at this offset.
 
