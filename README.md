@@ -10,7 +10,7 @@ The built book is available at https://riscv-programming.org/exercise-book.html
 
 In order to generate the HTML files for the book Rust's [mdBook] is used, to install it from its [GitHub repository](https://github.com/rust-lang/mdBook).
 
-At the root of this reporitory run
+At the root of this repository run
 
 ```bash
 $ mdbook build
