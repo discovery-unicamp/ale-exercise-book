@@ -13,7 +13,7 @@ int read(int __fd, const void *__buf, int __n){
     "mv a0, %1           # file descriptor\n"
     "mv a1, %2           # buffer \n"
     "mv a2, %3           # size \n"
-    "li a7, 63           # syscall write code (63) \n"
+    "li a7, 63           # syscall read code (63) \n"
     "ecall               # invoke syscall \n"
     "mv %0, a0           # move return value to ret_val\n"
     : "=r"(ret_val)  // Output list
@@ -41,7 +41,7 @@ void exit(int code)
 {
   __asm__ __volatile__(
     "mv a0, %0           # return code\n"
-    "li a7, 93           # syscall exit (64) \n"
+    "li a7, 93           # syscall exit (93) \n"
     "ecall"
     :   // Output list
     :"r"(code)    // Input list
