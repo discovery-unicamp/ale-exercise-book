@@ -72,7 +72,7 @@ This program receives as input the value of your RA in register a0 and produces 
    - a2:
    - a3:
 
-3. What are the values ​​of the following registers in hexadecimal representation after the simulator executes the first 25 instructions?
+3. What are the values ​​of the following registers in hexadecimal representation after the simulator executes the first 25 machine instructions?
 
    - a0:
    - a1:
