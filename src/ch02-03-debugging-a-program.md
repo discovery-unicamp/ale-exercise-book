@@ -86,7 +86,7 @@ This program receives as input the value of your RA in register a0 and produces 
    - a2:
    - a3:
 
-5. What are the values ​​of the following registers in hexadecimal representation after the simulator executes the first 30 instructions?
+5. What are the values ​​of the following registers in hexadecimal representation after the simulator executes the first 30 machine instructions?
 
    - a0:
    - a1:
@@ -103,3 +103,13 @@ This program receives as input the value of your RA in register a0 and produces 
 ### Notes and Tips
 
 - To see the complete list of commands available in the interactive mode you can execute the "help" command.
+- Depending on how many bits are necesary to encode the immediate value, the `li` pseudo-instruction can be mapped to one (`addi`) or two machine instructions (`lui` and `addi`).
+- When the question indicates to execute to code until it reaches a given label, it means you must execute instructions until reaching the memory address of the label, but without executing the instruction stored in that memory address.
+- The interactive terminal outputs some informations regarding the instruction that was executed in the format `#{Inst Num} 0 {Mem Addr} {Inst Code} {Inst Type} {Val} {Mnemonic}`
+   - **Inst Num**: number of the machine instruction that was executed.
+   - **Mem Addr**: memory address of the instruction that was executed. 
+   - **Inst Code**: code of the instruction that was executed.
+   - **Inst Type**: can be either `r` if the instruction uses only register or `m` if there is a memory access (store or load). 
+   - **Val**: value stored in the `rd` register for instructions of type `r` or stored in the memory position accessed for type `m` instructions.
+   - **Mnemonic**: assembly mnemonic of the executed instruction
+- The second occurrence of the instruction #1 can be ignored.

@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>Debugging a program - RISC-V ALE Exercise Book v1.0.4</title>
+        <title>Debugging a program - RISC-V ALE Exercise Book v1.0.5</title>
 
 
         <!-- Custom HTML head -->
@@ -143,7 +143,7 @@
                         </button>
                     </div>
 
-                    <h1 class="menu-title">RISC-V ALE Exercise Book v1.0.4</h1>
+                    <h1 class="menu-title">RISC-V ALE Exercise Book v1.0.5</h1>
 
                     <div class="right-buttons">
                         <a href="print.html" title="Print this book" aria-label="Print this book">
@@ -265,7 +265,7 @@ result:
 </ul>
 </li>
 <li>
-<p>What are the values ​​of the following registers in hexadecimal representation after the simulator executes the first 30 instructions?</p>
+<p>What are the values ​​of the following registers in hexadecimal representation after the simulator executes the first 30 machine instructions?</p>
 <ul>
 <li>a0:</li>
 <li>a1:</li>
@@ -287,6 +287,19 @@ result:
 <h3 id="notes-and-tips"><a class="header" href="#notes-and-tips">Notes and Tips</a></h3>
 <ul>
 <li>To see the complete list of commands available in the interactive mode you can execute the "help" command.</li>
+<li>Depending on how many bits are necesary to encode the immediate value, the <code>li</code> pseudo-instruction can be mapped to one (<code>addi</code>) or two machine instructions (<code>lui</code> and <code>addi</code>).</li>
+<li>When the question indicates to execute to code until it reaches a given label, it means you must execute instructions until reaching the memory address of the label, but without executing the instruction stored in that memory address.</li>
+<li>The interactive terminal outputs some informations regarding the instruction that was executed in the format <code>#{Inst Num} 0 {Mem Addr} {Inst Code} {Inst Type} {Val} {Mnemonic}</code>
+<ul>
+<li><strong>Inst Num</strong>: number of the machine instruction that was executed.</li>
+<li><strong>Mem Addr</strong>: memory address of the instruction that was executed.</li>
+<li><strong>Inst Code</strong>: code of the instruction that was executed.</li>
+<li><strong>Inst Type</strong>: can be either <code>r</code> if the instruction uses only register or <code>m</code> if there is a memory access (store or load).</li>
+<li><strong>Val</strong>: value stored in the <code>rd</code> register for instructions of type <code>r</code> or stored in the memory position accessed for type <code>m</code> instructions.</li>
+<li><strong>Mnemonic</strong>: assembly mnemonic of the executed instruction</li>
+</ul>
+</li>
+<li>The second occurrence of the instruction #1 can be ignored.</li>
 </ul>
 
                     </main>

@@ -8,7 +8,8 @@ In this activity, you must write a program in RISC-V assembly language that read
 
 Your program must read a file called "image.pgm" that will be in the same directory as the executable file. The _syscall_ open can be used to open the file (an example is shown at the [Notes and Tips](#notes-and-tips) section)
 
-Some examples of PGM images can be found on this site: [PGMB Files - Binary Portable Gray Map Graphics Files](https://people.sc.fsu.edu/~jburkardt/data/pgmb/pgmb.html)
+Some examples of PGM images can be found on this site: [PGMB Files - Binary Portable Gray Map Graphics Files](https://people.sc.fsu.edu/~jburkardt/data/pgmb/pgmb.html).
+Smaller examples are also availabe [here](https://github.com/discovery-unicamp/ale-exercise-book/tree/main/reference_code/ch06-04).
 
 ### Output
 

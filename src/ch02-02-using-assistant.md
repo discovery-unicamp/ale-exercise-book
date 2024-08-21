@@ -172,3 +172,5 @@ When accessing the assistant, a new simulator tab will open with the configured 
 
 To test your code, load the file (in this exercise the .c file) on the simulator and click on _Run Tests_ after selecting the Assistant tab.
 The name of each one of the tests will be informed, and after some processing time, it will return either _Pass_ or _Fail_, which can be selected to inform the input, expected output and returned output for the selected test.
+While the tests are running, **keep the simulator tab in the foreground**. 
+Changing tabs can lead to performance constraints of the simulator tab, leading to timeout errors of the test cases, which will be shown as _Fail_.

@@ -22,7 +22,10 @@ There is no directory structure and existing files with the same name are automa
 
 Once you have loaded your files, you can start your program execution. To do so, you must click on the RUN button (top right corner).
 
-The simulator will identify the source files and, if necessary, perform the compiling, assembling and linking to get the executable. Finally, the simulator will invoke the executable and show the program's output (if there is any).
+The simulator will identify the source files and, if necessary, perform the compiling, assembling and linking to get the executable.
+Note that for this case, if the C files are loaded, a warning is issued during the compilation process (`function declared 'noreturn' should not return`) due to the exit function definition.
+This warning can be ignored.
+Finally, the simulator will invoke the executable and show the program's output (if there is any).
 
 Note: The simulator stops the program's execution when (i) the program invokes the system call (syscall) exit, or (ii) when the execution finds invalid instructions. In the last case, the simulator may show error messages like "Error: Failed stop: 64 consecutive illegal instructions: 0". This is expected in programs that do not call the exit syscall, as the processor doesn't know where the program ends and will continue to execute instructions consecutively, until it finds invalid instructions.
 

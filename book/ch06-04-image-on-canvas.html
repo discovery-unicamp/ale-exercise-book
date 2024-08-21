@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>Image on Canvas - RISC-V ALE Exercise Book v1.0.4</title>
+        <title>Image on Canvas - RISC-V ALE Exercise Book v1.0.5</title>
 
 
         <!-- Custom HTML head -->
@@ -143,7 +143,7 @@
                         </button>
                     </div>
 
-                    <h1 class="menu-title">RISC-V ALE Exercise Book v1.0.4</h1>
+                    <h1 class="menu-title">RISC-V ALE Exercise Book v1.0.5</h1>
 
                     <div class="right-buttons">
                         <a href="print.html" title="Print this book" aria-label="Print this book">
@@ -183,7 +183,8 @@
 <p>In this activity, you must write a program in RISC-V assembly language that reads an image in <a href="https://davis.lbl.gov/Manuals/NETPBM/doc/pgm.html">PGM format</a> from a file and shows it on screen using the canvas peripheral.</p>
 <h3 id="input"><a class="header" href="#input">Input</a></h3>
 <p>Your program must read a file called "image.pgm" that will be in the same directory as the executable file. The <em>syscall</em> open can be used to open the file (an example is shown at the <a href="#notes-and-tips">Notes and Tips</a> section)</p>
-<p>Some examples of PGM images can be found on this site: <a href="https://people.sc.fsu.edu/~jburkardt/data/pgmb/pgmb.html">PGMB Files - Binary Portable Gray Map Graphics Files</a></p>
+<p>Some examples of PGM images can be found on this site: <a href="https://people.sc.fsu.edu/~jburkardt/data/pgmb/pgmb.html">PGMB Files - Binary Portable Gray Map Graphics Files</a>.
+Smaller examples are also availabe <a href="https://github.com/discovery-unicamp/ale-exercise-book/tree/main/reference_code/ch06-04">here</a>.</p>
 <h3 id="output"><a class="header" href="#output">Output</a></h3>
 <p>Your program must show the image on the screen using <em>syscalls</em> to the Canvas peripheral. The Canvas must be adjusted to have the image size. The available <em>syscalls</em> are:</p>
 <div class="table-wrapper"><table><thead><tr><th style="text-align: left"><em>syscall</em></th><th style="text-align: left">Input</th><th style="text-align: left">Description</th></tr></thead><tbody>
