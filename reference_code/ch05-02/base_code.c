@@ -1,5 +1,7 @@
+// Enum of possible instruction types
 typedef enum InstType { R, I, S, B, U, J} InstType;
 
+// Struct with instruction data
 typedef struct InstData {
     int opcode,
         rd,
@@ -12,6 +14,13 @@ typedef struct InstData {
 } InstData;
 
 
+// read function.
+// Parameters: 
+//    - __fd: file descriptor.
+//    - __buff: destination buffer address.
+//    - __n: number of bytes to read.
+//
+// Returns: number of bytes read 
 int read(int __fd, const void *__buf, int __n){
   int bytes;
   __asm__ __volatile__(
@@ -21,13 +30,20 @@ int read(int __fd, const void *__buf, int __n){
     "li a7, 63           # syscall read (63) \n"
     "ecall \n"
     "mv %0, a0"
-    : "=r"(bytes)  // Output list
-    :"r"(__fd), "r"(__buf), "r"(__n)    // Input list
+    : "=r"(bytes)
+    :"r"(__fd), "r"(__buf), "r"(__n)
     : "a0", "a1", "a2", "a7"
   );
   return bytes;
 }
 
+// write function.
+// Parameters: 
+//    - __fd: file descriptor.
+//    - __buff: source buffer address.
+//    - __n: number of bytes to write.
+//
+// Returns: (nothing)
 void write(int __fd, const void *__buf, int __n){
   __asm__ __volatile__(
     "mv a0, %0           # file descriptor\n"
@@ -35,24 +51,34 @@ void write(int __fd, const void *__buf, int __n){
     "mv a2, %2           # size \n"
     "li a7, 64           # syscall write (64) \n"
     "ecall"
-    :   // Output list
-    :"r"(__fd), "r"(__buf), "r"(__n)    // Input list
+    :
+    :"r"(__fd), "r"(__buf), "r"(__n)
     : "a0", "a1", "a2", "a7"
   );
 }
 
+// exit function.
+// Parameters: 
+//    - code: exit code.
+//
+// Returns: (nothing)
 void exit(int code)
 {
   __asm__ __volatile__(
     "mv a0, %0           # return code\n"
     "li a7, 93           # syscall exit (93) \n"
     "ecall"
-    :             // Output list
-    :"r"(code)    // Input list
+    :
+    :"r"(code)
     : "a0", "a7"
   );
 }
 
+// Receives an int value and then display its hexadecimal representation in STDOUT.
+// Parameters: 
+//    - val: value to convert to hexadecimal representaion and display.
+//
+// Returns: (nothing)
 void hex_code(int val){
     char hex[11];
     unsigned int uval = (unsigned int) val, aux;
@@ -72,6 +98,13 @@ void hex_code(int val){
     write(1, hex, 11);
 }
 
+// Compares the first n_char characters of two strings.
+// Parameters: 
+//    - str1: first string.
+//    - str2: second string.
+//    - n_char: number of chars to compare.
+//
+// Returns: 0 if the strings are equal, 1 or -1 if they are different
 int strcmp_custom(char *str1, char *str2, int n_char){
     for (int i = 0; i < n_char; i++){
         if (str1[i] < str2 [i])
@@ -82,6 +115,12 @@ int strcmp_custom(char *str1, char *str2, int n_char){
     return 0;
 }
 
+// Reads a string of characters representing a number in decimal base from a buffer, converts to int and updates the number of chars read from the buffer.
+// Parameters: 
+//    - buffer: buffer address.
+//    - read_chars: pointer to variable to be updated with the number of chars read form the buffer.
+//
+// Returns: int value computed from the 
 int dec_to_int(char buffer[], int *read_chars){
     int neg = 0, val = 0, curr;
     if (buffer[0] == '-')
@@ -99,6 +138,12 @@ int dec_to_int(char buffer[], int *read_chars){
     return val;
 }
 
+// Gets the register id from a buffer and updates the number of chars read.
+// Parameters: 
+//    - buffer: buffer address.
+//    - read_chars: pointer to variable to be updated with the number of chars read form the buffer.
+//
+// Returns: Register id 
 int get_register(char buffer[], int *read_chars){
     int curr = 0;
     while (buffer[curr] != 'x'){
@@ -109,6 +154,12 @@ int get_register(char buffer[], int *read_chars){
     return dec_to_int(&buffer[curr], read_chars);
 }
 
+// Gets the immediate value from a buffer and updates the number of chars read.
+// Parameters: 
+//    - buffer: buffer address.
+//    - read_chars: pointer to variable to be updated with the number of chars read form the buffer .
+//
+// Returns: Immediate value
 int get_immediate(char buffer[], int *read_chars){
     int curr = 0;
 
@@ -119,29 +170,70 @@ int get_immediate(char buffer[], int *read_chars){
     return dec_to_int(&buffer[curr], read_chars);
 }
 
+// Parsing of instruction with format rd_imm.
+// Parameters: 
+//    - buffer: buffer address.
+//    - rd: pointer to variable associated with destination register.
+//    - imm: pointer to variable associated with immediate.
+//    - start: index of where to start reading from the buffer.
+//
+// Returns: (nothing)
 void rd_imm(char buffer[], int *rd, int *imm, int start){
     *rd = get_register(&buffer[start], &start);
     *imm = get_immediate(&buffer[start], &start);
 }
 
+// Parsing of instruction with format r1_r2_imm.
+// Parameters: 
+//    - buffer: buffer address.
+//    - r1: pointer to variable associated with register 1.
+//    - r2: pointer to variable associated with register 2.
+//    - imm: pointer to variable associated with immediate.
+//    - start: index of where to start reading from the buffer.
+//
+// Returns: (nothing)
 void r1_r2_imm(char buffer[], int *r1, int *r2, int *imm, int start){
     *r1 = get_register(&buffer[start], &start);
     *r2 = get_register(&buffer[start], &start);
     *imm = get_immediate(&buffer[start], &start);
 }
 
+// Parsing of instruction with format r1_imm_r2.
+// Parameters: 
+//    - buffer: buffer address.
+//    - r1: pointer to variable associated with register 1.
+//    - r2: pointer to variable associated with register 2.
+//    - imm: pointer to variable associated with immediate.
+//    - start: index of where to start reading from the buffer.
+//
+// Returns: (nothing)
 void r1_imm_r2(char buffer[], int *r1, int *r2, int *imm, int start){
     *r1 = get_register(&buffer[start], &start);
     *imm = get_immediate(&buffer[start], &start);
     *r2 = get_register(&buffer[start], &start);
 }
 
+// Parsing of instruction with format r1_r2_r3.
+// Parameters: 
+//    - buffer: buffer address.
+//    - r1: pointer to variable associated with register 1.
+//    - r2: pointer to variable associated with register 2.
+//    - r3: pointer to variable associated with register 3.
+//    - start: index of where to start reading from the buffer.
+//
+// Returns: (nothing)
 void r1_r2_r3(char buffer[], int *r1, int *r2, int *r3, int start){
     *r1 = get_register(&buffer[start], &start);
     *r2 = get_register(&buffer[start], &start);
     *r3 = get_register(&buffer[start], &start);
 }
 
+// Parses a string with a RISC-V instruction and fills an InstData struct with the instruction's data.
+// Parameters: 
+//    - inst: instruction string.
+//    - data: pointer to InstData struct.
+//
+// Returns: (nothing)
 void get_inst_data(char inst[], InstData *data){
     int opcode = 0,
         rd = 0,
