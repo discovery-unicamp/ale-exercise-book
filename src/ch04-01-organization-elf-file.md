@@ -48,7 +48,7 @@ In this activity, you will manually read and interpret an ELF executable file fr
 00000294
 </code></pre>
 
-This is an example of the Hexdump for the executable of exercise Ex. 3.2. In the example, each line contains the following information, separated by spaces:
+This is an example of the Hexdump for the executable of exercise Ex. 2.3. In the example, each line contains the following information, separated by spaces:
 
 1. Offset of the first byte in the line (in hexadecimal). The offset is a number indicating the distance of the information (in this case, the first byte of the line) from a reference point (in this case, the beginning of the file).
 2. 16 hexadecimal numbers, each representing a byte of the file.
