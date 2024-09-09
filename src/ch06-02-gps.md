@@ -12,7 +12,7 @@ In this activity, you must write a program in RISC-V assembly language that comp
 
 </div>
 
-To simplify the exercise, it is assumed that satellite A is placed at the origin of the cartesian plane (0, 0), while B and C are positioned at (0, Y<sub>B</sub>) and (X<sub>C</sub>, 0), respectively. The satellites continuously send messages with a timestamp via waves that propagate in all directions at a speed of 3 x 10<sup>8</sup> m/s. At a given time T<sub>R</sub>, you receive a message from each satellite containing the timestamps T<sub>A</sub>, T<sub>B</sub> and T<sub>C</sub>. Assuming that all clocks are perfectly synchronized, print your coordinates (x, y) in the cartesian plane. Note that the formulation used in this exercise is not realistic.
+To simplify the exercise, it is assumed that satellite A is placed at the origin of the cartesian plane (0, 0), while B and C are positioned at (0, Y<sub>B</sub>) and (X<sub>C</sub>, 0), respectively. The satellites continuously send messages with a timestamp, which marks when the message was sent, via waves that propagate in all directions at a speed of 3 x 10<sup>8</sup> m/s. At a given time T<sub>R</sub>, you receive a message from each satellite containing the timestamps T<sub>A</sub>, T<sub>B</sub>, and T<sub>C</sub>. Assuming that all clocks are perfectly synchronized, print your coordinates (x, y) in the cartesian plane. Note that the formulation used in this exercise is not realistic.
 
 ### Input
 

@@ -28,14 +28,14 @@ The XOR operator can be used for a given subset of bits. For instance, to check 
 
 ### Input
 
-- **Line 1** - a sequence of 4 bits that must be encoded in a Hamming code using 3 parity bits.
-- **Line 2** - a sequence of 7 bits that is Hamming encoded, and must be decoded and checked.
+- **Line 1** - a sequence of 4 bits that must be encoded in a Hamming code using 3 parity bits, followed by a newline character (`\n`).
+- **Line 2** - a sequence of 7 bits that is Hamming encoded, and must be decoded and checked, followed by a newline character (`\n`).
 
 ### Output
 
-- **Line 1** - sequence of 7 bits that has been encoded using Hamming code
-- **Line 2** - sequence of 4 bits that has been decoded from the Hamming code.
-- **Line 3** - 1 if an error was detected when decoding the Hamming code, 0 otherwise.
+- **Line 1** - sequence of 7 bits that has been encoded using Hamming code, followed by a newline character (`\n`).
+- **Line 2** - sequence of 4 bits that has been decoded from the Hamming code, followed by a newline character (`\n`).
+- **Line 3** - 1 if an error was detected when decoding the Hamming code, 0 otherwise, followed by a newline character (`\n`).
 
 ### Examples
 

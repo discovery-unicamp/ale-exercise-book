@@ -60,7 +60,7 @@ As a first step, you should carefully read the description of the ELF format (pa
 
 - All numbers are represented in hexadecimal.
 - Memory words store numbers in little-endian representation. Therefore, the bytes "34 00 01 00" represent the value 0x10034 in 4 bytes.
-- Refer to the [Practical Guide to RISC-V: Atlas of an Open Architecture](http://riscvbook.com/portuguese/) to decode the instructions. Especially, consult the beginning of Chapter 2 and Figure 2.3.
+- The program instructions can be found in the .text section. Refer to the [RISC-V Instruction Set Manual](https://riscv.org/wp-content/uploads/2017/05/riscv-spec-v2.2.pdf) to decode the instructions. Especially, consult the RV32I Base Instruction Set in Table 19.2, presented in Chapter 19.
 
 ### Example Solution
 

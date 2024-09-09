@@ -44,6 +44,7 @@
   - [Custom Search on a Linked List](ch06-06-linked-list.md)
   - [ABI-compliant Linked List Custom Search](ch06-07-abi-linked-list.md)
   - [ABI-compliant Recursive Binary Tree Search](ch06-08-abi-recursive-binary-tree.md)
+  - [Complementary Short Exercises](ch06-C-exercises.md)
 
 ## Assembly System-level Programming
 

@@ -17,7 +17,7 @@ Your program must show the image on the screen using _syscalls_ to the Canvas pe
 
 | _syscall_     | Input                                                                                                                                                                                                                                                         | Description                                                                                                                 |
 | :------------ | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | :-------------------------------------------------------------------------------------------------------------------------- |
-| setPixel      | **a0**:pixel's x coordinate</br>**a1**: pixel's y coordinate</br>**a2**: concatenated pixel's colors: R\|G\|B\|A <ul><li>a2[31..24]: Red</li><li>a2[23..16]: Green</li><li>a2[15..8]: Blue</li><li>a2[23..16]: Green</li></ul>**a7**: 2200 (_syscall_ number) | Defines the color of a given canvas' pixel. For gray scale, use the same values for the colors (R = G = B) and alpha = 255. |
+| setPixel      | **a0**:pixel's x coordinate</br>**a1**: pixel's y coordinate</br>**a2**: concatenated pixel's colors: R\|G\|B\|A <ul><li>a2[31..24]: Red</li><li>a2[23..16]: Green</li><li>a2[15..8]: Blue</li><li>a2[7..0]: Alpha</li></ul>**a7**: 2200 (_syscall_ number) | Defines the color of a given canvas' pixel. For gray scale, use the same values for the colors (R = G = B) and alpha = 255. |
 | setCanvasSize | **a0**:canvas width (value between 0 and 512)</br>**a1**: canvas height (value between 0 and 512)</br>**a7**: 2201 (_syscall_ number)                                                                                                                         | Resets and defines canvas' size.                                                                                            |
 | setScaling    | **a0**:horizontal scaling</br>**a1**: vertical scaling</br>**a7**: 2202 (_syscall_ number)                                                                                                                                                                    | Updates canvas' scaling                                                                                                     |
 
@@ -51,6 +51,17 @@ The open _syscall_ returns the file descriptor (fd) for the file on a0. This fil
     li a1, 0             # flags (0: rdonly, 1: wronly, 2: rdwr)
     li a2, 0             # mode
     li a7, 1024          # syscall open
+    ecall
+
+input_file: .asciz "image.pgm"
+```
+
+[_close_](https://man7.org/linux/man-pages/man2/close.2.html) example:
+The close _syscall_ closes a file descriptor, so that it no longer refers to any file and may be reused.
+
+```riscvasm
+    li a0, 3             # file descriptor (fd) 3
+    li a7, 57            # syscall close
     ecall
 
 input_file: .asciz "image.pgm"

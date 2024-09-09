@@ -1,5 +1,5 @@
 [book]
-title = "RISC-V ALE Exercise Book v1.0.5"
+title = "RISC-V ALE Exercise Book v1.1.0"
 authors = ["João Seródio", "Edson Borin"]
 
 [output.html]
