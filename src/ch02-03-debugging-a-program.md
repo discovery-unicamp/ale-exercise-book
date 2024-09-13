@@ -103,6 +103,7 @@ This program receives as input the value of your RA in register a0 and produces 
 ### Notes and Tips
 
 - To see the complete list of commands available in the interactive mode you can execute the "help" command.
+- In case your program reads from STDIN, you can use the `write-stdin` command followed by the input string to provide an input.
 - Depending on how many bits are necesary to encode the immediate value, the `li` pseudo-instruction can be mapped to one (`addi`) or two machine instructions (`lui` and `addi`).
 - When the question indicates to execute to code until it reaches a given label, it means you must execute instructions until reaching the memory address of the label, but without executing the instruction stored in that memory address.
 - The interactive terminal outputs some informations regarding the instruction that was executed in the format `#{Inst Num} 0 {Mem Addr} {Inst Code} {Inst Type} {Val} {Mnemonic}`

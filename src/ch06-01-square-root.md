@@ -4,7 +4,7 @@
 
 Write a program in RISC-V assembly language that computes the approximated square root of integers.
 
-To perform read and write of data from/to the terminal, you must use the read and write syscalls (similarly to exercise 4.1, but now in assembly language)
+To perform read and write of data from/to the terminal, you must use the read and write syscalls (similarly to exercise 3.1, but now in assembly language)
 
 _read_ syscall example:
 

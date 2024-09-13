@@ -44,7 +44,6 @@
   - [Custom Search on a Linked List](ch06-06-linked-list.md)
   - [ABI-compliant Linked List Custom Search](ch06-07-abi-linked-list.md)
   - [ABI-compliant Recursive Binary Tree Search](ch06-08-abi-recursive-binary-tree.md)
-  - [Complementary Short Exercises](ch06-C-exercises.md)
 
 ## Assembly System-level Programming
 
@@ -54,10 +53,17 @@
   - [External Interrupts - MIDI Player](ch07-03-interrupts-midi-player.md)
   - [Software Interrupts - Controlling the Car](ch07-04-interrupts-controlling-the-car.md)
 
+## Complementary Short Exercises
+
+- [Complementary Short Exercises](ch08-00-complementary-exercises.md)
+  - [ABI Compliance](ch08-01-ABI.md)
+  - [Data Organization on the Memory](ch08-02-data-organization.md)
+
+
 ## Final Projects
 
-- [Final Projects](ch08-00-final-projects.md)
-  - [Driving Through the City](ch08-01-driving-through-the-city.md)
+- [Final Projects](ch09-00-final-projects.md)
+  - [Driving Through the City](ch09-01-driving-through-the-city.md)
 
 ## Appendix
 
