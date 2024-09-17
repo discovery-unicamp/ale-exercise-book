@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>Applying a Filter to an Image - RISC-V ALE Exercise Book v1.2.0</title>
+        <title>Applying a Filter to an Image - RISC-V ALE Exercise Book v1.2.1</title>
 
 
         <!-- Custom HTML head -->
@@ -143,7 +143,7 @@
                         </button>
                     </div>
 
-                    <h1 class="menu-title">RISC-V ALE Exercise Book v1.2.0</h1>
+                    <h1 class="menu-title">RISC-V ALE Exercise Book v1.2.1</h1>
 
                     <div class="right-buttons">
                         <a href="print.html" title="Print this book" aria-label="Print this book">
@@ -189,11 +189,11 @@ w = \begin{bmatrix}
 -1 &amp; -1 &amp; -1
 \end{bmatrix}
 $$</p>
-<p>Assuming w the filter matrix above, Minthe matrix representing the input image and Mout the matrix representing the output image. The basic idea of applying the filter is that each Mout pixel[i, j] is defined as:</p>
+<p>Assuming \(w\) the filter matrix above, \(M_{in}\) the matrix representing the input image, and \(M_{out}\) the matrix representing the output image. The basic idea of applying the filter is that each \(M_{out}\) pixel[i, j] is defined as:</p>
 <p>$$
 M_{out}[i][j] = \sum_{k=0}^{2} \sum_{q=0}^{2} w[k][q] * M_{in}[i+k-1][j + q - 1]
 $$</p>
-<p>Note that this can lead to the Min matrix to be indexed with invalid indices (negative or out of bounds). In order to avoid these cases, the border pixels of the image Mout must be initialized with black and it is not necessary to compute the filter value for them. You can visualize how this filter works in <a href="https://setosa.io/ev/image-kernels/">Image Kernels explained visually</a> (select the "outline" filter). This filter is also known as the Laplacian operator for edge detection.</p>
+<p>Note that this can lead to the \(M_{in}\) matrix to be indexed with invalid indices (negative or out of bounds). In order to avoid these cases, the border pixels of the image \(M_{out}\) must be initialized with black and it is not necessary to compute the filter value for them. You can visualize how this filter works in <a href="https://setosa.io/ev/image-kernels/">Image Kernels explained visually</a> (select the "outline" filter). This filter is also known as the Laplacian operator for edge detection.</p>
 <p>Also note that the image <em>pixels</em> must have values between 0 (black) and 255 (white). If the result of the equation presented above is not in this interval, you must use the closest value in the interval (i.e., values lower than 0 become 0, and values greater than 255 become 255).</p>
 <h3 id="input"><a class="header" href="#input">Input</a></h3>
 <p>Your program must read a file called "image.pgm" that will be in the same directory as the executable file, as explained in <a href="ch06-04-image-on-canvas.html">Exercise 6.4</a>.</p>

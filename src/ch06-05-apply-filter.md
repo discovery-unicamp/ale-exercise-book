@@ -14,13 +14,13 @@ w = \begin{bmatrix}
 \end{bmatrix}
 $$</p>
 
-Assuming w the filter matrix above, Minthe matrix representing the input image and Mout the matrix representing the output image. The basic idea of applying the filter is that each Mout pixel[i, j] is defined as:
+Assuming \\(w\\) the filter matrix above, \\(M_{in}\\) the matrix representing the input image, and \\(M_{out}\\) the matrix representing the output image. The basic idea of applying the filter is that each \\(M_{out}\\) pixel[i, j] is defined as:
 
 $$
     M_{out}[i][j] = \sum_{k=0}^{2} \sum_{q=0}^{2} w[k][q] * M_{in}[i+k-1][j + q - 1]
 $$
 
-Note that this can lead to the Min matrix to be indexed with invalid indices (negative or out of bounds). In order to avoid these cases, the border pixels of the image Mout must be initialized with black and it is not necessary to compute the filter value for them. You can visualize how this filter works in [Image Kernels explained visually](https://setosa.io/ev/image-kernels/) (select the "outline" filter). This filter is also known as the Laplacian operator for edge detection.
+Note that this can lead to the \\(M_{in}\\) matrix to be indexed with invalid indices (negative or out of bounds). In order to avoid these cases, the border pixels of the image \\(M_{out}\\) must be initialized with black and it is not necessary to compute the filter value for them. You can visualize how this filter works in [Image Kernels explained visually](https://setosa.io/ev/image-kernels/) (select the "outline" filter). This filter is also known as the Laplacian operator for edge detection.
 
 Also note that the image _pixels_ must have values between 0 (black) and 255 (white). If the result of the equation presented above is not in this interval, you must use the closest value in the interval (i.e., values lower than 0 become 0, and values greater than 255 become 255).
 
