@@ -36,6 +36,9 @@ void exit(int code);
 
 Your function will receive the address of the root of the tree on register a0 and the value being searched on register a1.
 
+Check the file [example.c](https://github.com/discovery-unicamp/ale-exercise-book/blob/main/reference_code/ch06-08/example.c) to see how your functions will be called.
+The binary tree used in this example is the same as presented in Figure 6.8.1.
+
 ### Output
 
 Your function must return on the register a0 the depth of the value if the searched value is present on the tree, 0 otherwise.

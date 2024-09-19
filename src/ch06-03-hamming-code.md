@@ -24,7 +24,7 @@ The new inserted bits with radical **p** are **parity** bits. Each one of the 3 
 
 On the second part of this exercise, you will receive a sequence of 7 bits that has been encoded. You have to extract the data field from this sequence, and also check if the data contains an error caused by a bit flip (there is no need for correcting the data if an error is detected). For this error checking, you have to verify the parity of each one of the 3 subsets.
 
-The XOR operator can be used for a given subset of bits. For instance, to check the parity for which pd<sub>1</sub> is responsible, p<sub>1</sub> XOR d<sub>1</sub> XOR d<sub>2</sub> XOR d<sub>4</sub> must be equal to 0. Otherwise, there is an error on the encoded data. Do this for the 3 subsets of bits in order to check if you can trust the data encoded with Hamming(7, 4).
+The XOR operator can be used for a given subset of bits. For instance, to check the parity for which p<sub>1</sub> is responsible, p<sub>1</sub> XOR d<sub>1</sub> XOR d<sub>2</sub> XOR d<sub>4</sub> must be equal to 0. Otherwise, there is an error on the encoded data. Do this for the 3 subsets of bits in order to check if you can trust the data encoded with Hamming(7, 4).
 
 ### Input
 
