@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>Accessing Peripherals - Using Serial Port - RISC-V ALE Exercise Book v1.2.4</title>
+        <title>Accessing Peripherals - Using Serial Port - RISC-V ALE Exercise Book v1.3.0</title>
 
 
         <!-- Custom HTML head -->
@@ -143,7 +143,7 @@
                         </button>
                     </div>
 
-                    <h1 class="menu-title">RISC-V ALE Exercise Book v1.2.4</h1>
+                    <h1 class="menu-title">RISC-V ALE Exercise Book v1.3.0</h1>
 
                     <div class="right-buttons">
                         <a href="print.html" title="Print this book" aria-label="Print this book">
@@ -183,33 +183,33 @@
 <p>In this activity, you will communicate with the Serial Port device via MMIO. You will need to read a stream of bytes from the Serial Port and then perform an operation on top of the data read.</p>
 <p>Interactions with Serial Port can be done through two memory addresses:</p>
 <ul>
-<li>base+0x00: storing the value 1 triggers a write, writing the byte that is stored at base+0x01. The byte at base+0x00 is set to 0 when write is complete.</li>
-<li>base+0x02: storing the value 1 triggers a read, reading one byte and storing it at base+0x03. The byte at base+0x02 is set to 0 when read is complete.</li>
+<li><strong>base+0x00</strong>: storing the value 1 triggers a write, writing the byte that is stored at base+0x01. The byte at base+0x00 is set to 0 when write is complete.</li>
+<li><strong>base+0x02</strong>: storing the value 1 triggers a read, reading one byte and storing it at base+0x03. The byte at base+0x02 is set to 0 when read is complete.</li>
 </ul>
 <p>There will be 4 different sets of operations to perform:</p>
 <ul>
 <li><strong>Operation</strong> 1: read a string and write it back to Serial Port
 <ul>
-<li><strong>Input</strong>: 1\n{string with variable size}\n</li>
-<li><strong>Output</strong>: {string with variable size}\n</li>
+<li><strong>Input</strong>: <mark style="background:transparent;color: darkred">1\n</mark><mark style="background:transparent;color: green">{string with variable size}\n</mark></li>
+<li><strong>Output</strong>: <mark style="background:transparent;color: green">{string with variable size}\n</mark></li>
 </ul>
 </li>
 <li><strong>Operation 2</strong>: read a string and write it back to Serial Port reversed
 <ul>
-<li><strong>Input</strong>: 2\n{string with variable size}\n</li>
-<li><strong>Outpu</strong>t: {string with variable size reversed}\n</li>
+<li><strong>Input</strong>: <mark style="background:transparent;color: darkred">2\n</mark><mark style="background:transparent;color: green">{string with variable size}\n</li>
+<li><strong>Output</strong>: <mark style="background:transparent;color: green">{string with variable size reversed}\n</mark></li>
 </ul>
 </li>
 <li><strong>Operation 3</strong>: read a number in decimal representation and write it back in hexadecimal representation.
 <ul>
-<li><strong>Input</strong>: 3\n{decimal number with variable size}\n</li>
-<li><strong>Output</strong>: {number in hexadecimal}\n</li>
+<li><strong>Input</strong>: <mark style="background:transparent;color: darkred">3\n</mark><mark style="background:transparent;color: green">{decimal number with variable size}\n</li>
+<li><strong>Output</strong>: <mark style="background:transparent;color: green">{number in hexadecimal}\n</mark></li>
 </ul>
 </li>
 <li><strong>Operation 4</strong>: read a string that represents an algebraic expression, compute the expression and write the result to Serial Port.
 <ul>
-<li><strong>Input</strong>: 4\n{number with variable size} {operator} {number with variable size}\n</li>
-<li><strong>Output</strong>: {operation result in decimal representation}\n</li>
+<li><strong>Input</strong>: <mark style="background:transparent;color: darkred">4\n</mark><mark style="background:transparent;color: green">{number with variable size} {operator} {number with variable size}\n</mark></li>
+<li><strong>Output</strong>: <mark style="background:transparent;color: green">{operation result in decimal representation}\n</mark></li>
 <li>Operator can be <strong>+</strong> (add) , <strong>-</strong> (sub), <strong>*</strong> (mul) or <strong>/</strong> (div)</li>
 </ul>
 </li>
@@ -217,7 +217,7 @@
 <h3 id="examples"><a class="header" href="#examples">Examples</a></h3>
 <div class="table-wrapper"><table><thead><tr><th style="text-align: left">Test Case</th><th style="text-align: left">Input</th><th style="text-align: left">Output</th></tr></thead><tbody>
 <tr><td style="text-align: left">1</td><td style="text-align: left">1</br>Random String</td><td style="text-align: left">Random String</td></tr>
-<tr><td style="text-align: left">2</td><td style="text-align: left">2</br>Random String</td><td style="text-align: left">gnirtS desreveR</td></tr>
+<tr><td style="text-align: left">2</td><td style="text-align: left">2</br>Reversed String</td><td style="text-align: left">gnirtS desreveR</td></tr>
 <tr><td style="text-align: left">3</td><td style="text-align: left">3</br>1876</td><td style="text-align: left">754</td></tr>
 <tr><td style="text-align: left">4</td><td style="text-align: left">4</br>244 + 67</td><td style="text-align: left">311</td></tr>
 <tr><td style="text-align: left">5</td><td style="text-align: left">4</br>2340 / 50</td><td style="text-align: left">46</td></tr>

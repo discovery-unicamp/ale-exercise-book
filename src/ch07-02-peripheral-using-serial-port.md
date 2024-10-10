@@ -6,34 +6,34 @@ In this activity, you will communicate with the Serial Port device via MMIO. You
 
 Interactions with Serial Port can be done through two memory addresses:
 
-- base+0x00: storing the value 1 triggers a write, writing the byte that is stored at base+0x01. The byte at base+0x00 is set to 0 when write is complete.
-- base+0x02: storing the value 1 triggers a read, reading one byte and storing it at base+0x03. The byte at base+0x02 is set to 0 when read is complete.
+- **base+0x00**: storing the value 1 triggers a write, writing the byte that is stored at base+0x01. The byte at base+0x00 is set to 0 when write is complete.
+- **base+0x02**: storing the value 1 triggers a read, reading one byte and storing it at base+0x03. The byte at base+0x02 is set to 0 when read is complete.
 
 There will be 4 different sets of operations to perform:
 
 - **Operation** 1: read a string and write it back to Serial Port
-  - **Input**: 1\n{string with variable size}\n
-  - **Output**: {string with variable size}\n
+  - **Input**: <mark style="background:transparent;color: darkred">1\n</mark><mark style="background:transparent;color: green">{string with variable size}\n</mark>
+  - **Output**: <mark style="background:transparent;color: green">{string with variable size}\n</mark>
 - **Operation 2**: read a string and write it back to Serial Port reversed
-  - **Input**: 2\n{string with variable size}\n
-  - **Outpu**t: {string with variable size reversed}\n
+  - **Input**: <mark style="background:transparent;color: darkred">2\n</mark><mark style="background:transparent;color: green">{string with variable size}\n
+  - **Output**: <mark style="background:transparent;color: green">{string with variable size reversed}\n</mark>
 - **Operation 3**: read a number in decimal representation and write it back in hexadecimal representation.
-  - **Input**: 3\n{decimal number with variable size}\n
-  - **Output**: {number in hexadecimal}\n
+  - **Input**: <mark style="background:transparent;color: darkred">3\n</mark><mark style="background:transparent;color: green">{decimal number with variable size}\n
+  - **Output**: <mark style="background:transparent;color: green">{number in hexadecimal}\n</mark>
 - **Operation 4**: read a string that represents an algebraic expression, compute the expression and write the result to Serial Port.
-  - **Input**: 4\n{number with variable size} {operator} {number with variable size}\n
-  - **Output**: {operation result in decimal representation}\n
+  - **Input**: <mark style="background:transparent;color: darkred">4\n</mark><mark style="background:transparent;color: green">{number with variable size} {operator} {number with variable size}\n</mark>
+  - **Output**: <mark style="background:transparent;color: green">{operation result in decimal representation}\n</mark>
   - Operator can be **+** (add) , **-** (sub), **\*** (mul) or **/** (div)
 
 ### Examples
 
-| Test Case | Input               | Output          |
-| :-------- | :------------------ | :-------------- |
-| 1         | 1</br>Random String | Random String   |
-| 2         | 2</br>Random String | gnirtS desreveR |
-| 3         | 3</br>1876          | 754             |
-| 4         | 4</br>244 + 67      | 311             |
-| 5         | 4</br>2340 / 50     | 46              |
+| Test Case | Input                 | Output          |
+| :-------- | :-------------------- | :-------------- |
+| 1         | 1</br>Random String   | Random String   |
+| 2         | 2</br>Reversed String | gnirtS desreveR |
+| 3         | 3</br>1876            | 754             |
+| 4         | 4</br>244 + 67        | 311             |
+| 5         | 4</br>2340 / 50       | 46              |
 
 ### Notes and Tips
 
