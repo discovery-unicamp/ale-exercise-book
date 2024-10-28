@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>External Interrupts - MIDI Player - RISC-V ALE Exercise Book v1.3.0</title>
+        <title>External Interrupts - MIDI Player - RISC-V ALE Exercise Book v1.3.1</title>
 
 
         <!-- Custom HTML head -->
@@ -143,7 +143,7 @@
                         </button>
                     </div>
 
-                    <h1 class="menu-title">RISC-V ALE Exercise Book v1.3.0</h1>
+                    <h1 class="menu-title">RISC-V ALE Exercise Book v1.3.1</h1>
 
                     <div class="right-buttons">
                         <a href="print.html" title="Print this book" aria-label="Print this book">
@@ -190,8 +190,9 @@ Your library will have three main functionalities:</p>
 </li>
 <li>Program and handle external interrupts of a timer device (GPT).
 <ul>
-<li>The GPT interrupt handler must simply increment a global time counter (<em>_system_time</em>), that needs to be initialized as zero and must store the system time in milliseconds. (System time is the time that has elapsed since the system has been booted).</li>
-<li>We suggest programming GPT to generate interrupts every 100 ms, which is the value that must be incremented in <em>_system_time</em>.</li>
+<li>The GPT interrupt handler must simply increment a global time counter (<em>_system_time</em>), that needs to be initialized as zero.</li>
+<li>We suggest programming GPT to generate interrupts every <strong>100 ms, which is the value that must be incremented</strong> in <em>_system_time</em>.</li>
+<li>After handling the interrupt, the <code>mret</code> instruction must be used to resume the user code execution.</li>
 </ul>
 </li>
 <li>Provide a function “<em>play_note</em>” to access the MIDI Synthesizer peripheral through MMIO.
@@ -223,7 +224,7 @@ Your library will have three main functionalities:</p>
 <li>Also on the "Hardware" tab, add the GPT, and after that, the Sound Synthesizer (MIDI), <strong>in this order</strong>.</li>
 </ul>
 </li>
-<li>Before beginning to test the MIDI Synthesizer, check the volume of your browser and computer.</li>
+<li>Before beginning to test the MIDI Synthesizer, check the volume of your browser and computer. Some notes from The White Stripes' Seven Nation Army will be played.</li>
 <li>You must access the peripherals through MMIO, just like Exercises <a href="ch07-01-peripheral-controlling-the-car.html">7.1</a> and <a href="ch07-02-peripheral-using-serial-port.html">7.2</a>.</li>
 <li>Each device's base_addr can be seen on the table “Memory Map” in the "Hardware" tab.</li>
 <li>You can test your code using this <a href="https://riscv-programming.org/ale/#select_url_content=TjRJZ3RnaGdsZ2RnK2dCd2djd0tZZ0Z3aEFHaEJBWndLZ0lCY0laUzRDQmpBSnlnVk0yenhvSHNZQXpLWlRVZGt5aWNDLUVCMjY4NEpDQUVGTXBPZ0ZkVWJUajJUU0NFQU1JTGxxOGVxa3lBSXZwVnJKbW1RREVMaGlScTBRQWtnNnZPWkFXUTlIckxnREtmazRtMmdDcWZxZ3dFQUJHQURhbzFPeHdOQUFXcURRQTFySHNBQjZZWEJEeEJJWUVLV1FRMllqc3NLU29kSEFBYnNVcUxBQU1lUURzdHIyOWVuaDFjRngwcUFDT2NIUVVhQ3dBVEFDc0lBQytlQVFBbnJURkpmd3JJQUFtcUUxUU5LaWlHS0JvTUEzRmlFcDBDT3lsY0tSUVlBMEFkQUJXWjZBRThlek1EQUxBQnN1ekFVRDJVR29hMG9HV0lBQzhQdDh4SDhBWmd1c0NBQnhMSEZMSUE=" target="_blank">simulator setup</a>, but there isn't an assistant for this exercise.</li>

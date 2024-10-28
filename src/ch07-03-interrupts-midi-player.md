@@ -8,8 +8,9 @@ Your library will have three main functionalities:
 1. Implement a _\_start_ function, that initializes the program's stack (see Notes and Tips for more information on how to do that), sets interrupts, and calls the _main_ function (using the jal instruction), available in the provided application.
    - Note that the jal instruction will be used, as it won't be necessary to change execution mode. In future exercises, this may be necessary (and mret will be used instead of jal).
 2. Program and handle external interrupts of a timer device (GPT).
-   - The GPT interrupt handler must simply increment a global time counter (_\_system_time_), that needs to be initialized as zero and must store the system time in milliseconds. (System time is the time that has elapsed since the system has been booted).
-   - We suggest programming GPT to generate interrupts every 100 ms, which is the value that must be incremented in _\_system_time_.
+   - The GPT interrupt handler must simply increment a global time counter (_\_system_time_), that needs to be initialized as zero.
+   - We suggest programming GPT to generate interrupts every **100 ms, which is the value that must be incremented** in _\_system_time_.
+   - After handling the interrupt, the `mret` instruction must be used to resume the user code execution.
 3. Provide a function “_play_note_” to access the MIDI Synthesizer peripheral through MMIO.
    - The function prototype is **void play_note(int ch, int inst, int note, int vel, int dur)**;
    - The parameters are:
@@ -30,7 +31,7 @@ Your library will have three main functionalities:
 - **Simulator configuration**:
   - To receive external interrupts, set the “Bus Controller Frequency Scaling” on the "Hardware" tab to 1/2<sup>7</sup>.
   - Also on the "Hardware" tab, add the GPT, and after that, the Sound Synthesizer (MIDI), **in this order**.
-- Before beginning to test the MIDI Synthesizer, check the volume of your browser and computer.
+- Before beginning to test the MIDI Synthesizer, check the volume of your browser and computer. Some notes from The White Stripes' Seven Nation Army will be played.
 - You must access the peripherals through MMIO, just like Exercises [7.1](ch07-01-peripheral-controlling-the-car.md) and [7.2](ch07-02-peripheral-using-serial-port.md).
 - Each device's base_addr can be seen on the table “Memory Map” in the "Hardware" tab.
 - You can test your code using this <a href="https://riscv-programming.org/ale/#select_url_content=TjRJZ3RnaGdsZ2RnK2dCd2djd0tZZ0Z3aEFHaEJBWndLZ0lCY0laUzRDQmpBSnlnVk0yenhvSHNZQXpLWlRVZGt5aWNDLUVCMjY4NEpDQUVGTXBPZ0ZkVWJUajJUU0NFQU1JTGxxOGVxa3lBSXZwVnJKbW1RREVMaGlScTBRQWtnNnZPWkFXUTlIckxnREtmazRtMmdDcWZxZ3dFQUJHQURhbzFPeHdOQUFXcURRQTFySHNBQjZZWEJEeEJJWUVLV1FRMllqc3NLU29kSEFBYnNVcUxBQU1lUURzdHIyOWVuaDFjRngwcUFDT2NIUVVhQ3dBVEFDc0lBQytlQVFBbnJURkpmd3JJQUFtcUUxUU5LaWlHS0JvTUEzRmlFcDBDT3lsY0tSUVlBMEFkQUJXWjZBRThlek1EQUxBQnN1ekFVRDJVR29hMG9HV0lBQzhQdDh4SDhBWmd1c0NBQnhMSEZMSUE=" target="_blank">simulator setup</a>, but there isn't an assistant for this exercise.
