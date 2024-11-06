@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>RISC-V ALE Exercise Book v1.3.1</title>
+        <title>RISC-V ALE Exercise Book v1.3.2</title>
         <meta name="robots" content="noindex">
 
 
@@ -144,7 +144,7 @@
                         </button>
                     </div>
 
-                    <h1 class="menu-title">RISC-V ALE Exercise Book v1.3.1</h1>
+                    <h1 class="menu-title">RISC-V ALE Exercise Book v1.3.2</h1>
 
                     <div class="right-buttons">
                         <a href="print.html" title="Print this book" aria-label="Print this book">
@@ -1639,7 +1639,7 @@ infinite_loop:
 <div class="table-wrapper"><table><thead><tr><th style="text-align: left"><em>syscall</em></th><th style="text-align: left">Parameters</th><th style="text-align: left">Return Value</th><th style="text-align: left">Description</th></tr></thead><tbody>
 <tr><td style="text-align: left">syscall_set_engine_and_steering</br>Code: 10</td><td style="text-align: left"><strong>a0</strong>: Movement direction</br><strong>a1</strong>: Steering wheel angle</td><td style="text-align: left">0 if successful and -1 if failed (invalid parameters)</td><td style="text-align: left">Start the engine to move the car.</br>a0's value can be -1 (go backward), 0 (off) or 1 (go forward).</br>a1's value can range from -127 to +127, where negative values turn the steering wheel to the left and positive values to the right.</td></tr>
 <tr><td style="text-align: left">syscall_set_hand_brake</br>Code: 11</td><td style="text-align: left"><strong>a0</strong>: value stating if the hand brakes must be used</td><td style="text-align: left">-</td><td style="text-align: left">a0 must be 1 to use hand brakes.</td></tr>
-<tr><td style="text-align: left">syscall_read_sensors</br>Code: 12</td><td style="text-align: left"><strong>a0</strong>: address of an array with 256 elements that will store the values read by the luminosity sensor.</td><td style="text-align: left">-</td><td style="text-align: left">Read values from the luminosity sensor.</td></tr>
+<tr><td style="text-align: left">syscall_read_line_camera</br>Code: 12</td><td style="text-align: left"><strong>a0</strong>: address of an array with 256 elements that will store the values read by the Line Camera.</td><td style="text-align: left">-</td><td style="text-align: left">Read values from the Line Camera.</td></tr>
 <tr><td style="text-align: left">syscall_get_position</br>Code: 15</td><td style="text-align: left"><strong>a0</strong>: address of the variable that will store the value of x position.</br><strong>a1</strong>: address of the variable that will store the value of y position.</br><strong>a2</strong>: address of the variable that will store the value of z position.</td><td style="text-align: left">-</td><td style="text-align: left">Read the car's approximate position using the GPS device.</td></tr>
 </tbody></table>
 </div>
