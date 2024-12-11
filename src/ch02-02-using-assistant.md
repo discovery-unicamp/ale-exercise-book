@@ -10,7 +10,7 @@ Programs written in C are usually linked to the C standard library and with obje
 
 Besides linking the code from multiple object files (.o), the linker must register the address of the entry function of the program on the header of the executable file so that the operating system's _loader_ knows where to start the execution of the program once it starts. By default, in C and C++, the program's entry point is defined by the function called **\_start**. This is a short function that invokes the function main() and after main returns, it invokes the **exit** syscall. to inform the operating system that the program has finished.
 
-When generating the executable files, C and C++ compilers link an object file that has the implementation of this function. However, the RISC-V compiler used here doesn't link to such file (nor LibC), thi way, it is necessary to include an implementation of the function.
+When generating the executable files, C and C++ compilers link an object file that has the implementation of this function. However, the RISC-V compiler used here doesn't link to such file (nor LibC), this way, it is necessary to include an implementation of the function.
 
 The following code shows possible implementations to the function **exit** and the function **\_start**. In this example, the function exit consists of a sequence of instructions in assembly language that copies the value of function parameter (code) to the register a0, puts the value 93 on register a7 and generates a software interrupt (ecall instruction). The software interrupt redirects the execution flow to the operating system, which will use the value on register a7 to determine which syscall was requested and the value on register a0 as a parameter to the call.
 
