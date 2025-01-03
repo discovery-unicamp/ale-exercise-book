@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>RISC-V ALE Exercise Book v1.3.2</title>
+        <title>RISC-V ALE Exercise Book v1.3.3</title>
         <meta name="robots" content="noindex">
 
 
@@ -144,7 +144,7 @@
                         </button>
                     </div>
 
-                    <h1 class="menu-title">RISC-V ALE Exercise Book v1.3.2</h1>
+                    <h1 class="menu-title">RISC-V ALE Exercise Book v1.3.3</h1>
 
                     <div class="right-buttons">
                         <a href="print.html" title="Print this book" aria-label="Print this book">
@@ -299,7 +299,7 @@ Finally, the simulator will invoke the executable and show the program's output 
 <p>Programs written in C are usually linked to the C standard library and with object files that contain support routines to the application's execution. These routines, initialize the C library's data structures, organize the parameters to the main function (_start) and, after returning from the main function, invoke the operating system to signal the end of the application (function exit).</p>
 <h4 id="_start-function-and-exit-syscall"><a class="header" href="#_start-function-and-exit-syscall">_start function and exit syscall</a></h4>
 <p>Besides linking the code from multiple object files (.o), the linker must register the address of the entry function of the program on the header of the executable file so that the operating system's <em>loader</em> knows where to start the execution of the program once it starts. By default, in C and C++, the program's entry point is defined by the function called <strong>_start</strong>. This is a short function that invokes the function main() and after main returns, it invokes the <strong>exit</strong> syscall. to inform the operating system that the program has finished.</p>
-<p>When generating the executable files, C and C++ compilers link an object file that has the implementation of this function. However, the RISC-V compiler used here doesn't link to such file (nor LibC), thi way, it is necessary to include an implementation of the function.</p>
+<p>When generating the executable files, C and C++ compilers link an object file that has the implementation of this function. However, the RISC-V compiler used here doesn't link to such file (nor LibC), this way, it is necessary to include an implementation of the function.</p>
 <p>The following code shows possible implementations to the function <strong>exit</strong> and the function <strong>_start</strong>. In this example, the function exit consists of a sequence of instructions in assembly language that copies the value of function parameter (code) to the register a0, puts the value 93 on register a7 and generates a software interrupt (ecall instruction). The software interrupt redirects the execution flow to the operating system, which will use the value on register a7 to determine which syscall was requested and the value on register a0 as a parameter to the call.</p>
 <pre><code class="language-c">void exit(int code)
 {
@@ -1916,55 +1916,58 @@ int fill_array_char(){
 <div style="break-before: page; page-break-before: always;"></div><h2 id="ale-peripherals-mmio-manual"><a class="header" href="#ale-peripherals-mmio-manual">ALE Peripherals MMIO Manual</a></h2>
 <h3 id="canvas"><a class="header" href="#canvas">Canvas</a></h3>
 <div class="table-wrapper"><table><thead><tr><th style="text-align: left"><strong>Address</strong></th><th style="text-align: left"><strong>Size</strong></th><th style="text-align: left"><strong>Description</strong></th></tr></thead><tbody>
-<tr><td style="text-align: left">base+0x00</td><td style="text-align: left">byte</td><td style="text-align: left">Storing “1” triggers the canvas to write an array of up to 504 bytes representing up to 126 pixels to the screen. The register is set to 0 when writing is completed.</td></tr>
-<tr><td style="text-align: left">base+0x02</td><td style="text-align: left">half</td><td style="text-align: left">Array size (in bytes).</td></tr>
-<tr><td style="text-align: left">base+0x04</td><td style="text-align: left">word</td><td style="text-align: left">The initial position to write the array on the canvas. The canvas is represented as a 512x512x4-byte one-dimensional array representing 512x512 pixels.</td></tr>
-<tr><td style="text-align: left">base+0x08</br>to</br>base+0x200</td><td style="text-align: left">word</td><td style="text-align: left">504-byte array representing up to 126 pixels. Each pixel takes 4 bytes, one byte for each value: Red, Green, Blue, and Alpha (in this order).</td></tr>
+<tr><td style="text-align: left"><code>base+0x00</code></td><td style="text-align: left">byte</td><td style="text-align: left">Storing <code>1</code> triggers the canvas to write an array of up to 504 bytes representing up to 126 pixels to the screen. The register is set to <code>0</code> when writing is completed.</td></tr>
+<tr><td style="text-align: left"><code>base+0x02</code></td><td style="text-align: left">half</td><td style="text-align: left">Array size (in bytes).</td></tr>
+<tr><td style="text-align: left"><code>base+0x04</code></td><td style="text-align: left">word</td><td style="text-align: left">The initial position to write the array on the canvas. The canvas is represented as a 512x512x4-byte one-dimensional array representing 512x512 pixels.</td></tr>
+<tr><td style="text-align: left"><code>base+0x08</code></br>to</br><code>base+0x200</code></td><td style="text-align: left">word</td><td style="text-align: left">504-byte array representing up to 126 pixels. Each pixel takes 4 bytes, one byte for each value: Red, Green, Blue, and Alpha (in this order).</td></tr>
 </tbody></table>
 </div>
 <h3 id="general-purpose-timer"><a class="header" href="#general-purpose-timer">General Purpose Timer</a></h3>
 <div class="table-wrapper"><table><thead><tr><th style="text-align: left"><strong>Address</strong></th><th style="text-align: left"><strong>Size</strong></th><th style="text-align: left"><strong>Description</strong></th></tr></thead><tbody>
-<tr><td style="text-align: left">base+0x00</td><td style="text-align: left">byte</td><td style="text-align: left">Storing “1” triggers the GPT device to start reading the current system time. The register is set to 0 when the reading is completed.</td></tr>
-<tr><td style="text-align: left">base+0x04</td><td style="text-align: left">word</td><td style="text-align: left">Stores the time (in milliseconds) at the moment of the last reading by the GPT.</td></tr>
-<tr><td style="text-align: left">base+0x08</td><td style="text-align: left">word</td><td style="text-align: left">Storing <em>v</em> &gt; 0 programs the GPT to generate an external interruption after v milliseconds. It also sets this register to 0 after <em>v</em> milliseconds (immediately before generating the interruption).</td></tr>
+<tr><td style="text-align: left"><code>base+0x00</code></td><td style="text-align: left">byte</td><td style="text-align: left">Storing <code>1</code> triggers the GPT device to start reading the current system time. The register is set to <code>0</code> when the reading is completed.</td></tr>
+<tr><td style="text-align: left"><code>base+0x04</code></td><td style="text-align: left">word</td><td style="text-align: left">Stores the time (in milliseconds) at the moment of the last reading by the GPT.</td></tr>
+<tr><td style="text-align: left"><code>base+0x08</code></td><td style="text-align: left">word</td><td style="text-align: left">Storing <em>v</em> &gt; 0 programs the GPT to generate an external interruption after <em>v</em> milliseconds. It also sets this register to <code>0</code> after <em>v</em> milliseconds (immediately before generating the interruption).</td></tr>
 </tbody></table>
 </div>
 <h3 id="midi-synthesizer"><a class="header" href="#midi-synthesizer">MIDI Synthesizer</a></h3>
 <div class="table-wrapper"><table><thead><tr><th style="text-align: left"><strong>Address</strong></th><th style="text-align: left"><strong>Size</strong></th><th style="text-align: left"><strong>Description</strong></th></tr></thead><tbody>
-<tr><td style="text-align: left">base+0x00</td><td style="text-align: left">byte</td><td style="text-align: left">Storing <em>ch</em> ≥ 0 triggers the synthesizer to start playing a MIDI note in the channel <em>ch</em>.</td></tr>
-<tr><td style="text-align: left">base+0x02</td><td style="text-align: left">short</td><td style="text-align: left">Instrument ID.</td></tr>
-<tr><td style="text-align: left">base+0x04</td><td style="text-align: left">byte</td><td style="text-align: left">Note.</td></tr>
-<tr><td style="text-align: left">base+0x05</td><td style="text-align: left">byte</td><td style="text-align: left">Note velocity.</td></tr>
-<tr><td style="text-align: left">base+0x06</td><td style="text-align: left">short</td><td style="text-align: left">Note duration.</td></tr>
+<tr><td style="text-align: left"><code>base+0x00</code></td><td style="text-align: left">byte</td><td style="text-align: left">Storing <em>ch</em> ≥ 0 triggers the synthesizer to start playing a MIDI note in the channel <em>ch</em>.</td></tr>
+<tr><td style="text-align: left"><code>base+0x02</code></td><td style="text-align: left">short</td><td style="text-align: left">Instrument ID.</td></tr>
+<tr><td style="text-align: left"><code>base+0x04</code></td><td style="text-align: left">byte</td><td style="text-align: left">Note.</td></tr>
+<tr><td style="text-align: left"><code>base+0x05</code></td><td style="text-align: left">byte</td><td style="text-align: left">Note velocity.</td></tr>
+<tr><td style="text-align: left"><code>base+0x06</code></td><td style="text-align: left">short</td><td style="text-align: left">Note duration.</td></tr>
 </tbody></table>
 </div>
 <h3 id="self-driving-car"><a class="header" href="#self-driving-car">Self Driving Car</a></h3>
 <div class="table-wrapper"><table><thead><tr><th style="text-align: left"><strong>Address</strong></th><th style="text-align: left"><strong>Size</strong></th><th style="text-align: left"><strong>Description</strong></th></tr></thead><tbody>
-<tr><td style="text-align: left">base+0x00</td><td style="text-align: left">byte</td><td style="text-align: left">Storing “1” triggers the GPS device to start reading the coordinates and rotation of the car. The register is set to 0 when the reading is completed.</td></tr>
-<tr><td style="text-align: left">base+0x01</td><td style="text-align: left">byte</td><td style="text-align: left">Storing “1” triggers the Line Camera device to capture an image. The register is set to 0 when the capture is completed.</td></tr>
-<tr><td style="text-align: left">base+0x02</td><td style="text-align: left">byte</td><td style="text-align: left">Storing “1” triggers the Ultrasonic Sensor device to measure the distance in front of the car. The register is set to 0 when the measurement is completed.</td></tr>
-<tr><td style="text-align: left">base+0x04</td><td style="text-align: left">word</td><td style="text-align: left">Stores the Euler angle X of the car rotation at the moment of the last reading by the GPS.</td></tr>
-<tr><td style="text-align: left">base+0x08</td><td style="text-align: left">word</td><td style="text-align: left">Stores the Euler angle Y of the car rotation at the moment of the last reading by the GPS.</td></tr>
-<tr><td style="text-align: left">base+0x0C</td><td style="text-align: left">word</td><td style="text-align: left">Stores the Euler angle Z of the car rotation at the moment of the last reading by the GPS.</td></tr>
-<tr><td style="text-align: left">base+0x10</td><td style="text-align: left">word</td><td style="text-align: left">Stores the X-axis of the car position at the moment of the last reading by the GPS.</td></tr>
-<tr><td style="text-align: left">base+0x14</td><td style="text-align: left">word</td><td style="text-align: left">Stores the Y-axis of the car position at the moment of the last reading by the GPS.</td></tr>
-<tr><td style="text-align: left">base+0x18</td><td style="text-align: left">word</td><td style="text-align: left">Stores the Z-axis of the car position at the moment of the last reading by the GPS.</td></tr>
-<tr><td style="text-align: left">base+0x1C</td><td style="text-align: left">word</td><td style="text-align: left">Stores the distance (in centimeters) between the Ultrasonic sensor and the nearest obstacle. Returns -1 if there’s no obstacle within 20m.</td></tr>
-<tr><td style="text-align: left">base+0x20</td><td style="text-align: left">byte</td><td style="text-align: left">Sets the steering wheel direction. Negative values indicate steering to the left, positive values indicate steering to the right.</td></tr>
-<tr><td style="text-align: left">base+0x21</td><td style="text-align: left">byte</td><td style="text-align: left">Sets the engine direction.</br>1: forward.</br>0: off.</br>-1: backward.</td></tr>
-<tr><td style="text-align: left">base+0x22</td><td style="text-align: left">byte</td><td style="text-align: left">Sets the hand break. (1 = enabled)</td></tr>
-<tr><td style="text-align: left">base+0x24</td><td style="text-align: left">256-byte array</td><td style="text-align: left">Stores the image captured by the Line Camera. Each byte represents the luminance of a pixel.</td></tr>
+<tr><td style="text-align: left"><code>base+0x00</code></td><td style="text-align: left">byte</td><td style="text-align: left">Storing <code>1</code> triggers the GPS device to start reading the coordinates and rotation of the car. The register is set to <code>0</code> when the reading is completed.</td></tr>
+<tr><td style="text-align: left"><code>base+0x01</code></td><td style="text-align: left">byte</td><td style="text-align: left">Storing <code>1</code> triggers the Line Camera device to capture an image. The register is set to <code>0</code> when the capture is completed.</td></tr>
+<tr><td style="text-align: left"><code>base+0x02</code></td><td style="text-align: left">byte</td><td style="text-align: left">Storing <code>1</code> triggers the Ultrasonic Sensor device to measure the distance in front of the car. The register is set to <code>0</code> when the measurement is completed.</td></tr>
+<tr><td style="text-align: left"><code>base+0x04</code></td><td style="text-align: left">word</td><td style="text-align: left">Stores the Euler angle X of the car rotation at the moment of the last reading by the GPS.</td></tr>
+<tr><td style="text-align: left"><code>base+0x08</code></td><td style="text-align: left">word</td><td style="text-align: left">Stores the Euler angle Y of the car rotation at the moment of the last reading by the GPS.</td></tr>
+<tr><td style="text-align: left"><code>base+0x0C</code></td><td style="text-align: left">word</td><td style="text-align: left">Stores the Euler angle Z of the car rotation at the moment of the last reading by the GPS.</td></tr>
+<tr><td style="text-align: left"><code>base+0x10</code></td><td style="text-align: left">word</td><td style="text-align: left">Stores the X-axis of the car position at the moment of the last reading by the GPS.</td></tr>
+<tr><td style="text-align: left"><code>base+0x14</code></td><td style="text-align: left">word</td><td style="text-align: left">Stores the Y-axis of the car position at the moment of the last reading by the GPS.</td></tr>
+<tr><td style="text-align: left"><code>base+0x18</code></td><td style="text-align: left">word</td><td style="text-align: left">Stores the Z-axis of the car position at the moment of the last reading by the GPS.</td></tr>
+<tr><td style="text-align: left"><code>base+0x1C</code></td><td style="text-align: left">word</td><td style="text-align: left">Stores the distance (in centimeters) between the Ultrasonic sensor and the nearest obstacle. Returns <code>-1</code> if there’s no obstacle within 20m.</td></tr>
+<tr><td style="text-align: left"><code>base+0x20</code></td><td style="text-align: left">byte</td><td style="text-align: left">Sets the steering wheel direction. Negative values indicate steering to the left, positive values indicate steering to the right.</td></tr>
+<tr><td style="text-align: left"><code>base+0x21</code></td><td style="text-align: left">byte</td><td style="text-align: left">Sets the engine direction.</br><code>1</code>: forward.</br><code>0</code>: off.</br><code>-1</code>: backward.</td></tr>
+<tr><td style="text-align: left"><code>base+0x22</code></td><td style="text-align: left">byte</td><td style="text-align: left">Sets the hand break. (<code>1</code> = enabled)</td></tr>
+<tr><td style="text-align: left"><code>base+0x24</code></td><td style="text-align: left">256-byte array</td><td style="text-align: left">Stores the image captured by the Line Camera. Each byte represents the luminance of a pixel.</td></tr>
 </tbody></table>
 </div>
 <h3 id="serial-port"><a class="header" href="#serial-port">Serial Port</a></h3>
 <p>The serial port is connected to the terminal (stdout and stdin).</p>
 <div class="table-wrapper"><table><thead><tr><th style="text-align: left"><strong>Address</strong></th><th style="text-align: left"><strong>Size</strong></th><th style="text-align: left"><strong>Description</strong></th></tr></thead><tbody>
-<tr><td style="text-align: left">base+0x00</td><td style="text-align: left">byte</td><td style="text-align: left">Storing “1” triggers the serial port to write (to the stdout) the byte stored at base+0x01. The register is set to 0 when writing is completed.</td></tr>
-<tr><td style="text-align: left">base+0x01</td><td style="text-align: left">byte</td><td style="text-align: left">Byte to be written. ID</td></tr>
-<tr><td style="text-align: left">base+0x02</td><td style="text-align: left">byte</td><td style="text-align: left">Storing “1” triggers the serial port to read (from the stdin) a byte and store it at base+0x03. The register is set to 0 when reading is completed.</td></tr>
-<tr><td style="text-align: left">base+0x03</td><td style="text-align: left">byte</td><td style="text-align: left">Byte read. Null when stdin is empty.</td></tr>
+<tr><td style="text-align: left"><code>base+0x00</code></td><td style="text-align: left">byte</td><td style="text-align: left">Storing <code>1</code> triggers the serial port to write (to the stdout) the byte stored at <code>base+0x01</code>. The register is set to <code>0</code> when writing is completed.</td></tr>
+<tr><td style="text-align: left"><code>base+0x01</code></td><td style="text-align: left">byte</td><td style="text-align: left">Byte to be written. ID</td></tr>
+<tr><td style="text-align: left"><code>base+0x02</code></td><td style="text-align: left">byte</td><td style="text-align: left">Storing <code>1</code> triggers the serial port to read (from the stdin) a byte and store it at <code>base+0x03</code>. The register is set to <code>0</code> when reading is completed.</td></tr>
+<tr><td style="text-align: left"><code>base+0x03</code></td><td style="text-align: left">byte</td><td style="text-align: left">Byte read. <strong>NULL</strong> (<code>0</code>) when stdin is empty.</td></tr>
 </tbody></table>
 </div>
+<pre><code>                                                                                 |
+</code></pre>
+
                     </main>
 
                     <nav class="nav-wrapper" aria-label="Page navigation">

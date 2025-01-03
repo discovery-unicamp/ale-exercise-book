@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>Using the Assistant to check a Simple Symbol Calculator program - RISC-V ALE Exercise Book v1.3.2</title>
+        <title>Using the Assistant to check a Simple Symbol Calculator program - RISC-V ALE Exercise Book v1.3.3</title>
 
 
         <!-- Custom HTML head -->
@@ -143,7 +143,7 @@
                         </button>
                     </div>
 
-                    <h1 class="menu-title">RISC-V ALE Exercise Book v1.3.2</h1>
+                    <h1 class="menu-title">RISC-V ALE Exercise Book v1.3.3</h1>
 
                     <div class="right-buttons">
                         <a href="print.html" title="Print this book" aria-label="Print this book">
@@ -184,7 +184,7 @@
 <p>Programs written in C are usually linked to the C standard library and with object files that contain support routines to the application's execution. These routines, initialize the C library's data structures, organize the parameters to the main function (_start) and, after returning from the main function, invoke the operating system to signal the end of the application (function exit).</p>
 <h4 id="_start-function-and-exit-syscall"><a class="header" href="#_start-function-and-exit-syscall">_start function and exit syscall</a></h4>
 <p>Besides linking the code from multiple object files (.o), the linker must register the address of the entry function of the program on the header of the executable file so that the operating system's <em>loader</em> knows where to start the execution of the program once it starts. By default, in C and C++, the program's entry point is defined by the function called <strong>_start</strong>. This is a short function that invokes the function main() and after main returns, it invokes the <strong>exit</strong> syscall. to inform the operating system that the program has finished.</p>
-<p>When generating the executable files, C and C++ compilers link an object file that has the implementation of this function. However, the RISC-V compiler used here doesn't link to such file (nor LibC), thi way, it is necessary to include an implementation of the function.</p>
+<p>When generating the executable files, C and C++ compilers link an object file that has the implementation of this function. However, the RISC-V compiler used here doesn't link to such file (nor LibC), this way, it is necessary to include an implementation of the function.</p>
 <p>The following code shows possible implementations to the function <strong>exit</strong> and the function <strong>_start</strong>. In this example, the function exit consists of a sequence of instructions in assembly language that copies the value of function parameter (code) to the register a0, puts the value 93 on register a7 and generates a software interrupt (ecall instruction). The software interrupt redirects the execution flow to the operating system, which will use the value on register a7 to determine which syscall was requested and the value on register a0 as a parameter to the call.</p>
 <pre><code class="language-c">void exit(int code)
 {
