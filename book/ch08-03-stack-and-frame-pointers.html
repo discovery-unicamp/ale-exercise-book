@@ -1,0 +1,343 @@
+<!DOCTYPE HTML>
+<html lang="en" class="light" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Stack and Frame Pointers - RISC-V ALE Exercise Book v1.4.0</title>
+
+
+        <!-- Custom HTML head -->
+        
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="favicon.svg">
+        <link rel="shortcut icon" href="favicon.png">
+        <link rel="stylesheet" href="css/variables.css">
+        <link rel="stylesheet" href="css/general.css">
+        <link rel="stylesheet" href="css/chrome.css">
+        <link rel="stylesheet" href="css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="highlight.css">
+        <link rel="stylesheet" href="tomorrow-night.css">
+        <link rel="stylesheet" href="ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+
+        <!-- MathJax -->
+        <script async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    </head>
+    <body class="sidebar-visible no-js">
+    <div id="body-container">
+        <!-- Provide site root to javascript -->
+        <script>
+            var path_to_root = "";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('light')
+            html.classList.add(theme);
+            var body = document.querySelector('body');
+            body.classList.remove('no-js')
+            body.classList.add('js');
+        </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            var body = document.querySelector('body');
+            var sidebar = null;
+            var sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+            }
+            sidebar_toggle.checked = sidebar === 'visible';
+            body.classList.remove('sidebar-visible');
+            body.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded affix "><a href="title-page.html">RISC-V ALE Exercise Book</a></li><li class="chapter-item expanded affix "><a href="ch00-00-introduction.html">Introduction</a></li><li class="chapter-item expanded "><a href="ch01-00-getting-started.html"><strong aria-hidden="true">1.</strong> Getting Started</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch01-01-code-generation-tools.html"><strong aria-hidden="true">1.1.</strong> Code Generation Tools</a></li><li class="chapter-item expanded "><a href="ch01-02-code-generation-tools.html"><strong aria-hidden="true">1.2.</strong> Automating the compilation process with Makefiles</a></li></ol></li><li class="chapter-item expanded "><a href="ch02-00-getting-started-with-the-simulator.html"><strong aria-hidden="true">2.</strong> Getting Started with the Simulator</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch02-01-running-hello-world.html"><strong aria-hidden="true">2.1.</strong> Running the Hello World program</a></li><li class="chapter-item expanded "><a href="ch02-02-using-assistant.html"><strong aria-hidden="true">2.2.</strong> Using the Assistant to check a Simple Symbol Calculator program</a></li><li class="chapter-item expanded "><a href="ch02-03-debugging-a-program.html"><strong aria-hidden="true">2.3.</strong> Debugging a program</a></li></ol></li><li class="chapter-item expanded "><a href="ch03-00-data-representation.html"><strong aria-hidden="true">3.</strong> Data Representation on Modern Computers</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch03-01-base-conversion-c.html"><strong aria-hidden="true">3.1.</strong> Number Base Conversion in C</a></li></ol></li><li class="chapter-item expanded "><a href="ch04-00-assembly-object-executable-files.html"><strong aria-hidden="true">4.</strong> Assembly, object and executable files</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch04-01-organization-elf-file.html"><strong aria-hidden="true">4.1.</strong> Organization of an ELF file</a></li></ol></li><li class="chapter-item expanded "><a href="ch05-00-bit-manipulation-instruction-encoding.html"><strong aria-hidden="true">5.</strong> Bit Manipulation and Instruction Encoding</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch05-01-bit-masking-shift-operations.html"><strong aria-hidden="true">5.1.</strong> Bit Masking and Shift Operations</a></li><li class="chapter-item expanded "><a href="ch05-02-riscv-instruction-encoding.html"><strong aria-hidden="true">5.2.</strong> RISC-V Instruction Encoding</a></li></ol></li><li class="chapter-item expanded "><a href="ch06-00-assembly-user-level-programming.html"><strong aria-hidden="true">6.</strong> Assembly User-level Programming</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch06-01-square-root.html"><strong aria-hidden="true">6.1.</strong> Square Root</a></li><li class="chapter-item expanded "><a href="ch06-02-gps.html"><strong aria-hidden="true">6.2.</strong> GPS</a></li><li class="chapter-item expanded "><a href="ch06-03-hamming-code.html"><strong aria-hidden="true">6.3.</strong> Hamming Code</a></li><li class="chapter-item expanded "><a href="ch06-04-image-on-canvas.html"><strong aria-hidden="true">6.4.</strong> Image on Canvas</a></li><li class="chapter-item expanded "><a href="ch06-05-apply-filter.html"><strong aria-hidden="true">6.5.</strong> Applying a Filter to an Image</a></li><li class="chapter-item expanded "><a href="ch06-06-linked-list.html"><strong aria-hidden="true">6.6.</strong> Custom Search on a Linked List</a></li><li class="chapter-item expanded "><a href="ch06-07-abi-linked-list.html"><strong aria-hidden="true">6.7.</strong> ABI-compliant Linked List Custom Search</a></li><li class="chapter-item expanded "><a href="ch06-08-abi-recursive-binary-tree.html"><strong aria-hidden="true">6.8.</strong> ABI-compliant Recursive Binary Tree Search</a></li></ol></li><li class="chapter-item expanded "><a href="ch07-00-assembly-system-level-programming.html"><strong aria-hidden="true">7.</strong> Assembly System-level Programming</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch07-01-peripheral-controlling-the-car.html"><strong aria-hidden="true">7.1.</strong> Accessing Peripherals - Controlling the Car</a></li><li class="chapter-item expanded "><a href="ch07-02-peripheral-using-serial-port.html"><strong aria-hidden="true">7.2.</strong> Accessing Peripherals - Using Serial Port</a></li><li class="chapter-item expanded "><a href="ch07-03-interrupts-midi-player.html"><strong aria-hidden="true">7.3.</strong> External Interrupts - MIDI Player</a></li><li class="chapter-item expanded "><a href="ch07-04-interrupts-controlling-the-car.html"><strong aria-hidden="true">7.4.</strong> Software Interrupts - Controlling the Car</a></li></ol></li><li class="chapter-item expanded "><a href="ch08-00-complementary-exercises.html"><strong aria-hidden="true">8.</strong> Complementary Short Exercises</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch08-01-ABI.html"><strong aria-hidden="true">8.1.</strong> ABI Compliance</a></li><li class="chapter-item expanded "><a href="ch08-02-data-organization.html"><strong aria-hidden="true">8.2.</strong> Data Organization on the Memory</a></li><li class="chapter-item expanded "><a href="ch08-03-stack-and-frame-pointers.html" class="active"><strong aria-hidden="true">8.3.</strong> Stack and Frame Pointers</a></li></ol></li><li class="chapter-item expanded "><a href="ch09-00-final-projects.html"><strong aria-hidden="true">9.</strong> Final Projects</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="ch09-01-driving-through-the-city.html"><strong aria-hidden="true">9.1.</strong> Driving Through the City</a></li></ol></li><li class="chapter-item expanded "><a href="appendix.html"><strong aria-hidden="true">10.</strong> Appendix</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="appendix_ale-peripherals-mmio-manual.html"><strong aria-hidden="true">10.1.</strong> ALE Peripherals MMIO Manual</a></li></ol></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <!-- Track and set sidebar scroll position -->
+        <script>
+            var sidebarScrollbox = document.querySelector('#sidebar .sidebar-scrollbox');
+            sidebarScrollbox.addEventListener('click', function(e) {
+                if (e.target.tagName === 'A') {
+                    sessionStorage.setItem('sidebar-scroll', sidebarScrollbox.scrollTop);
+                }
+            }, { passive: true });
+            var sidebarScrollTop = sessionStorage.getItem('sidebar-scroll');
+            sessionStorage.removeItem('sidebar-scroll');
+            if (sidebarScrollTop) {
+                // preserve sidebar scroll position when navigating via links within sidebar
+                sidebarScrollbox.scrollTop = sidebarScrollTop;
+            } else {
+                // scroll sidebar to current active section when navigating via "next/previous chapter" buttons
+                var activeSection = document.querySelector('#sidebar .active');
+                if (activeSection) {
+                    activeSection.scrollIntoView({ block: 'center' });
+                }
+            }
+        </script>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </label>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">RISC-V ALE Exercise Book v1.4.0</h1>
+
+                    <div class="right-buttons">
+                        <a href="print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+                        <a href="https://github.com/discovery-unicamp/ale-exercise-book" title="Git repository" aria-label="Git repository">
+                            <i id="git-repository-button" class="fa fa-github"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h2 id="stack-and-frame-pointers"><a class="header" href="#stack-and-frame-pointers">Stack and Frame Pointers</a></h2>
+<p>Proper management of the stack pointer and frame pointer is essential to avoid issues such as buffer overflows during recursion.
+It also assists in debugging, as correctly setting up the function's stack frame enables debugging tools to generate accurate stack traces.</p>
+<p>The figure below shows a properly set up stack frame.
+The last position (higher address) of the stack frame is used to save the return address register (<code>ra</code>), and the second to last is used for the old frame pointer (<code>fp</code>).
+Then, the stack pointer (<code>sp</code>) can be update to allocate memory space on the stack for the current function, and the frame pointer is used to store the previous <code>sp</code> value (top of the stack for the previous function scope).
+The memory space between <code>sp</code> and <code>fp</code> encompasses the stack frame of the current function.</p>
+<div style="text-align:center">
+<img src="img/ch08_03_01.png" alt="layers"/>
+<p><span class="caption">Figure 8.3.1: Function Stack Frame</span></p>
+</div>
+<ol>
+<li>
+<p>Convert the following C functions to assembly code.</p>
+<pre><code class="language-c">int factorial(int n){
+    if (n &lt; 2){
+        return 1;
+    }
+    return n*factorial(n-1);
+}
+
+</code></pre>
+<p><a href="https://riscv-programming.org/ale/#select_url_content=TjRJZ3RnaGdsZ2RnK2dCd2djd0tZZ0Z3aEFHaEJBWndLZ0lCY0laUzRDQmpBSnlnVk14Q2pBUUhzN1NBQ1lBVlFDU2NBQktvQU5nbFIwY1BBSUpFUzVTbkFESzlScVFDK1BBR1owT1lIZ0IwUUFPZ0QwWURnQk1BcnVOUUVMaFltUXFrekFLd0tuak1OazV1UGg1aU1BY0lVaTQ0R2c1S0EzRkhPaDRkZlVNVGN5dGJCeWNMTUlpb3VtOWZFQUJ1ZjM4YWNWY2VBR0VBQ3dBT0FGRUFaamdBUmg1VUFBOVNWQmdiQW5sRmR4VjFCaVpnZng0ZVdKZ3lPanNhUW9BS0FFcHBtRm5aZ2pzcE9nM3k3WjNTZXBJek95Z2VBRjRlR0ZRQWR4NGhVUWtEMWRObW51a2FFbFFlSTB6SzB6QjBNRHhWT1FhQUJySGdVR3c4QUJpZEFnWUFCQUFVT0xCK25RU3V0ampzVENkWm81ZU5zN21jTGlqQnRqVmdBV1dRZEFCTStKbU8xSlBEb1RsdVBFcEJETXVnZ0t5NFVBZzRsV01GWnhKNEhQZ05ERjRtR0ZQTy1QbGlRSUVxbGhMWkpOUXZGaU5nQnlvdWFDb0FDTnhCd3pSTFpGeUNMSTVRcUNGS2RUSzlieW5MdzdvUUFKNHdHZzhPQzNBQjhmRmRoTDVaZ2dOaHNNVnNxRldCdFFzbE00bGcwTlFzYVRaanhCTUpweFZaa05nb2NWRjBVRWNNRlJScmhqMmd2RWpzWFlGZFFjY05SeUorWUxGMHR5RGdIRHNwQVFnNk80ZTctTjdjRmd3N0xMWTFXcTdQQ2d1bFdBRUpJOFdJS1c0T1hLOVhObU9JNFdybVplNThRTFZEQWdLNUVvSEVlTTA2QVlpc1otQUFSS0FJbjBEbmo3UzNSM2w2Z0JSNERCZ1pBOUJiSGd1RDBMaFRWNURnZUVOS29JQzVPRVpRZ00wSkRoWVprRXRNMHhRQWZsTUJkRjA1UFU3RG9iWkJVVlZBOHk3TFFLbWxJOExnUUxsaTFnVE00QlE1QWxSNEFCdFV3QUZwQk94YVFoVklLQUFEZFVGTUZNUUdFa2dJRmtqSWhSc2Nzd0QyVXdBRjA2UHpaYzExV0NBNnlnQnRDeVdlQjhtcU5aMWhzclpTTm1TTVR6UFV3QURrRU4zQUVDQWtWQVZrellqZEs3U05uSkFOeUlNY1VKdk44bXgtTVBIWXVWSUNpcUxGTHlBcDJCaVlGaWprQ0I5TUF6UTRSVWVTTSt0QUpOUFZxQnl2TEZWSEppZGlLa3lTdjVjeXAwb01TVmlrMXNhREFHeFZnQUF6c1NnS3g0QUFHSG9BQkpnR3kzTDhvSUFTUURnTGpkQnhHSWdKaGJTekNpU0VHREExWU9nQU5uV0xRZXBJLU1PUlFoaHBOalNKeXFtOFFlVldWWWtGeFZCQkVvUXpqTk1xbCt1YW5GeFBhbUl1dlBLUlVGaEJBYUdJbXpianVTYktwbTB4NW9nUmJwR1duem9XMDQ3Q1dYSGcxek85ckxxb2FIOG9QR3JtUDVNZ09BUWFnMkFLTGhxdnNockxpZ1U4T0dRYzkwUU1aQVVTTVhvZk1ITzhxTXRaNFNDWGYwdUM1RlpWMWZHQVB5LUg4dVRSVERraWlVSUlHa25nQUhJVVRWdUZCaklzblVQcTJBZUctQ2k5SDZ0cjcwdzNRdUFCZUxFdGdaQWlKQWRIODF0eWk5R1Myall2U3pMM1ZJTG83Z2VsQ3ZKZTBnM3VLeU1tdEVsRTJ1ay03dXRNSUhZVVZqcHdlZDNVR3laTzdIdUQxNjZvK3hxdnFqMzdZODYrT1FFVHpsZVNaVlBVdlQzbFdpem9QbnR6OTc2Y2pscm80a2t1QVlUMUJnY3IwaFdocm4zZUFnSWJHNmVrT3ctcWlQQzQ3NHVPcDc4dSs2VHVFaHVIakxpYmRYaFlBUkNrT2dBS2pwSGdBR29xNFB6T3o4SDQ0UjVsWm00QTBuaWVRRXJmWmxNT1JFam1GYm9XR0pBaUV6Q1d1Qllwdnd2QXFQdXl0VlpjbVFFb2FRd3hIalNBQkxBV0lUNGZLa0hFRDZYOFhsb3BBTmZqd0hxaUp4SWlqRkxyVXNQQTZ6RENRYUxWQlpoSllBQ1Z5S1VVekR3Y2FZOGRCbWtIS0Vlb0E1eEFJa3dzdzRBZG90Qm1CNmpnWUJlRDZFMEFvc1FWV3VnellTWHZPUXVZWUNFU09DSUx5TmczSXpnVUc2RDBLUVVVc1lzS0dqb0FBUFB3eDA2b3REckJvZjRCb0tNbHk2Q05qK0ZDQUprRmkzRUtRREJhbzB4Z1hWbUFIMFpCcEEraDNISXZtV3RZREVFTkZCQnh4dGtoaXlrZTFVMi1wNUV3R0VhSTNCUFVBQXFRRjdoMkZ5dElLSjZpMFRERE9EYkhtdUlFbXlLU1h6TWhoQWxHSkNZYjBHZ2ZjaGlBUUJMMFBSLVFFUXdGeVFyQXBYamhoVzJTTk9EaDQwWUJhRmtJOGM0TkI2aExtR0tNbUlUb2hFaUxFYVlTRVFwWVNyQUlBZ2RZbkR1RzhJQkdLS0F5QUhnSW52QkFIZ2UxQkptaDlQMEhnZVYrbzJCUWo2R2hPQzZhbUg0RldDMEFJbFpjaUZETWdZcHlISHVCaEx5YU9xQnJFd0hSSTRRZ0FKSUFabENCUkFFK2hxdzhFNEZITEd1aHRtekx1YWdlMmN3cUVySFFaZ3BoOEpBS1JDWEtRWCtYSkpKM2pzTU1TU1lvN0RjbWNUaTNlRUNtSDNoS2ZpbEJLeFVVY0dJTWtncFhMZ1d3bVJXaUY1YVRTSmFVWXFSV0trWXlZVTBzcEVHbWFkNlpPV1pxc1NjajhacTd5MHFxMTIyeFZoc3B1SGNJYXgwdEEzMmxLNlNNckZNeW9ITENjcmlkQW41M0ZtZ3BlZU1jWks0QXlBcEFnU2x2V21GVXVwVFNJQWRMV3VQSXphTXNaK2hrSFBCa3owN3RoUU1ERk1wR05wQUZ4c25EUmNFOERxeFJ3RHRLUXU0UVliaWhqc2lkZDBITm93MWlHcWxXVWNBMDI4VWNvek5OK2FuQ2xnbkFNWkFad3h5REt4aHlhNHByU2hMaDRLWStBRGFoMVFCUGlmSFpaYXV5VnNpU2ZZMC1JVHd0b0xlNG5WWWFhcnBUblNpU0pBZDUwQWdQaGNzMVBBTEJZekhaNlowcVVMQm5zZUx2RGdqd3pDUFFHSjRUZ1pBQUN5VGctVm9GV01BSnNhSktEZ2liZXRUMHJhOWpydGtBZThFQjdaQU9wSVBVZXRub2dOTEZRSlkxS0JxOEVBSEZkMm9IQk9OQTk2ME9DSWlnRDhicUhRRHBtR01XYU9nd1kzd1BwZ1ArQkVhYThWSmpKYndSUjNpTXhNWVFqRTFGN05PWlkyTWVjK29YSmRBM0hHbmV3WUQ2ekQ4Rm9RQUdUTVBRVkFrUlVBQUhrelJlRlFiSnVUaVo0d0hVUXZSeGpOeFV6cGs0dG1Fb3dZa3pHSmNNR0t4UFV4eXVtM1NrR1ZpYkNpaW5GSktXZDlqejBqcDRDeUx6c3dNTWRGMGs1d0xERHRnd0FQcEdRVVNiM01Ta0V1UnZNM3NUajlNMUY1ekdFcGZQK2JIRUZrTHJvTU9OaWRQRjhqcDhMbEpaYzlTR3d0SXdDd0ZrSkFIb003OHZoWjRPK3lJOVFCU1docHExczRaaEt1R0EyRHdJOXF4NnM4RUVqd0dyMnd6N2taMldmQ2I1WE42ekZOSEFDMFZvYlFrUGNYVmlBUFFGbnFpSm9TRGtyRzdnOVFBTVE4SGpXUVBGbDVJbTl1K0w4ZjRnSmdTZ2xkR1lYQ1ZwYnJVSElOd1o3cjJMVGpmOFRpSUpsVHpZTFoyQjlsQ3BBTUNIalRLRUlhc2dScHlBQUVLMURmTTBSRWlPb2ZYQUlCME9IUFJFZkk5UitqNG0wT0NCTWh4M2psSGFPRWNZOUNLME1uU09LZUU4WE1UaGt3MWNmMDRKMVRvbm1PQUNzZFA4ZVUrcHdRWGFmT0dlYzZaNWpnQTdDTGpuZ3ZHalM0RjF6MElBQk9lWGpPdXpFNDZMRDFuNU9aZUs2eDlqN1g3T0ZmaTlDQWdISEV2RVNXOFJNMGRlaXV4NnlGR2FGd2tYaGlFeGJjeW14WHBBdGZ3Nk4yci1NWm9IZ3c5a0Y3MlE4MFcyQ2dyRHR4d3JZLVhTVVBBSHp5QnVRK0JrUTJRSGMwQnhCUjc3dFFGV01saVlKOUNLVDNrV3V3K2dZajVucngyZlk5NThYQVhnZ3RQaStoOVQyV0RQV2VZKzUtajRIZ2dMUGsrbDdUK1h0dk9lNC01Njc3enh2S2Z3K3Q4ciszNGZ0ZXU5Uy1IMzNsdmtmcDlENXIxMk92Y3ZGLU4tVHl2c0JNLTEtKzY3eXI3ZmsrOS0xSVA1M3hQV3ZlODc0SDZ2NnZWLVFnZENUeVh1LVUtOTlyK3A4bmthRnVyYzI2ZnkyV0R6ZnpQd3IwLTBmeUozT1dUM2FWUVU0alhWSUNoMmVCLTFXQzkzV0NmM3QxUDFBeEFqaUQ3QU5TaHlnSzEwa1JRUlVDOFVRUEh5R2hRTE5XLXdOM0ducXlqd0lDZHgyQUwyVHo5aWJ4Ylg2V29MaDIteUwxdHhOMEhpNE9KaThCVHdSaVdtbVJSbGRDWDEzekFJdnpYMGgwOXdOMTRQVjJ1RklCNE8td2J4VGtFT0VNUmpvR1JsV21sRWtPd0xBbGJRU2tvamtMNElVTzRNWkRVSUVNWENFUGhtME4wTlJuMEozMzZUTUtVTjVBc005eUx3MEw0UFVQd0xYbGtDSUs1QklJVkRJSXdJb0xIalFNMFBzTkVPLWdrSjMwYVdhWG9MY0pPbVVJTng4UGNKVUpzTXlJYjBVUHpEc0lXbGlQRU9jSmJVT1dPUUF5b0QyaFNQMnpTS3NLOE95TlNQcmpxTnNLMEtLTDBNSkVrTXhVUUdxQ2FRcU9xUFpGcUl1VXNLR005MXlNUEFLSkVLUmpFUGFOQjBLS21PLW42SmxHdUhDTEhHaHdnQVh5VnlIaHFoOGxDSkIxbUQ4UUNUb0VCeENUaUVXT3FISHlDSmZTajFXS1FJVU1vS2lLN0NqVUdOWUpHTXlLTDFvSzIzb01ZTHVTN1E4T0R5TDBrTVNMTXlkREhBSUZ1TGgzdUxIREFFa25IMHhTaEpoSmVLMlZXT1VPOE4ybFdJNEhKa1dMQ3lNSDRMK0tybGlnVHdBQzhtaUo5UU15aVlBS2pPZzBTdDRMUUVweDhYak9pS1lFQWVqVUFLallwb1M4U3ZkTW9rQ3RkQkpHaElTdDVvZGNUZjhyZHJkeDRDVEE4WGpjVE9zRUJrVHlDNVNYaThpQmlxNEdqbFRoU0ZTV2NsU3dzRURONW50SGx5QlhSTGlRakVod1F6QkhndUFFUWxTWUNvb3dOU3hUVHpTNkFFUnhwNENuZDdOcFFPUjlUems3Z0hobmg0MCtobWdSWkRSRGhUQkJ4ZEErVGlJekFCZ2t4ZE5EUmpvT1FWc3pRZVFmU2VBRWM4SlZnK0pQU3RKWkJnQVBFcEJ3UkEwRUJtU29CNVJra0xBT0JmSlNCQkpGaGxNd0JUQTBNbXNURHRnRXkyUmt0WmdvMDJ3RXdreGxzOElIUjl3dk1PUVBJa3luZ2tRV3gweXV5RXlzejdoOXhkSWxWQ2c0eDRoOG9rZ21ab3c0QWZTZHhSeVBJRnhrdGt0a3lHZ1doMmdPZ2poY0FRQjVoeXhrQk1CUUJ5WmtrQ0FMeVR5NGd6eXB3LVU1Qk1CU0FVTThCVHlqbEh5SUJhZ1h5M3k3eVlBSHpGSTN4ZnltVjN6N3pQekZKRVFRTGt4LXpBSy1WQkJvS3dLQUtJSy1WMzFFTFlLVUtJQlZCMEtQeSt4RkorQjBLQmdNSkhCcUFPQkhDOG9laDBLQ0F5S1JWRUFzUU80NEFHVnhBbVVXQVJUUlNmeThCc1Fkd3VRQUJIZk5DZ05BRmdKa2JuRUFjWkVBYktXZ0owQzhzU3cwR2xKcEc4akFZQUxRWlNvQUE=" target="_blank">Assistant Link</a></p>
+</li>
+<li>
+<p>Convert the following C functions to assembly code.</p>
+<pre><code class="language-c">int fibonacci(n){
+    mysterious_function(n);
+    if (n &gt; 1) {
+        return fibonacci(n-1) + fibonacci(n-2);
+    }
+    return n;
+};
+</code></pre>
+<p><a href="https://riscv-programming.org/ale/#select_url_content=TjRJZ3RnaGdsZ2RnK2dCd2djd0tZZ0Z3aEFHaEJBWndLZ0lCY0laUzRDQmpBSnlnVk14Q2pBUUhzN1NBQ1lBVlFDU2NBQktvQU5nbFIwY1BBSUpFUzVTbkFESzlScVFDK1BBR1owT1lIZ0IwUUFPZ0QwWURnQk1BcnVOUUVMaFltUXFrekFLd0tuak1OazV1UGg1aU1BY0lVaTQ0R2c1S0EzRkhPaDRkZlVNVGN5dGJCeWNMTUlpb3VtOWZFQUJ1ZjM4YWNWY2VBR0VBQ3dBT0FGRUFaamdBSmg1VUFBOVNWQmdiQW5sRmR4VjFCaVpnZng0ZVdKZ3lPanNhUW9BS0FFcHBtRm5aZ2pzcE9nM3k3WjNTZXBJek95Z2VBRjRlR0ZRQWR4NGhVUWtEMWRObW51a2FFbFFlSTB6SzB6QjBNRHhWT1FhQUJySGdVR3c4QUJpZEFnWUFCQUFVT0xCK25RU3V0ampzVENkWm81ZU5zN21jTGlqQnRqVnExWkFCMmZFekhha25oMEp5M0hpVWdobVhSUUFCR2NRZ05EK3F4Z3pPSlBEWjhCb0VFU3d3cDUxNWNvVjRzbGhKWkpOUXZGaU5nQlNvdWFDb0F2RUhBRjR0a0hJSXNsbDh2RUJFbFd1bE91NVRsNGQwSUFFOFlEUWVIQmJnQStQak93azhzd1FHdzJHSzJWQ3JQV29XU21jU3dhR29hTUpzeDRnbUUwN0tzejYzUVFCeFVmbU9HQ29nMXd4N1FYamgyTHNLQ09HUDZvNUUzTjVpNW01QndEaDJVZ0lmdEhVT2QzbmR1Q3dRZWxwdE9ZZFN3bFFYU3JBQ0U0Y0x4ZkUwLUxsYzJJN0QrYXVabTdueEF0VU1DQ2JrU2djUjR6VG9CaUt4bjhBQkVvQWl2WDJlUHN6Wkh1ZlVBWThCZ3dNZ2Vnemp3WEI2Rnd4cmNod1BENmxVRUFjbkMwb1FBS0Vod3NNeUJtZ0s4b0FQeW1CcUhZN0J5cEIySFEyeEZnNnFBNWgyV2dWUE9vNW1BZ0hLRnJBNlp3SWh5Q0tqd0FEYXBnQUxUOGRpMGdpcVFVQUFHNm9LWVNZZ0lKSkFRTkpHUWlqWS1KZ0hzcGdBTG8wYm1pNHJxc0VBMWxBZGI1a3M4RDVOVWF6ckZaV3hFWXhoN0hxWUFCeXNGbGdDQkFTS2dLenBnUjJrZHVHRGtnTTVvR09LRUhsZVRZUGw3c1JPcGtSUjhydWI1T3gwVEFVVnNnUVhwZ0VLRHBjZ1p0Wi1rYU9yVUJsV1VFSE90bTVVWitXOHFaRTZVQ0pLd1NhZ01SZ0RZcXdBQVoySlFUWThBQUREMEFBa3dEcFpsSEFPbnhJQndCeHVnNGpFLTR3cHBaaFJKQ0REQWFzQUNNQUJzNnhhRzFoRWRteWlFTUpKMGFSRVZJM2lGeXF5ckVndUtvSUlsRDZZWnhsVXAxdFU0cUpqWE5hMXBoU0tnc0lJRFFCRldiY2R6RFNWNDJUUkEwM1NMTm5uUXBwZTA2Ym9QQXJvZGpVblZRWU9qYnVESDdoY1pBY0FnMUJzQVVYQmxiWlZXWEZBUjRjTWdKN29nWXlBb2tZdlNlZjIxNFVXYXp3a0R3c0N4UGVubWtNdVQ0d0srNzZmaHlhSm9ja1VTaEJBa2s4QUE1Q2lpdHdvTTdMdWx3QUtWYkFQQWZtUmVpZFExTjVvYm9Xc2E2UjVHd01nK0VnSWpIWWtiRmVqeGRSVVhKYWxycWtHdGwwM2U1OTJrSTllWGhqVndrb2cxa2xmU2V2MndqTGExQS1icktlMTBkelhZaGZzUFJWejNWYTlvY2ZSSE5BdFZIcUItZXkzSWRQSGlYYW5XclErMm5kMFowOWxNaDNWWWRpZm5oYy1jWE1mY3EwRmNlN3dFQTliWHQzKzRIbFhCem5MZDUwMUJmZlNBMGVsNFBmY3BiakxxOExBQ0lVbXRBQlVBQXNQQUFOUmw5dlhSSDZRclRIUDMwcTAzQWFsY1Z5ZkdyN01waHlJa2N4emRDd3hJRVE2YkM3Z1VYUDFQUGFZdWNzRlljbVFFb2FRd3hIalNHMXI2TGdISVZqaUM5RitkeUVWLTVQeDRHMVJFZ3BoU2ltdU5hRXNQQWF6REQ1Z2d3V1pnUllBQ1VZcmtYVER3UWFnOGRBQ243S0Vlb2ZaeEFJalFndzRBMW90Qm1EYWpnQUJXQ2FFMERJc1FCV3VnalppUnZDUXVZd0NFU09DSU55TmduSXpnVUc2RDBLUTRVVWFNSjZqb0FBUER3dTBDb3REckVvZjRCb2NOZWJJMzFuQ0pDLU5FR2JoUWFxRk13RWxaZ0M5R1FhUVhvNEJTTjlESW1BcXRZREVIMU9CV3hmWmtpSVBFWTFRMkFTT1lDS0VaZ3RxQUFWZjg5dzdDWldrT0VsUmFKaGhuQUJORTNFc1QtSEcyMkhJMXg5RGVnMEdMa01QOEFKZWphUDZBaUdBbVRwWTVOY2NNTTJ5Ukp5c01HakFMUXNoSGpuQm9QVVhtd3gra3hIdEFRZmhnamhHbUVoQ0tXRXF3Q0FJSFdHd2poWENBVHlpZ01nQjRDSWJ3UUI0SnRmaUFvdlQ5QjRFS1RxTmhFSmVrb1JnaW1HUitBVmxOQUNXV0hJUlJqSUdBYzVHN2dZVGNqRHFnQ3hNQjBTT0VJQUNTQWFaUWhrUUJQb1NzUEJPQ2h4UnJvTlo0ekxtb0d0bk1jaFNDVUYyRFFXckJFNmoxNmtDLWh5Y1MxNDhVOEhFdktPd25KRUlBalFodlVCOUNid0ZLeFFMRllDS09ERUVDVGt0bGZ6WVJ3clJQY3BKdGtOTDBWc2xGY01CTWlibVVpR1RCT3N4d3oyVnBxc2NjZDhDQThRM2hwUlZGc25hckNaVGNPNFBWRVphRXZsS1owNFptTHBsUVB5ZlpIRTZEM3p1T05PU1U5dzVTVndCa09TQkFGS2V0TU1wVlM2a1FCYVV0UWVhbWtab3o5RElDZUZKN3BRSkNnclBneFNVYlNDRVJaS0dpNGg0N1h5amdJUXpjWElBdzNHRERaWE1iSW1hUmlyRDFSS01vNEFwdTRzcTZtS2JjMU9CTEdPQVl5QXpnam02U2pOazF4aldsRjVqd0l4OEE2MERxZ0FmQSs2eVMwZG5MV0VnK2hwZVNIaWJYbWtsV3FRME1XU2pPbEVZU1U2em9CTnZZNUpxZUFXQlJpTzkwanBFb1dCUFk4RGVIQkhoTVhwWlFKaTNMU0FBRmtuQStyUUtzWUFEWTBTVUhCQTJ4YTdwbTE3RTNEYUhnZTd3Ujd0a0hha2c5UmEzdWdBMHNWQVpqRXFPM0lsZ2dBNHR1MUE0SkJwN3NXaHdIQlB4V3ByVzJtWUF4QW82Q0JtZkhlbUFQNUNYdWt4UW1QOGtSaUdFR2xLbWVoc3Q5YkpHWXJUWm1LTURGSFBxQnlYUU54Qm8zc0dIZXN3LUFxRUFCa3pEMEZRSkVWQUFCNUFVWGhCWnlmay1HV00yMDRKMFlZemNaTVhHTXl4aXpLWVFNQ1lERXVFRE9ZdHFJNW5TYnBTQksrTmVDeFFTbW5UWTA5UEJneGtlODdNZEQyeHd6OGdUU0tUei1FeU9IMHBtRmp6VUJ4VDhRNkthNTB3WDdnNW5kaWNUcDZwdk9MbDgtNW5HRHRhSGJHOW1mZk0yV1lCUmZXV1ZpNEZXa3NwYWxHbHRhR1czUFVoc0xTTUFzQlpDUUI2Rk8xTHhXZUN2c2lQVVBrWm95WkRiT0dZTnJoZ05nOEFQYXNIclBCK0k4RTY5c0krWkhxc3JkZ0MxbGVzeGpSd0ZOT2FTMEd0UU9rRzZ4QUhvVXlGU0ZjVHJxV01YSTJvQUdJZUN4cklKaXM4WVR1M2ZGK1A4UUV3SlFUT2pNRmhjMEYxcURrRzRJRDRIcG9WdGVKeEw0MHBnVG5SZzhRcVFEQWU0VXloQjZySVBxY2dBQkN0Um56TkVSSGo5SDF3Q0JyV3h6MFBIQk9pY2s5eGhqZ2dIUktmVThKOFQzSHBQUWowbDZsVC1Ick82ZEVRWjd2Wm52UGFmcy1wMlRnQXJNTG1uYk9PY0VBMnRMdm5ZdUJkazRaSXIwWGN2R2pxOWwrTDBJQUJPYlgtUDlwazdXbGo3bkxPTmU2LUp4VDgzSXVkY3E5Q0FnU25ESkVTdThSTTBIcUhQQjZ5SDZTNTNNWGg1VHVjVFg4RG5wQXpjNDd0MGIzTUFvSGlZOWtHSDJRazBtMUZpYkZkeHdUVWZXU1QzREh0eU51RS0rZ1EyUVB4MEJ4QnArTHRRZVdVbGNZNTlDRXo3a1p1ay1BWlQ2WHlwR2ZLLVo5andRTG4rZkc5RitiMlh0dldmcStkNkYtWHhQaGZTd2w0SHhYb2ZSRWE4RUNsMlBndnllcCt0NW4xWHVmbmUxZEw5NzVQMVBhLU04YjQ3UFByWE8rSi1GLTM4QXdmUi1vK2Q0TjJmbGZsLUVqbDhQeDMzUFp1ZS1uLTd3Zjl2dy1jOTU0YnktMVh5djNYMUQzRHg2QmR6ZHc5emYwZDNqMEFNZnhieEFOZjNweU9YejBhVUZuWWhYWFIyZUh6eDZsV0REM1dCZ085d2YyQTBBamlCN0dDM1IxUUxOekVRRmhVRmNXd0tYendJSU5EeHQwR2g2elR4bVJnUHp5OW5IeWJVNlZZT3gxRHpyMDkxMTNQaUVOeGk4QUx5aGhtbEdUaGlSeUFLZjNUM1h6UnpFSnQxRUlkMUlCRU5EeTV6amtrT2tPaGpvRmhubWlsRjN6Z0RJT0FtYlV0aGdGVU0wUFVPRU5rRDBNMEs1dzBJN0NrTWhrTU9NUGhsTVBQMDZWc09OMjVIc0xFTHJ5Y0lDUEVPT1NvTGhCb0xJZzVIb1B0RVlPSUx3TUhrSVAwSThOa0ktZ1VLYldxVnFVNFA4TkxXdUY0SWlPQ0lrT2NKS0xjSU1QU1BrSjhLYlIyVDJULVNvRTJqeU1KQXgwS05DUHlMTGpLUGFQQ0xhTUpIY0tta3FKTU1KRE1KUlVRR3FCcVhxS2FOWkFLSnR4NkttSTZLS05LTjZqM0Q2SmtKaGprTUdKMkRTTFdJLWttTTR5aU02TG1JZ0czejExN2dZazhuaU4yeDJFOFc4VG9IaDJrUTVsMk9xQ1gxb05pS29BWUlZbkVCd1BVUHdKTlJIQWpXbVBqeG1KSEJhTHIzWUl1MDRMOXgyQUZBN1VDUGp6cnpNT3lQWWdFSVlnSUMrT3h4K0pTSTdEQUhFaVh4UlJIR3hOaE1kMkJJS0pDSTJtQkk0RUpsMktDMVFDTUhDTUtLMEtpaHp3QUM4ZTQrRGdOYWlZQjZpNEJOcEdUTnc3QWw5Q2poaWlZRUF4aWFTQmhTQW9vQ1Q2VFhEOW9jQ3pkK0pHZ01UVW9DaVhDSUMzZDNjaDVHVFk5NlN1Y3hzRUJpU21DRFRDaVpTNWl0Q0RpU1FWVHpTOWpTQlI4VFRxU0pTVjVBY2JseUJuUVhqeFMwOXdRekJIZ3VBRVFUVDBEd29RTVN4UFR2UzZBRVJCb1YxSVRITXBRMlJuU2prN2dIaG5oWTAraG1oNEY5UkRoVEIreGRBRlNDSXpBQmdFdzlOOVJFWTJSRHNCUXVRRXllQmNkc0pWZ2VKWXlOSlpCZ0JTQXZRcEJ3Ui1VRUFSU29BNVJBa0xBT0F2SlNCK0pGZ1ZNd0JUQlVOK3RyRExsc0lXUk10WmdJMFd3NHdFd0R0c0piUWR4dk0yUlhJeXluZ2tRWnhxejV5U3k2ejdnZHh0STVWQ2dZeDRoUm9rZ2FaSXc0QUV5LUV0elhKQ0pNdE10eXlHZ1doMmdPZ2poY0FRQjVoK1JrQk1CUUJDWkFrQ0JmelB5NGh2eUp3ZlU1Qk1CU0JrTThBdnpka3dLSUJhaElMb0xnS1lCUUw1Sm53a0xhVVlLUUs0TDVKRVJNTEV3VUswS2ZWQkFDTHNMVUxjS2ZWWDB5S2lMS0tJQlZBYUxZS2V4NUorQWFLQmhVSm13Q0FPQXZDaFFlZ2FLdUxrY1lSRUFzUVc0NEJxVnhCYVVXQStwSUMzZEVLOEJzUS1FT1FBQkhYTkNnTkFGZ0RvQ1hFQVFaRUFkS1dnYVpYOG5TLVVjbEdwUUNqQVlBTFFTeW9BQQ==" target="_blank">Assistant Link</a></p>
+</li>
+<li>
+<p>Convert the following C functions to assembly code, using the program stack to store local variables.</p>
+<pre><code class="language-c">void reverse_str(char *str, int start, int end) {
+    if (start &gt;= end) return;
+    char temp = str[start];
+    str[start] = str[end];
+    str[end] = temp;
+    reverse(str, start + 1, end - 1);
+}
+</code></pre>
+<p><a href="https://riscv-programming.org/ale/#select_url_content=TjRJZ3RnaGdsZ2RnK2dCd2djd0tZZ0Z3aEFHaEJBWndLZ0lCY0laUzRDQmpBSnlnVk14Q2pBUUhzN1NBQ1lBVlFDU2NBQktvQU5nbFIwY1BBSUpFUzVTbkFESzlScVFDK1BBR1owT1lIZ0IwUUFPZ0QwWURnQk1BcnVOUUVMaFltUXFrekFLd0tuak1OazV1UGg1aU1BY0lVaTQ0R2c1S0EzRkhPaDRkZlVNVGN5dGJCeWNMTUlpb3VtOWZFQUJ1ZjM4YWNWY2VBR0VBQ3dBT0FGRUFaamhXbmxRQUQxSlVHQnNDZVVWM0ZYVUdKbUItSGg1WW1ESTZPeHBDZ0FvQVNpbVlHWm1DT3lrNmRmS3Q3ZEo2a2pNN0tCNEFYaDRZVkFCM0hpRlJDWDJWMDJidTZSb1NWQjVHbVpXa0NNRHhWT1FhQUJySGdVR3c4QUJpZEFnWUgrQUFVT0xBK25RU21zanRzVE1jWm81ZUF0WU1naHJjQU5yVGZFWkFCS3FBQWJ0SUNQOVRpUlFxUUdEQmtBQkNVdzRHbjQweDB3U3FXb0FXZ0FhandERkNDUHpjRUx0cVlBQ3dBQmxWZHc0dkYwSERzQXo4aEo0QUYxbGNTN2pjZU95Q0dZa1FOTVN0MWJJQUV5NDgyb0VsY3Eya25rRVNrd0UxNDdZV3VoT0swMnUxTWxtb2FoY2xZTGQzR2kzd0dnUVJJVTYxblcxcGpNSnJsSjRYSnoyeld6LVc2UnRCVUFCRzRnNDFmek1sbFRsa3FmVDRnSVNZOXZENlpDdGhBQW5qQWFEdzREY0FIeDhaWDR5TVFHdzJHSmxsYXhHeW9XU21jU3dTR29CY3IxQm1ISEIybFo4NnIzUVFCeFVYUlFSd3daSGxtRVBhQTk3Tm1XTHNHK3h2ZUhBbkhtYVJ1dGtEZ2ZWU0FRT3hTRU9hY1RsZlFDNEZnTUNyMC1BaElPTmZFb0YwRlplVWpNOEwzRVJEYjN2RFlvSm5WOUxqTVFDUGhBV3BEQVFHOUlpZ09JZUdhT2dEQ0tZeC1BQUVTZ09FQjMxSGc5anJPY3MzK0I0REI1UFJQeDRMZzlDNEt0clE0SGhWeXFDQXd4aEhocW1yQ1FZU0daQTYycmRNQUg1VEVMUDhaakRVZzdEb0xaenc3VkFqMXBMUUtsUTZEemdRTU16MWdIYzRCVThrcldwRUFKUWxURnBBZ1pZb0daQVVNa0NrZ0lFaTB4UXBzYTh3RjJVd2cySW5oME13bFlJQ2ZLQVgzT1JaNEh5YXBWaldNck5sTS05U0tnY2lPR1FTaUFEa0ZPdlJ4UWdrVkJsaDNZejdPUEFDNnNhNXJKTlpSeE9wc2JyMHJNejFMT3M5TldSNjdaSEpnZEtMUUlBY3dHckRnTzM3WEw4dHRLdHFEV2phT3hRMHljdWZFOWJVS3VES0JDc0xtUmlNQWJCV0FBREExU0J2SGgxVzZBQVNZQlZ2V3piLVZNT0J2TjBMRVlucURySVZTc3dvbkJibDZvQVJnQU5qV0xSbnBNNDhMUlVoaG1RWFNJRG9COFFyUldGWWtHeFZCQkVvYktkb3V1MERXdXJGUXZlKzZhRWV5aXBGUWFFRUJvWXl5cHVXNS1xT29HUUJCaUF3ZWtDR29kU3pIYVhRbmhNSng4S3ZJSm9YTnFJNXlTUE9NZ09BUWFnMkFLTGdUc3F5TXlJbzB4VVFNWkFrU01Ib092QWhqckxySjRPVmdXSVdJNjBoK1U0N2llRjR1eG14UlRUa2lpVUlJR1pIZ0FISWtVam1FQm1iSFhWTHlqS3RuOTVKZEFOTUxHTTB2VlZQTTZheVNNa0JaZVBmT3JMMFdhN1BTeGJscExVaEVaSjhuV1NwaUN6dVR5TXJ1Q3BFN3EtZG5URTU2RVE4UnZtUzVET3VYVWJsVG0rcHR2ZHZwK0F1K1o1V0hxZS12VUM1MlZyUmRFZjVxSk92T2x1TW1wOHBtZmFZN2huRjU3bGVPZlh3ZnJWYUhmYTk0Q0IxVW5pbVc1cDg3ejRYbTd1NVozdlY0Z0FIcHZGK2o5TmJxUkxHR1hZZUZ0cGYxZkozWCtTOVdiczJlc0Fvd1gxZnBxdzdQNWVDNEVZWnd5NUdTRllLTTBhZlIrc0FCTWgxQVk0SmdBaFZLQUJxQlk1RitqSUZPR3NXR0hCNFpFSkllak5ZVDh1amRDa0tOV0I3ZDRFWDBRVmZObVQxVUczeDRPZzhoV0NSWTlDRVgwQmNVREx6NE00WVFua3hEVVk2QXdSUXhSLWxsR2V5OHVvdkNEQ21HM2xZZlVkaEJDRWE2TFJoakp5cGtMU3dEaEJXUkdBQXFMVTlDdDVlSW5uNDBnclFqajhOZ3NsWHlWSUpvWkRrSWtXWWtONVE4Q1FFUUhjaXBCVGdKbUtZV283WjE1aHdqbUdaQVNnV1E4QWVOSWY0YnN1QmhtV09JQWMtRldSalNWQmtuZ3owR1RNZ3BuR1pJNWplQlBpR0JVajJ5d1U1Skk0RU1YNkw4dEJtSFlqQUJrMERTQ2dsK3BHT1liU3FBTEJXRjAyUVVEbUU4allZNWZ3WHdWRTdqbWNBQlpjUWxrZEpXQ1kwYTZ5bkNiSnNVNDlKbFZta01ob0paWWdFY003RG5lb3hIcHN3Y2x3a2NFUWEwYkJ3eW5Bb0FJLVpjSVZpalBWRG9BQVBEd1g2YllNeGFIWVpNaG9VTU1xNkQ5bnhGUy14M1pWTHdyVTNNbTV4S1J6QUFPTWcwZ0J4d0hlVm5HQXNkWURFRlhGSlRGYWRtelBPeE1yUFFtZFBrd0RNTTllNWxWbm9BQlZJWjNEc090YVF6TEFVb2lHS2NmNFZTWG1jcHBUeWtwaEFmbUpCM0FJbWc2OUJqQ1RCYVl1RU1CeFhCeWxVU29ZdWNVNElVNUFqS09tRHRIa2dEQ2FMUWtkWkFQRE9EUWVvR1VSbkFFUlIyY1otTG9tbUhCS0ZhRUNZRUJyRkNQVWZVNGc0U2FSaEp1WkE5dzRTTVFnRHdGR0VwcXdEajZEd0RhQm9iQXFRSEJNeHBEelREOER2TFdOa0Nrd3loVTlmMFpObUwzQlFtdE4zZmNrelVTT0VJUDhTQTI1UWlXWCtQb2U4UXl1NEsxME9HcjFPYlVCa2xMUDAwZ05TNm1hdGhGbVNJR1ZTQkREY2t5QmlkZ2hpTW5USFljTU9LSjN1THlacXhpY3JwMVZONEp3WWdLcU9DWXJQWTI2RUE2VVJGb0ZjZU0wUzF3SHBVakRyUFd4VkloRzFIbFZjNFp0K3JoSUlBNjl4SnBBUE5nc3VYRllSN3JpM0hWTExMUW9UalRLa2pPdWp5U2J2SjBFaVR3ZnkwVUpILXppZ0ZJS0JCWXE0QXlBbEpLS1VRQnBXTktiR3FjNEZ5OWdncVlJVlRoZUJoamFheURwa1UyTW1ScEJoNnFaaHJ4M25FSEFMcFZveHpYRW5CVldrRnByWnpnZk9xZWFLWTRCc2N6RXgyR1hHcE5PRXZMYWF4cHdvSVdwV0c0cTBhbU1vOERoZkFMVHBRTXIwUG9SR2hUeDVsTk12b1JXVVRiSDlNelA5RkFCang1RnB1YVJFeXcrN24taGVMVGNobmdGZ0ZaMmE0NTJlYUZnNHNQSGNSd0I0Wmh5YjlFOEZlMGdBQlpKd0ZHMEFyR0FPK0ZFbEJRUTZaODEwZ2dzZ0l1Z2dpN0ljVEpCNmlhYTQxVnhZcUJrWHpUTGxzWjZBQnhVTHFCRGtSWTRmQ0tBM3ducUl6Um1ZR0YxWTZEamc0aGxtQWdrNFJzYW5YdUpkM1MxWEV1M090aFNySzNKMVJ0Z3JHRnFiNmhobDBOY1g2YVdCZ1piTVB3T2tBQVpOODFhK2dBSGxxeGVFOWs5NTd5NHl5a0pzQ3R0YjF3TnhiaThudUE4cGh4eDdoaFM0Y2M3RG5wUVdWTUZsSUxqU3d3Rk9Tcy1ONUE0RFZIOXFRV1F4QUFCZXFBTmI0aFd2YXEwZmd5amRuaVZQU3o5a0xURXZETGNYSEVCOGNRRUp3ZUJBbTUyTWdFbWNaWlVabTVoOWxaMUsxbm5aWFBiSGx1Wnp5QXNNakdSbC1pT1k3MGpWVjJjbWp5bkpZT2RXbFo3ei1ubEVNREdVcElqRTBCNU56YXBXSzBVZVl2TnI3Z29oejBlWm1MTzNHUmc1cTQ0NGtNOEFBR1MrNFo5aUd6b1FvQms4OXhLYTRib1ZmYkY5TWdIZ25td1QyckV3WU1BRFFWTFVWWEVmZCsxTU9lVzZnTmJxQXNnb0QwTGRMSUVoMEdQVlR5Yy1OYlg2UGpSOWV0V1NZTU5kamc4WmpHY3hNTXVHOU1JSUh6dktsRmpKUmw0NmdkWTNnTVF3QUg4WEdrTGVaaG1zYkJUN1lEZjh1UkhxSGFmVUF4U1pXSllhY0NVTTNZczhEZFBIdE56ZU1mMmhzSTZNQXNCWkNRRzZDNTVVUytWOWlickViWmZwdzdTd2tNT3NIZ1VXVmczNTRCS09SV0FJLUdiQ05QeFMtR0FFLUQ5R1lmYVdzZXNlRFdoY0NEcEs1R1pKQXVSQ0Fib0dJZHNhWGVuTGJXNFo2QUFZaDRFNHpJQ25RejM3V2tpK0IrRCtBQkNCQ0JHVkRNRjBuckdKampCVWxJSG9NWU5yRGtYSlN4Q3BXVlVkbVZCWU80Qk4wMWszRkNHZERJVGtBQUNGYWdPSm1oNFFwRGlKUkNDQkVaWkF2b3BDWkM1Q0ZDUkNyZ0NBWFJWRHVoMURaRDVESkRGQ2REV2g5RERETkNURHREUWhWUUxEcENqQ3RDLXdsQ0FCV2V3alE0dzB3MElaR2R3eHc2dzV3blFnQWRsOEtzSzhJSUVhQkNNOEpzSUlBQUU1SWluQ3NZZERFWnhDMUNIRFFqb2pFWVZDSkMwaW9pQWpRZ0VCOURBajRSaWo0Um1oMVJGRFUwWDRpOEVDMkNiQ0lBc2p5aTZpOUQ0VmdCY0Zsa3VRYmtkOUVaYTl0Z3ZCMHhteGg5K01iRFNBVWlEQ2NpRWphUnF4N2d4RFpBUmpaQVFZZk56d2J4TUNOVll3S01JcE5ZcGotaGxEWmp4Q0ZpOU1sakpNaVYxNXFCdzVVQmlJdGpRaG1pNWpSeDJzeUJxVm9BamljazFpemlManBpQ0J6RHJROWk3aXJ4SGlWakhBWGlOaS14TGlDQTdDdmo1aWZpSGpsampqQVR6ak5qM2kzRHdUYmpGaS1pWVRUaWdUandRVGdpa1Q5ajdqRGotaVRqMWk0VGdUM2lJaWNUSVQ4UzBTaVMzanRpNGp5U1VUb1RuajBUaVRNVDNqa2pkaUlTR1NualZqbVNhVFFoTWlPVGtTRGpVU21UcVRoalJpaWlTaXlpK1RlOUJUY1RmakdTZVN4VG5EVTBiaUxsVkZmTU5FUkRWU3NpMml2Q3FqUG92RGdsWkJmbzJpT2xPajZoZDhlalo4RWxJUjhjT0JkWmhEWEZxd0E1U0F3VDFRVmdSaStGd0Z4QVhUclJFU1BUNjV2VFRKTGkzVFpqRVQ1UzRCUkk0Z2dJZDF4QTkxMG9XTXJnYmliamg1d0VrenJRc2o2NHk5RXo1d3JnRFNEUzB6VG84ejc1WmpQamQ5MG90aVNkU3o0a29aN1RkWUtpa1QyVXd3VkFpVkZDbmdiakF6a01qU3NqZm9iOS1pQ0JyU2MxcGlVeXNqSXl6VWV6VkNqVG1qR2k4ampURFROWXZCYmp4WndZUFZwWmpSSXpLVFJTemluVEVqTXlwemhpWnlqVFBpaXpqd2x5eFlKWTZBcFlvUUJESVRveWVRNEE0eTkxZHpGTmt5R2pweWN6aGpQalp5enpsekx6cnpvWU56SVN6VVh6S2MzeUR5NXptalR6WHlhem9MS2RLanhEbXljdC1qMnlZUVVqc3B1ekZ5LXpWemJUYnlmTWVodFZJY3NEUUtReHdLMDBQeUZ5NXp2emlKenpRWWNMMXo4Ukl6MHdvQkUwS3NxQVVZU0tpUXlLNExTS3Q0SUs5ejV5ZUtaaGFLVnpKWTF5YnlnTEZpOVkrZFFwVUEyTE9MMUp1S0tLaExGS2F5ZnphUVJMLXp4TEFMR0s2S3hMYlRPTFJDRFQxTGVLSUJzU1lpSDVuSU9wMndNY1pneVVLVTZCZUR1VkhaRExWVEVMTElXeXFBMnpuSnhBT3lHalBUTUxqd016c3o5enlLZkxrem1pK3owQ0J6clRxeFdGUXJTQm1qSXlDS2RVQnlvSUNBLUxWQ0FyZ3phUXdCR1FrVFIwb0k4clFyZThvSlJERXF5OWtZeXFIU0VBRkxBNGF5UXJFckt6N2hxejV5bUtFMFlBMks0QVVaS3k4SlhUeENRck56cExxaHRVMkwwcGlyR3FUTEtjT3p4Q0pSR2hzcmxwa3p2enVoSlRpaXlqZndTUzJRc3pQam44RUF5cmt5VWo5clFxcHJWS0tyS0tZTDV5VHJ5cjNTb0p6SW5KNkNPZDZEbUxFMGVCVlJsUTJqUVF6QkNCZmhxelRCVFNhaU9sSEpCZGpRRHhJUkdCb3NUS3ZxT3JYcmxRa0xXejJ4UHFIZ3VBNFFUTDFTekVETThKUHJ2clE4TWhmb3VsQWFqUjhSa2RpeGVBOWRiaDdnbmhPTmVobWhod3l3RGhUQndKZEE1ckI5K2h2dzl4WllMUllEcXdyUUthZUJKQzlJVmhLUU9jVFJaQWprQndwQlFSNG9FQSs4MHdlVUxBT0JPcFNBSlFGaFVCa1JUQWV0NzhwcHk0dWJwOE1jV05GeE04OXc0QXViV3hDSVpjTFFXb0h4ZWFKdEhCQmFqYXVhUmE3aENKN0ktMUNoRng0aE5va2hhbzV3NEFLYnFWUHdWaExhVElXOFc5ZWFHZ1doMmhXaERoY0FRQTVocnhrQk1CUUJkWWVVQ0JFN1k2NGg0NjRJS001Qk1BdVE5MDhBNDZXS3M2SUJhaGM2dXNDNk02aTZZb09JeTc4NzA2WUJNNllwNFJhNjF4NjdHNktOQkFXNks2RzZxNktOOHN1NjI3ZTZJQlZBQjdDNmdJWXArQUI3K2dJQUsxcUFPQUFLTnB1Z0I2Q0I1NkgxRUJ4OXdZbnowQXNBdnBWcmlqUzY4Qk1ScVV3d0FCSEtUQ2dOQUZnRjBGd2tBTFFQQVZhV2dMQXhPdStrQVZjUmtmUEp3WityUUxRSUFB" target="_blank">Assistant Link</a></p>
+</li>
+<li>
+<p>Convert the following C function to assembly code.</p>
+<pre><code class="language-c"> typedef struct Node {
+   struct Node *left, *right;
+ } Node;
+
+int tree_depth(Node *root){
+     mysterious_function(root);
+     if (root == NULL){
+         return 0;
+     }
+     int left = tree_depth(root-&gt;left);
+     int right = tree_depth(root-&gt;right);
+     int max = left &gt; right ? left : right
+     return max + 1;
+ }
+</code></pre>
+<p><a href="https://riscv-programming.org/ale/#select_url_content=TjRJZ3RnaGdsZ2RnK2dCd2djd0tZZ0Z3aEFHaEJBWndLZ0lCY0laUzRDQmpBSnlnVk14Q2pBUUhzN1NBQ1lBVlFDU2NBQktvQU5nbFIwY1BBSUpFUzVTbkFESzlScVFDK1BBR1owT1lIZ0IwUUFPZ0QwWURnQk1BcnVOUUVMaFltUXFrekFLd0tuak1OazV1UGg1aU1BY0lVaTQ0R2c1S0EzRkhPaDRkZlVNVGN5dGJCeWNMTUlpb3VtOWZFQUJ1ZjM4YWNWY2VBR0VBQ3dBT0FGRUFaamdBRmg1VUFBOVNWQmdiQW5sRmR4VjFCaVpnZng0ZVdKZ3lPanNhUW9BS0FFcHBtRm5aZ2pzcE9nM3k3WjNTZXBJek95Z2VBRjRlR0ZRQWR4NGhVUWtEMWRObW51a2FFbFFlSTB6SzB6QjBNRHhWT1FhQUJySGdVR3c4QUJpZEFnWUFCQUFVT0xCK25RU3V0ampzVENkWm81ZUtRNktnQVhjemhjMEE4VWYwNEFBaldBUU9nQVR6ZzVNcEd3cXhKNHBKNEZPRzFQT0JETTNOUWNCc3FDWTlWV2t2eE14Mmd2Z05BZ2lSRlBCcDR2Vm1vVkZOUVN2NXlwSnFGNHNSbHQyMVlyTWFDb1RQRUhDWnEyRnNqVkd2RUJHTmhNRk5raUVHdE9ydDV1bEFZTmxPTnBvRjV1MVRsNGQwSTdKZ05CNGNGdUFENCtOSENjR0lEWWJERmJLaFZwYlVMSlRPSllORFVJV3kyWThRVENhZGJmbTY4WFZ2N3lCV1FGMklHWWFLWWZjM1pzR1pib0lBNHFMb29JNFlLaXFYREh0QXliYll1eFoxS3kwY2lTUFI3YW5jZzRCdzdLUUVLZWpqbVd4ZEQzQllPZnA1dUNKZitZU29McFZnQkNNZW9DZFR1QXpuT0M2YkZldWEybGNaaUhwOElDMUlZQ0N6cEVVQnhEd3pSMEFZUlRHUDRBQWlVQUl1eUo0OFBzVHI1amFBS1BBWU1ESUhvbTQ4RndlaGNQYTJvY0R3TXBWR3lBS0J0VVRJU0hDd3pJRTZUSWFnQS1FT1RaN2tLNXAySFEyd1RsNnFCaWMyV2g4dUp3WUlCUzQ2d0xXY0Jzc2dXb0FOcW1BQXRJWjJMU0JBS3hRQUFicWdwZzlzWkpBUUxaR1RtVFlNNWdIc3BnQUxvS1crSDZmcXNFRExsQXE0WEVzOEQ1TlVhenJORld6aWZ1RndRVkJwZ0FITE1ZQkFJRUJJcUFyTFdvbWdkZTRwSlNBcVhVWTRvUlpUbE5oNWErellVcVFVa3lScW1VK1RzU2t3UGxnb0VPeVlCTWh3WHJXb0ZLNDJyU29aZFQxZlhQc09JNkRjRnczaW1GZDZVR1pGbldURVlBMktzQUFHZGlVTE9QQUFBdzlBQUpNQVkyOVY2QmtnSEEybTZEaU1UMU5sMEplUktIQ1Fnd2xHckFBakFBYk9zV2liVk56YUNteUREV1lXa1RVTjE1M1dxc3F4SUxpcUNDSlFBVkJTRjgwN1l0T0xtYVFWbGJ1dDBGU0tnc0lJSU9JRFJlc3R4M0dkRTJYZGRFQzNkSTkyUFY1Z08rVHdYNGc3ajROVU5UNGdnVFZZRVhHUUhBSU5RYkFGRndMNXhYTmx4UUpCSERJTkI2SUdNZ0tKR0wwMldua2hNbE9zOEpBOExBc1JvZGxwQ2ZwaE1BNFhoQkVVbWkzSEpGRW9RUU5aUEFBT1FvaTdjS0RCSndzVWdidkN3RHcrRlNYb08wV2NoM0c2RndBSjFRMXNESUNKWk10WVNNZlNYb1RYeWZsYlVkYkdwQ2ZURDhPWlVqcEFvME53WUxhWktJclhqRzJtSVRzTDI1OVE3UlVuTVprZ0FUUG5iS0Y4ak0xbzJZNWRMWlhPT3JUUStPMTVTOWZhbTNUZXN5cU9ldEozQ05GeVhzMWx4akZmWTdqYTAxeUFkZEN0cXJRenkzd1A3WXYzZkY3M01zRDFqVmZid1RFLTd4QSsxSDhwZTZDckFDTFVwOUFCVVhRQU5SVDItaDNBQnBCV2pIR3pyd1c4N2xkTFdnTWdMSFlwZzVDSkRtQTlHRXd3a0JFRnJHYlhBK1ZaaW1GcUo2U2tqdG5ZVW1RRW9hUXd4SGpTQUJJYkxnRklWamlIWklSVEtWVWNId05tSnRBQUtvYUhnV0ZaUm5HOWxPSGd5NWhpME9OaXNNdzVzQUJLa2xwSzFoNENkSitPZ21TbmxDUFVFODRnRVRjUVVjQVlVLTBjQzRKNEp0R1JOQXBMRUdkcm9VT09Oa0lpTG1JUWhFamdpRGFqWUU0RzBGQnVnOUNrSlZkbWlqOW82QUFEdzZJOUpxTFE2eEpIK0FhSTlBMnVoQTRFWFluTU9oMlZ4Q2tDWVhxS3NsRlhaZ0haR1FhUW5KTEVwbXNUQUQyc0JpQldnNERFb095UjZGbU54aUhBcDJzekNiUU1ld294bkNIcjNEc0QxYVF0RVlrNHpSTU1NNDBkTmE0bHFma3NPMnhiRnBQa2IwR2dsSWhpa1E4VjQtb0NJWUNkTHRqMHV4bXA2TDIzYVdRNnkyeEpTeUVlT2NHZzlRRGJEQk9zRXIwV2hHbk5PbHFZU0U1bFlTckFJQWdDbUJCMUVPQzBSeEtzeUFIZ0ltUW9HSDZoa21Uc242RHdYcU8xLVFja2tXdys1SUIrRHprZEFDQjJGSnpKbklHQUNtSjdnWVRha3JxZ2NKTUIwU09FSUFDU0FOWlFoU1FCUG9CY1BCT0FWM1pyb041NXlJV29EamdrOFJwQkdITVBrZkNOeC10U0RvSXBKWkpDZGhoaVdRMUhZVng4VHVJZjJJZkk1Q2d5T1gwTjRKd1lnaFNObEtweGJDR2xhSllWM0wzSjVWK0k1OHJCbUZxTENLa1JKYXozaXVLUktDdFZoUUlJTHBQU0g5UEkyb2t2VlZPcXc1VTNEdVB0UUdXaHdFbW41S3BkU3Y1Tkxnem9EQXU0bDE3S0QwM3RaSnlSa1RJRUVjcmdaeU5CWEpzQThpQWJ5MFpnd1FUYkZ5ZU0wRk9IeGp4WlNhVS1ENmhPWDZHUVljeW9DM2dUbGpPZWM0ZzREQ2lFWGNkTU53c3l4U0JyR1ZXK1pGejdSYXFxRXRaQXRTRnJsdldxZ1hia21GUUdNZ000VjVJN0pFZGJHYTQtclNnR3g0SUUrQWM2Q0M3cWdILVArRk1CMGptSFZhUCtvb0VxenZqSjJwd1U0Q0N1dnpUVk5xVjZVUldqdUtzYTlBSnY0OEUrZ0duZ0ZoMmFIdmpONkZxRmd3T1BBLWh3UjRaaDRZREU4R3EwZ0FCWkp3YWEwQ3JHQU91TkVsQndRem9sSStoZGdyWkQtdkJQKzJRYmFTRDFFbmFRSWpTeFVDaEphaW5iWW0wQURpMzdVRGdoT3YrbDZpSW9BLUEycDlQNlpoLUZNam9CbUxDQ0dZREVRUkhPOWxaWitYQ01JQUthczhpSGFWTHBTck5XN04tR0JucUJTWFFOd1Rwd2NHQWhzdy1BcEVBQmtCeG92NkFBZVNaRjRFMk5uYk9sbUxIOUZpY21GTTNFckpwOXNNb0d5bUF6R1dmeExnTXl5RU16d1l6djR6UEFBc3pZS3pIbUhPb0VpS2dGemJtVmdlYzdBR0h6S1hIanlZNFBtQUx2WUF3RGpDMzJTTEVBTXhoTTJsZWFNbjZVaXYwbE5XdVVFWWpTWHRiaXhHdDFveDNSblhlemVZWkI3akZnTmdjdzBGNnJ5Q2xNWFFEckFqcVNHajBqQVlzbmt6QXlqbEMxZDhJMnBLTGJPVm1MYlp4K2JpV08yY3U0ODJEc3RSMEhnLWtRYm96c2I2OXQ1VVdjVGhwT2ZJcUhyVDIyN2YyeXliTXdOWnNsZGJDWE9GZFp5QUdmU2JHOTJZS0pCallsV0dBV0FzaElBOUJtLXlKNzZISWoxRE1Mb0owa3NzZG5IN3ZDUXdHd2VDQWNSeEFIb1BCREk4Q1I5c1NIMFVlQUFQcDlEMSs5cG1RQ1ZkTSs1SktPcWN4RTlONkhyYzJKdDNFMmdBWWg0T1dzZzdMWUpXbUc5OFg0LXhBVEFsQk5HTzBBbHhCeGhsNVJkWC1GblJhNnlUa2prQUVySGEyTmRybkdsRU1DZ1NyS0VUNnNoRHB5QUFFSzFDd3MwUkVMdmJmWEFJRzNSM1BRWGR1NDkxN2dXZHVDQ3RIOTRIOTNudm5mZTlDQjBTUHJ2bzhoN2ZqN2dBcklub1BNZTQ4RUcrcG41UHNmUTgrNEFPejUrRDRYMVBvUkdobCt6MFgwSUFCT0d2S2VSeGgrQTAzaXZMZWZlZlFkd2RBUFNmeSsyOERLUWZhc2h0V0lDeElQVUNCQm5pdk1kd3FBTmNmaCtPOUFsNERVbGFwVG5jWHlQM3ZVZUI4Q3laQThlM3NnbDlwZ1l3QmFBSGFwbFNqVFVtLWZoLWZmSCszOWRPZDUtWndDOFNGV20tTms3OFpRajlxSi1aK0U0YitWKzFBVHMzK2U0QitHVUNlLStzZ3orajZRQmwraEMxK1lCb0VrQm9RR2VNQnArTCtDQjcramd5QnQrRUI5K3BlbUJjQlpBcitpQkgrK0I0Qkk0YUJCQTFlSkJnQkYrdUJuK0tCUCtEZWorc0JqQndCU0JvQkJCTkI5K2JlREIyQlRCSUJYK3FCQWhQZUorcEIwNEloUEJZaG9lUSsyK1krOUtrK29lendKKyswOCs2dzRoR1VDQUhCV0I4QnNobEJ2QjFCUU0xd0orSjBaR0xXellhQlQ4K2gwaGNBNUVjUVI0RXE0Z1VxZyttQjgyRklLZ2FTdHU2aDIrbWh3KzJoZGV1Y3NnSjBxT3VCQkExaGhJYUJKK29SQmhaQkgyaStQZXo4SVJmdUIwaStmK3FSZTRYZ3ArOU1kMHB5ek0tSURoT0JvaFlCTnVJUktSaSs2UjJSbmVCOHNnamNBc3VSZE1ETUMyaFJNSTBZRGhUaGxFY0FyaFVxRlJsZThSdFJaaFU4RFJtUnkrVFJlUnJSVE1IUnhSWitIMkF4ZFJReDFSWXhJUmYralJiOGdZZGhjd1VrM2hWQXZoYWhjSUFSQVVDK2t4TFJCUnFDVDBjeEwrTXljeWtSaXhJeDhSR3hTeE5SNHhHUlp4TjBGeFJSaElEaEdvVUFmeUJHVkFQMER4dm81aFBlenhqeHJ4YXhxeE9SVXhYeHN4UHhnQm9zQ0ExUXN5Z0pJSktvWUpNSkx4MkpqeFdSSytjSmpNN1JWeGlKK1JSSmx4R0pHbVJ4RXhkUkVBeEI5ZWg4TlUyVW5vRnVSdU9JZVNadWNRbEoxUW5odXhLR3VCczI2aEtSV2hWNGJZV0oybzRKczI1aDZSNFItT0gyMFJzd1RJSzZFcHgrNlJEaHR4V2tTUk5VMCtLcEIwSXBOVVlBbGttQlRLVjRocHVwcnlVcG94UUczMHMyUSswQnloRStPSWdwMm8wQmdSSFF3UkxlSEFJc2xKc09xQVJnb0N4K2toMDg4Q2tCQUFYdlVRa1ZRSDhRQ2Z5VDlQbEk2UFZKZ2ZFU1VjaWFpWDZTaHZsR2FmRWNQaDFQNGJJSVpJMFBxZUpMRVpJZEFmamdnSmFSb1pXVlVUVkhicVFGQ1VzZmliV2VZYTZWZUhWSHlPcm4yTkdGNGZ5V2t1Q0dZSThGd0FpTU1hRUZDTkNPUGhYUDJZT1hRTU9kR0kxdnlINkFHTmFBOE04T1duME0wQ21NV0ljS1lLZUxvQVdVT0dZQU1OdUdXSURJS0k2TTZNdVU4RHdNN2x6bnBIMko1TElNQUNrbElPQ0tZQkFBZ0NpVkFPcUlVaFlCd0RsS1FJWklzQmxtQUtZS3hvOXJJdHNPZVV5Szl1emdNR1pJeUN5UE9DYnBLQnNNTGpuQndPUUIybXRqS05PcmFIRGpZQWpwOUJnVzNHbnFlVG5Ed25jTUFBOXZ5REJqd0FBSXBTb3k3SVF6Z2lhamxMQXJCVW9Gb3JhbUFHQVlWd0RZVTJSNXJXalRDOWcxcW1EZ2c5Nm1DdUhpVkFicEdWaS1pa0F5VXBUOEMyYTJiSm9nQU1ESUQxQ0tXWUFaREpRcVZxVWdEVVcraXhnb25tVHBtVUN5Q2l5VGc5Q3lBZnk5QUtUQXdTb0lUY1J3QWtyV1Q2Uk5ZYVZlbFVBQ1dHU09DM1MyUmVXOFcrWEZpR1NhWGFWK0Q4anZwRFowU2JyK3pXaFE1N3FCSlJDWVg4WEZqSG9HeG5xbmJOajJYVTUzcnpUd2dJN2I1T3dYNFFDdVh1Vk9DUVRMcG5DR1JpWXRSbVZva29ZRFRPVmNSU2lWV3ZwNVh2clRTdFhsWHRVWlllVU5pZm16SStxREM5QU5HenpXVjJENVYwcHBtQWxEVlZqRnhHVFZRamlTaDZTYlFDVndBblJRRC1TZVRDWDVTbUNiNjZWclZUVTlCNlQ3U2VTZVNYUkhWN1dRNEdvbW9nQUJVNld2bkZRR1ZCWHdJOFgtR1JXNlhLV3FWUlVqakdYTmduWGFUVFhuV1hWNlNuVjZTZlNYWFdpYlFBQmttMTIxLTBMVXBWTGwtVllCNG81NEh5VzBpTndBTzEtbENsQU1LTnZWRlZBMVZWV044b0cxeFlXMWVOV2c0VlgxcEFSTnpXNEZYcVUybEliTzdVSndIT2ZZSU9hRnZBQWxCQWkwczBzYTNWT3d3MlhtQ3ctTkUyQWNpbzJZTlVBdFF0cUdZcWxObHl4WU55VDExb0owYTFBbEcyVDFRYXF0TW9OeUVWQ1lPaTJ0NjItY0ROUWFSTkpxOTJ3YWhJbzJGb291UmkwWXRGV0VTNUN1UHdkQWZ3bVVLdUlJSFFCYTdJVWc0NGJGeXd2QXFVVm9QV3V3NUlvZFBBNGRBR1Qxc2czOHh0Q2tPZ2NkZHRPdzR1R2toKytscWw3eDBZbGtXSWltOFljY3F3Y2Q1T0lWVVktSUJkdUVhWTdnM0FxRlY0WmRKMC0yRWlRT24yMDIzZ0UrMEVCaVpNZ05oSUJ0VGdpdG5kc0Fxd0xzNXM0a0xzZjBWNFNtSDBjTklWNlZNb2dhYzUwWWk1NUFsNXE1dlFwQUc1WlkyNUlBdTUrNVpNaDVtNU1vWG1pOWpsc1lVRjY5MTV0NTk1ajV6NXZHemtINVZZMzUyc3Y1LTVnRjNJcUlvRlpGdkE2VVY5UW1qZ3F3ZWtVRkQ1R1FmWVZXaWMwWWxxaFFSWThRZlVTUThzK1ktRlR3QUVtNHF3NlVnTVQyVUZITnlveGF4NTFOVUY3b3dFZk5wVWk0SzVTSWFEZWtaWW5Pem9vRDg0YUlnTTBEMFE4dzVJOEQwZ2lEaFlLNXFEZ0RHRE9ETUFiMjVERFFMUTdRSFFSd3VBSUE4d000eUFtQW9BSXNoU0JBTWpFamNRVWpkNGFhY2dtQTBkNVlTak1BS2pEa3RRR2p6R2VBa2oteHFqRUFXRUJqVXFSanlqSmpEa2lJRmpXanhqUjREa2dnOWpWak9qTmphYTZHcmoyanVqYWFxZzNqampwai1BM2pBdzVWamcxQUhBTXgwSXZVUFEzakJBa1REcEZjdlJrcTZBV0FoMHhlaUltVG1UK2plQTJJQUVGSUFBanAyaFFHZ0N3Q1JVWlhnRjFMUUlMakkxb0hnREtDS3JNZ294Z0ZSVm9Gb0VBQQ==" target="_blank">Assistant Link</a></p>
+</li>
+<li>
+<p>Convert the following C function to assembly code, using the program stack to store local variables.</p>
+<pre><code class="language-c">void merge(int* array, int left, int mid, int right) {
+    int n_left = mid - left + 1;
+    int n_right = right - mid;
+
+    int L[n_left], R[n_right]; // These arrays should be created using malloc, but we will use use the program stack to store these arrays. Since array will have at most 30 values, 120 bytes should be enough to store the largest L and R together 
+
+    for (int i = 0; i &lt; n_left; i++){
+        L[i] = array[left + i];
+    }
+    for (int j = 0; j &lt; n_right; j++){
+        R[j] = array[mid + 1 + j];
+    }
+
+    int i = 0, j = 0, k = left;
+    while (i &lt; n1 &amp;&amp; j &lt; n2) {
+        if (L[i] &lt;= R[j]){
+            array[k++] = L[i++];
+        } else {
+            array[k++] = R[j++];
+        }
+    }
+
+    while (i &lt; n1) {
+        array[k++] = L[i++];
+    }
+    while (j &lt; n2){
+        array[k++] = R[j++];
+    }
+}
+
+void merge_sort(int* array, int left, int right) {
+    if (left &lt; right) {
+        int mid = left + (right - left) / 2;
+        merge_sort(array, left, mid);
+        merge_sort(array, mid + 1, right);
+        merge(array, left, mid, right);
+    }
+}
+</code></pre>
+<p><a href="https://riscv-programming.org/ale/#select_url_content=TjRJZ3RnaGdsZ2RnK2dCd2djd0tZZ0Z3aEFHaEJBWndLZ0lCY0laUzRDQmpBSnlnVk14Q2pBUUhzN1NBQ1lBVlFDU2NBQktvQU5nbFIwY1BBSUpFUzVTbkFESzlScVFDK1BBR1owT1lIZ0IwUUFPZ0QwWURnQk1BcnVOUUVMaFltUXFrekFLd0tuak1OazV1UGg1aU1BY0lVaTQ0R2c1S0EzRkhPaDRkZlVNVGN5dGJCeWNMTUlpb3VtOWZFQUJ1ZjM4YWNWY2VBR0VBQ3dBT0FGRUFaamdBVmg1VUFBOVNWQmdiQW5sRmR4VjFCaVpnZng0ZVdKZ3lPanNhUW9BS0FFcHBtRm5aZ2pzcE9nM3k3WjNTZXBJek95Z2VBRjRlR0ZRQWR4NGhVUWtEMWRObW51a2FFbFFlSTB6SzB6QjBNRHhWT1FhQUJySGdVR3c4QUJpZEFnWUFCQUFVT0xCK25RU3V0ampzVENkWm81ZUJBNkNpQUo2M0hobkM1b0I0by1wd2NsVWpZVllrOFVuM0dJUVJMRE81MGdobUdoODhRRVZZQUJsa3JJZ2xMTWpoZ3lET0FGb0FJejRtWTdMVWsxQzhXSTJBR0M4N0N0QlVBQkc0ZzQ1dFdzc3BzbmdvdjVtczUzSnNrUWdOS0Zaak5jSGQ1RnRGTGxMcDFYTDF0S2N2RHVoRXBNQm9QRGd0d0FmSHhRNFR2UkFiRFlZclpVS3NEYWhaS1p4TEJvYWhzd1d6SGlDWVRUaWF6Sm1LN25WdjZJRVdRSzJxNllYYlc2eGREYm9JQTRxTG9vSXJVVWE0WTlvTHh2YkYyR1BVRG5EVWNpYjNadDZyY2c0Qnc3S1FFSHVqbW0rOEt0M0JZQWVSNHVKVDMxMUJkS3NBSVRlZ2REOFJYOGRvemJIOVAxcTRLamhrRStFQmFrTUJBeDBpS0E0aDRab0tTNE14akg4QUFSS0FFVXBYY2VIMksxTTFwZW9BVWVBd2xUMFJjZUM0UFF1RE5Xa09CNFEwcW5KQUZQV3FjMEpEaFlaa0N0YzArUUFmbTdHdDF4NE9nOVRzT2h0a0hjVlVENDJzdEE1Zmp2UVFRU0IxZ2NzV1RvWkFCUjRBQnRVd1ZSVmJGcEFnRllvQUFOMVFVeDJ4MGtnSURNaklESnNVY3dEMlV3QUYxSk1KZThuMXRhY29GbmVzbG5nZkpxaldkWmdxMmZpTnotS0FBS0Ewd0FEbHFOSFJ4UWdrVkFWbkxYaWZ4UEtMZ0xpNGpFb0laTFVwc2RMT1Y3UVRTR0UwUytYeTF5ZG1rbUFNdTVBaEtUQWMwT0hGR2tJQzhuejZUMWFobXRhOFVqeEtuWk9wblhDTGo4ODlLSDB3eVRKaU1BYkZXQUFET3hLREhIaEpSNkFBU1lBbXBhdHFDQzBrQTRCWlhRY1JpUENZV2Nzd29raEJnbFZXTlVBRFoxaTBKYmIxN2JsV1dNNVRJajYtYnhCcFZaVmlRWEZVRUVTaFBMRzcxSnIwbEZacVhHZ0Z1QXFSVUZoQkFhRzdZTGJqdVBhQnNPMHdUb2dNN3BBdWxMb1djajdhM3ZIZ24yK2t6c3ordkcydS1ZYmZ3dU1nT0FRYWcyQUtMZ2hyQzhiaFgtTGRnUFJBeGtCUkl4ZWhTdmNvTkVxMW5oSUhoWUZpQ2tVdElSOUVKZ0ZDMEl3d1MwV1k1SW9sQ0NBVEo0QUJ5RkVMYmhRWUJNakxnQVc4bFh0blE0UzlGV3d6b09ZM1JIZnQ4cVJOZ1pBZUpBS25TcUVrUzlDcWlTTXJxaHJ3MUlOVWdkQi1LSWRJS0huWmgxYXBweEF6U0IrK2JGdE1WSFlXTnRVc2JEblp1VklBQW1aUHlWVHlIUnN6M3pzN2h2T0M2Um91UUJMZ1RhUnJpdWF0MVdkV25yc0cwNHo3cmhWaDZiNGZ6dWF1NVIxQTBiNzBoV2tIK095VWxNZkctVDV1cDdNR2ZjNFJ3dWw1WDVJSUVsRGY2clpzTmVFRXZaM3c2cnFoY1B0dlo0N2hma2FXM3VqRTJuYkw0M1E0SGRJT2owWG82SC1zQVcwa29BRFVnWXFRS2dHTXFlb0FBcUFBTE1GSUJJQ0hyUFZldTlHUzY1dVN3QVJJS05VNkNlQXdQN2lndXVsQzE3SEUzbHlRQ2NBSEpxUnBGcFcrc3hUQnlFU0hNUzYwSmhoSUNJT1dMV3VBTXFjSkFtS1plcHR6YUNXUUVvYVF3eEhqU0NkbkdMZ2drVmppR3BIWWZLUlZSRWNKNEV0QUFzdElOQUVJdUQzeWNNT0hnMDVoaXF6VVJyQkMtZzVCQm1wRFkrNEhCZUFFSE1lV1J4TUJuRlVuQkR0T2NjUVRMY0JVbXlCK3c0WlF1TVFVcU00ZUNjQmlJTVFBSlZscmlINkhzNHo1MmdtNHAwamdFU09DSUxTTmdUaGNJVUc2RDBLUWhWYVlBTWxEb0FBUER3SGFqb3hRRUMwT3NYeERSeVlxMTBEd04yY0pCSnpIc1ZVVWcxSThsQjB0bUFTa1pCcENVamdMb1QyMlNZQTIxZ01RUTBwRmVsdTJTT280U3hCellMS3lmTE13UzFFbjZLV2dBRlR3dmNPd0xWcEFiT0tXaVlZWndBUTdQU2ZzeFo4dHJHRURtSkloRXZRYURMeUdMaEFFdlFxbjlBUkRBRzVSdDdsNU9HTDdZMlZ5NUVtVzJIYVdRanh6ZzBIcUNyWVl6VGVUOGkwTWMwNWd0VENRZ01yQ1ZZQkFFRHJGQ1BVWGM0Z0VUTVRoQ1daQUR3RVRRVTlNOUZVNXBLVDlCNEsxVmE3bzZEeWpNa2swdy1BWUFRRXRBQ0UyZ2tESllvR0d5M3A3Z1lTMG5ocWdYeDZKSENFQUJKQU1zb1JoSUFuMEJPSGduQTRhMDEwRlM3RmZMVUFUTFZ1bzBnbWpNSTZOdGdpTTRrUVZha0FFWUpJeVVGdEU4Q01ueU93cFQ2TFd1SWRJOHNwRnRqUEtHZXJGWUpxT0RFQ1dmYzZOeXJZUkdyUkFoUFItRW5JRU43QmxiMG5OdVlCVWlQelN1NFVMZ2kwQXFzTThMRERyRUtjbVctMkZWYVpocHVIY1NVVk10RDBNNUtHT1NDbFVDamxaU3BWaGR3am9XUS1namF5MmxkSUVDc3JnR3lOQTdKc0VjaUFGeXZhSW9OaXpIQWZvWkJnTG5NakR3TkVxa2x4ZU80TlpIZHBCYnhhblhSV3lLZzYrUndFaVUtTzRpWWJncGxDcldia2t0TXlUa2xEVmJrOEFMM3FXOVArQzlqN0xIdmxQRWdzNHg1NFcweUlUU1A5S3NlQ05NQTVHQWdwUVZZd0pnZFNqOXZadjNySmdjYVc5TjFJemdjZnA2alNVQTEzRFRxdmhsRTZ5N2lyQUl3Q0ZCUEExUWRwNEJZV21hR3lBRUVyaFliamp4aUVjRWVHWVVHQXhQQ2NESU1Zb2dLQTh6QUhuR2lTZzRJUU9SVEEwK3oxc2dXUGdoWTdJUWRKQjZqYnNqS3BwWXFCMmsxVEtzMnBhQUJ4QmpxQkFuQUJZMEF4RVVBZmlMUTFBUytwNW82QkppUXFKbUEyRlhXUmx0Ym1NcHZBM0VsaGdHV1YxMUV0a21vbGxMV205VFBUMUVFcm9HNE8xaE9ERkUyWWZneVNBQXlJcFpYOUFBUExtaThCcmZMQlg4eTVsZWpSQUxRV2JqRmxMTXBTc0pRa3dGbnFTNEpNc2dVczhEU3dPekx3QnNzMkZ5OVY0cnFCSWlvSEs1VmxZMVdXd2VucTJOeDRnV09DWm1heDJEMFhZUUJKbGJOMWlBU1lPbExXUEtHT2pLUUNIekZDVlFPMGkzeUJ3R3FHN1Vnc2hpQUFDOVVDczBKRjlGeGJDYU5mZkRBRzhRUWIxSi10RE55S0xwUzdpdGdlM0tYY25oS1VsblRuNENvb2RReHdkcXdzWGdFUDdrUS00M2huWU5OcTFLUnhoa2JzK1BDVHpIenBDbU90SGp4dWc5RFNDSFZZRUNJK0FoZ2JzR2sxUi1kclBNTHhqZ3NxdGtybmFjVDJqNmdnd2J1RFNHZ3ZLNkErQjlobXFoUFplbEtUTGpLQTczUHZyaDgxTjZFTlZ6dXpEMTAyeU9kb2F4eHhPTENpbDVCdUN5QVZScjJZaFAzREJFYVRiOG5kOUQyb1JwQTczZ2xEREdSSHFHWVhRVnArYXJBVlR3RlVvUkxlWHE0endHdWxjck9SeVRyUStzNXZQZXlEQUtoYWxpZUxqbTdUellHQmFwcmVERTdhR09QMncxUW00SVNpUVkySlZocDVnS25pQVBSY1BGNGp0c0gzWngtZUI4T0czdjNsZXh0Z0EyRHdOak5lRytoN2Q5c1NoR29NOWotTHpmV1l2cExUV25nWEtldlBROFhpbHQ2N2dzTklsb0FHSWVEN3JJQk0wQzZ5NFBmRitQOFFFd0pRU2hoOUJ4UUcxQUk4My1ZdGFRR1V5WmxDdm1SOHVJdWFFeWUtWjJ6RXNVSWFVRGFIb09RQUFJVnFDUW1hRVJIQUotRUFJSUh6eEFQQU1nT2dOZ0lBT3VBSUJybGtFMm1RS2dKZ0xBTGdJd05hR3dOQUlnTHdMUU1JUXdMUVJJTndOUUlJUFFOQ0E2Qm9MSUxvTUlOQ0NlbVlKUVB3TFlJSUFBSFpPRHlENkRLRFFoR2dCRFdDR0NDQUFCT01RN2dpUWpqR1FpZ3o2REF0VVJBbkFsZzJRNFF5bEVnM2d4RVhReEVab0srQUF6MFMrYUpLa05naUFWUTh3ckFwcFlBWVhSVVpCVWZOVUEzSFlMd1BrUTlFeEU5Y3hOZzBnWUF0UXJneFEyc2MwQjRJQTJRSHcyUUU2TURRY01jTmZaZWFnTTJVeU5tSUlnRUJBMEk0QWlJc2pLSThRR0lrOWVJbjhKSTBJYXdzSWhNWXpNZ2VaYUFMSXZKV0kyZEV5UEk0SWdnWWcya05Ja29rY2NvN0l1SW1veEl1bzZneG84STVvc282SXlvbklqb3pYT29wZ25vNG95STFvd1k5b2hJa1k1SS1nOFk5STBvekl0bzZvMlkzc2ZJZ2dVUXhZdm9sWTZZdFkybzVJNlFuWXlZZ1l5UklZOVl3SXVvK1FrNGpJcVk4NG1ZdzQwSUZRMUkzbzA0aW9oNGc0aGdvb3phSFF2UWd3cDRyUTI0NVkrNHhJS28zSW93dUVZQXUwSDhNQUl5Y1l5K09BNTRDdzdBMVlIdzlZYnd4QWdCR0pld3M0Unc1dzJZVEZjbUI3RGdMbWYtZmlaaUFBUjFlMXBFUUtKSmhCSks1amdBVlF5a2JHdUNLS0tMUVZaS3pIWk1RTVRsa0hWQWFtUk9zTWxEUkk3UXluTkdWRGhFUUlnR3NLV0tvQUlqaUczQzRFTkRvQXlqaE9sSmxBSGx2aThGNFdKTUR3UUItSHBPaEVaTzVnVlhKTStrOUNLSm9HRWtFaFVEeVNSUEdORlBSTXhOa0Iya2dGWDFoUUpMNVdDSTVNUVBsTFgxOEcrTXNPK0pGTzhJYU1NUFhGMUtKaEpqb0RKaXVrNUFETDJNK1BpSXRNLVY1T3dPOExETytJYVBMalptak5Pbk9tTk5EQURNVktWQjNEb0ZWTFRLK3d6STJpek5rRHpPRUxYa3pQek9LT0ppTEw0UkxMNk5oV3JLcmxyTWpLVVA3Z2JQRE9ITWhKTUxtRnRNa3pYMGRQSE5GTXZneE5iSmpJN1BKaTdMQTMrVUJVRE43SkpGck1iTUhOcmhiS2JJakotQUxQYk5KbUxNVEw2TDVDZ0JaV1V5b0dlaTNLNUIzUHJMckp6TkhLakxiTmpQaklwZ3ZNaU81aFp3TWxRRnZJZk1BUDVQWTJmTjNQVE5wQ1BNWE1MTFBNN0l2TlBMak9OSzNNQU5uTHAydUFnQVdNa1BYbUdoU2pGQi16Znh4RG1RT1M5aGdCUXF0T0FKdFBWbnRQd3VHbkVHZUZBdWRQRk9HalpOcE5DTVFJZ3I3S0hKc0k5TURJSk1sTm5ENUxsTDZQWExhMWFXUEFJQVl0VUxGSVhON0ExS0tJdFdQSGtzUU1wWFF1NHVlanAxSklRQWZQdGlNR2JMWXY3Z2xJZUJwUDBvREt2SnZLbkkwdHZrdEhLbkdOQXFUTC1PcUFCVnZQVlBoTkFwOEtGUEdKVkVhQmtvYW5aSWpKNkQrTjBJTUxYRG1JTXYwb05MVXArS2lwREwzT3pMM09ncjNPNklITUpES2c1QnYxYkZEQ29ydEtvRHlYQkRNRWVCVkpmTUpCTzFkSERGYkJwQWVHZUgzVDZHYUZVVlZPQWozRjBHOHU3RE1BR0FMRnEwTkNwbTVBWDNORXFxZUI0REFJNGxXQTBsYkNjbGtHQUZHU2tIQkZNQWdBUUJaeWdGRkNXUXNBNEZTbElCVkVXQ216QUZNQXMyYndEbTJGNnExRk56bndHSDBtWkZ1dzMzQjJneXhXSTJubmhHcnpWREdKcmc3VWtoTDNrQmlUU0g3MkFGeFBxSEJCK3EwRmtBSHpmUjRHN3c3MUpLNzE5MFBuaEVNQUh6WXc0dzdWdkdPcDRGOUZiQ1gwcEV1dkREdENtbWRsSFc1MW1IUndRM2JVdzJ1RWFUc091dUp1d3lieFlwY1d4cWsxRjJXZ0txS3V4S3BDb3ljamVueER6VTVDN1ItMTUzMURDenVGM3g0Q1FnWjFQeCtEb0QrSHlrdnhCQTZDZnp2d0dUTU01RE1FeXM1RHRDM09acmxGcHU4Q3hCZ0ZXQXRtMW40Z3RsZWxERkt2KzE0QXFydUNxdjMxNkZJRHFvTEVPRk1DYXBhdERqYXZxcnpBTEc2dkRGNnY2dWVDR3NYMUdvOUhHcjRDbW9jeHNubXBMQ1d2bGhXcldvMnRJRmxXMnBBRjJyS3Q0QVNrbkV0dGMwY0JHdDZzRHRNRTdHckZER0xVS0J6SGlEYWlTQUFrekRnQ3F2bVVYRldCVHFwamV0NnBueTFFYkdYRGR0ekRnRjZvZEFuQXh1VHBJZ3RvR3ZUcnpBMGdMSGJvNGtEb2xTLUVrZ0x1aUVwd1NGTHFDd3JxZUNyb3p0cnNicGdGTjB0b2FCYUhhQTZDT0Z3QkFIbUZIR1FFd0ZBQzVpV1FJR1B2M3JpRVB2UEZuVGtFd0ZqcURUd0FQdXZKdm9nRnFIdnJNeWZxdnBmc3NpUWctc2ZzdnBnR3Zzc2tSSC1zTEVBZUFkblVFREFhLXFBWi10blVNUmdZZ2ZnWWdGVUNRZWZ1M0VzbjRDUVlHRWxVY0dvQTRDLU5haDZDUWE4UWZ6SlVRRzF2T2lWeFlGK0wwTjBQZnJ3R3hIbVVFa3BNZlFvRFFCWUJyZzZBVHJ3Q2Fsb0ZhV1BvQm83RlFCOVFCWFBvd0dBQzBHa2FBQQ==" target="_blank">Assistant Link</a></p>
+</li>
+</ol>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="ch08-02-data-organization.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next prefetch" href="ch09-00-final-projects.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="ch08-02-data-organization.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next prefetch" href="ch09-00-final-projects.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="elasticlunr.min.js"></script>
+        <script src="mark.min.js"></script>
+        <script src="searcher.js"></script>
+
+        <script src="clipboard.min.js"></script>
+        <script src="highlight.js"></script>
+        <script src="book.js"></script>
+
+        <!-- Custom JS scripts -->
+
+
+    </div>
+    </body>
+</html>

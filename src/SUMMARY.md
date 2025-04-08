@@ -58,6 +58,7 @@
 - [Complementary Short Exercises](ch08-00-complementary-exercises.md)
   - [ABI Compliance](ch08-01-ABI.md)
   - [Data Organization on the Memory](ch08-02-data-organization.md)
+  - [Stack and Frame Pointers](ch08-03-stack-and-frame-pointers.md)
 
 
 ## Final Projects
