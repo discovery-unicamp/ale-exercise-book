@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>RISC-V ALE Exercise Book v1.4.1</title>
+        <title>RISC-V ALE Exercise Book v1.4.2</title>
         <meta name="robots" content="noindex">
 
 
@@ -144,7 +144,7 @@
                         </button>
                     </div>
 
-                    <h1 class="menu-title">RISC-V ALE Exercise Book v1.4.1</h1>
+                    <h1 class="menu-title">RISC-V ALE Exercise Book v1.4.2</h1>
 
                     <div class="right-buttons">
                         <a href="print.html" title="Print this book" aria-label="Print this book">
@@ -805,7 +805,7 @@ Students are expected to read chapter 3 of the textbook (An Introduction to Asse
 <p>e_shstrndx contains the value 4, indicating that Section Header number 4 (counting from 0) is the header of shstrtab, which stores the information about the names of the sections. We colored its content in <mark style="background:transparent;color:orange">orange</mark>.</p>
 </li>
 <li>
-<p>The sh_offset field of Section Header 4 (<mark style="background:gray;color: orange">orange number with gray background</mark>) stores the address of shstrtab: 0x00000160.</p>
+<p>The sh_offset field of Section Header 4 (<mark style="background:gray;color: orange">orange number with gray background</mark>) stores the offset of shstrtab: 0x00000160.</p>
 </li>
 <li>
 <p>The sh_name field of Section Header 4 is the offset (from the beginning of the shstrtab section) to the string representing the section's name. For example, Section Header number 1 has an offset of 0x1 (highlighted in <mark style="background:transparent;color: lightblue">cyan</mark>), so its name is the string at position 0x00000160 + 0x1. In other words, this is the Header of the ".text" section, which stores the executable's instructions.</p>
@@ -817,7 +817,7 @@ Students are expected to read chapter 3 of the textbook (An Introduction to Asse
 <p>By checking the name of each section, we identified that Section Headers number 3 and 5 represent the ".symtab" and ".strtab" sections.</p>
 </li>
 <li>
-<p>Evaluating the sh_offset field of each of them, we know that the ".symtab" and ".strtab" sections are located at addresses 0x00000110 and 0x0000018a. Evaluating the sh_size field, we know that their sizes are 0x50 and 0x18 bytes, respectively.</p>
+<p>Evaluating the sh_offset field of each of them, we know that the ".symtab" and ".strtab" sections are located at offsets 0x00000110 and 0x0000018a. Evaluating the sh_size field, we know that their sizes are 0x50 and 0x18 bytes, respectively.</p>
 </li>
 <li>
 <p>In the .symtab section, for each symbol:</p>
