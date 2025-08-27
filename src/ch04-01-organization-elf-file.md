@@ -120,7 +120,7 @@ To make your job easier, we will discuss how to read the ELF file given above. T
 
 3. e_shstrndx contains the value 4, indicating that Section Header number 4 (counting from 0) is the header of shstrtab, which stores the information about the names of the sections. We colored its content in <mark style="background:transparent;color:orange">orange</mark>.
 
-4. The sh_offset field of Section Header 4 (<mark style="background:gray;color: orange">orange number with gray background</mark>) stores the address of shstrtab: 0x00000160.
+4. The sh_offset field of Section Header 4 (<mark style="background:gray;color: orange">orange number with gray background</mark>) stores the offset of shstrtab: 0x00000160.
 
 5. The sh_name field of Section Header 4 is the offset (from the beginning of the shstrtab section) to the string representing the section's name. For example, Section Header number 1 has an offset of 0x1 (highlighted in <mark style="background:transparent;color: lightblue">cyan</mark>), so its name is the string at position 0x00000160 + 0x1. In other words, this is the Header of the ".text" section, which stores the executable's instructions.
 
@@ -128,7 +128,7 @@ To make your job easier, we will discuss how to read the ELF file given above. T
 
 7. By checking the name of each section, we identified that Section Headers number 3 and 5 represent the ".symtab" and ".strtab" sections.
 
-8. Evaluating the sh_offset field of each of them, we know that the ".symtab" and ".strtab" sections are located at addresses 0x00000110 and 0x0000018a. Evaluating the sh_size field, we know that their sizes are 0x50 and 0x18 bytes, respectively.
+8. Evaluating the sh_offset field of each of them, we know that the ".symtab" and ".strtab" sections are located at offsets 0x00000110 and 0x0000018a. Evaluating the sh_size field, we know that their sizes are 0x50 and 0x18 bytes, respectively.
 
 9. In the .symtab section, for each symbol:
 
