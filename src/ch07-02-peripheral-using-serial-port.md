@@ -17,7 +17,7 @@ There will be 4 different sets of operations to perform:
 - **Operation 2**: read a string and write it back to Serial Port reversed
   - **Input**: <mark style="background:transparent;color: darkred">2\n</mark><mark style="background:transparent;color: green">{string with variable size}\n
   - **Output**: <mark style="background:transparent;color: green">{string with variable size reversed}\n</mark>
-- **Operation 3**: read a number in decimal representation and write it back in hexadecimal representation.
+- **Operation 3**: read a number in decimal representation and write it back in hexadecimal representation. Use uppercase letters.
   - **Input**: <mark style="background:transparent;color: darkred">3\n</mark><mark style="background:transparent;color: green">{decimal number with variable size}\n
   - **Output**: <mark style="background:transparent;color: green">{number in hexadecimal}\n</mark>
 - **Operation 4**: read a string that represents an algebraic expression, compute the expression and write the result to Serial Port.
