@@ -19,6 +19,7 @@ The memory space between `sp` and `fp` encompasses the stack frame of the curren
 
     ```c
     int factorial(int n){
+        mystery_function(); 
         if (n < 2){
             return 1;
         }
@@ -33,7 +34,7 @@ The memory space between `sp` and `fp` encompasses the stack frame of the curren
 
     ```c
     int fibonacci(n){
-        mysterious_function(n);
+        mystery_function();
         if (n > 1) {
             return fibonacci(n-1) + fibonacci(n-2);
         }
@@ -43,15 +44,16 @@ The memory space between `sp` and `fp` encompasses the stack frame of the curren
 
     <a href="https://riscv-programming.org/ale/#select_url_content=TjRJZ3RnaGdsZ2RnK2dCd2djd0tZZ0Z3aEFHaEJBWndLZ0lCY0laUzRDQmpBSnlnVk14Q2pBUUhzN1NBQ1lBVlFDU2NBQktvQU5nbFIwY1BBSUpFUzVTbkFESzlScVFDK1BBR1owT1lIZ0IwUUFPZ0QwWURnQk1BcnVOUUVMaFltUXFrekFLd0tuak1OazV1UGg1aU1BY0lVaTQ0R2c1S0EzRkhPaDRkZlVNVGN5dGJCeWNMTUlpb3VtOWZFQUJ1ZjM4YWNWY2VBR0VBQ3dBT0FGRUFaamdBSmg1VUFBOVNWQmdiQW5sRmR4VjFCaVpnZng0ZVdKZ3lPanNhUW9BS0FFcHBtRm5aZ2pzcE9nM3k3WjNTZXBJek95Z2VBRjRlR0ZRQWR4NGhVUWtEMWRObW51a2FFbFFlSTB6SzB6QjBNRHhWT1FhQUJySGdVR3c4QUJpZEFnWUFCQUFVT0xCK25RU3V0ampzVENkWm81ZU5zN21jTGlqQnRqVnExWkFCMmZFekhha25oMEp5M0hpVWdobVhSUUFCR2NRZ05EK3F4Z3pPSlBEWjhCb0VFU3d3cDUxNWNvVjRzbGhKWkpOUXZGaU5nQlNvdWFDb0F2RUhBRjR0a0hJSXNsbDh2RUJFbFd1bE91NVRsNGQwSUFFOFlEUWVIQmJnQStQak93azhzd1FHdzJHSzJWQ3JQV29XU21jU3dhR29hTUpzeDRnbUUwN0tzejYzUVFCeFVmbU9HQ29nMXd4N1FYamgyTHNLQ09HUDZvNUUzTjVpNW01QndEaDJVZ0lmdEhVT2QzbmR1Q3dRZWxwdE9ZZFN3bFFYU3JBQ0U0Y0x4ZkUwLUxsYzJJN0QrYXVabTdueEF0VU1DQ2JrU2djUjR6VG9CaUt4bjhBQkVvQWl2WDJlUHN6Wkh1ZlVBWThCZ3dNZ2Vnemp3WEI2Rnd4cmNod1BENmxVRUFjbkMwb1FBS0Vod3NNeUJtZ0s4b0FQeW1CcUhZN0J5cEIySFEyeEZnNnFBNWgyV2dWUE9vNW1BZ0hLRnJBNlp3SWh5Q0tqd0FEYXBnQUxUOGRpMGdpcVFVQUFHNm9LWVNZZ0lKSkFRTkpHUWlqWS1KZ0hzcGdBTG8wYm1pNHJxc0VBMWxBZGI1a3M4RDVOVWF6ckZaV3hFWXhoN0hxWUFCeXNGbGdDQkFTS2dLenBnUjJrZHVHRGtnTTVvR09LRUhsZVRZUGw3c1JPcGtSUjhydWI1T3gwVEFVVnNnUVhwZ0VLRHBjZ1p0Wi1rYU9yVUJsV1VFSE90bTVVWitXOHFaRTZVQ0pLd1NhZ01SZ0RZcXdBQVoySlFUWThBQUREMEFBa3dEcFpsSEFPbnhJQndCeHVnNGpFLTR3cHBaaFJKQ0REQWFzQUNNQUJzNnhhRzFoRWRteWlFTUpKMGFSRVZJM2lGeXF5ckVndUtvSUlsRDZZWnhsVXAxdFU0cUpqWE5hMXBoU0tnc0lJRFFCRldiY2R6RFNWNDJUUkEwM1NMTm5uUXBwZTA2Ym9QQXJvZGpVblZRWU9qYnVESDdoY1pBY0FnMUJzQVVYQmxiWlZXWEZBUjRjTWdKN29nWXlBb2tZdlNlZjIxNFVXYXp3a0R3c0N4UGVubWtNdVQ0d0srNzZmaHlhSm9ja1VTaEJBa2s4QUE1Q2lpdHdvTTdMdWx3QUtWYkFQQWZtUmVpZFExTjVvYm9Xc2E2UjVHd01nK0VnSWpIWWtiRmVqeGRSVVhKYWxycWtHdGwwM2U1OTJrSTllWGhqVndrb2cxa2xmU2V2MndqTGExQS1icktlMTBkelhZaGZzUFJWejNWYTlvY2ZSSE5BdFZIcUItZXkzSWRQSGlYYW5XclErMm5kMFowOWxNaDNWWWRpZm5oYy1jWE1mY3EwRmNlN3dFQTliWHQzKzRIbFhCem5MZDUwMUJmZlNBMGVsNFBmY3BiakxxOExBQ0lVbXRBQlVBQXNQQUFOUmw5dlhSSDZRclRIUDMwcTAzQWFsY1Z5ZkdyN01waHlJa2N4emRDd3hJRVE2YkM3Z1VYUDFQUGFZdWNzRlljbVFFb2FRd3hIalNHMXI2TGdISVZqaUM5RitkeUVWLTVQeDRHMVJFZ3BoU2ltdU5hRXNQQWF6REQ1Z2d3V1pnUllBQ1VZcmtYVER3UWFnOGRBQ243S0Vlb2ZaeEFJalFndzRBMW90Qm1EYWpnQUJXQ2FFMERJc1FCV3VnalppUnZDUXVZd0NFU09DSU55TmduSXpnVUc2RDBLUTRVVWFNSjZqb0FBUER3dTBDb3REckVvZjRCb2NOZWJJMzFuQ0pDLU5FR2JoUWFxRk13RWxaZ0M5R1FhUVhvNEJTTjlESW1BcXRZREVIMU9CV3hmWmtpSVBFWTFRMkFTT1lDS0VaZ3RxQUFWZjg5dzdDWldrT0VsUmFKaGhuQUJORTNFc1QtSEcyMkhJMXg5RGVnMEdMa01QOEFKZWphUDZBaUdBbVRwWTVOY2NNTTJ5Ukp5c01HakFMUXNoSGpuQm9QVVhtd3gra3hIdEFRZmhnamhHbUVoQ0tXRXF3Q0FJSFdHd2poWENBVHlpZ01nQjRDSWJ3UUI0SnRmaUFvdlQ5QjRFS1RxTmhFSmVrb1JnaW1HUitBVmxOQUNXV0hJUlJqSUdBYzVHN2dZVGNqRHFnQ3hNQjBTT0VJQUNTQWFaUWhrUUJQb1NzUEJPQ2h4UnJvTlo0ekxtb0d0bk1jaFNDVUYyRFFXckJFNmoxNmtDLWh5Y1MxNDhVOEhFdktPd25KRUlBalFodlVCOUNid0ZLeFFMRllDS09ERUVDVGt0bGZ6WVJ3clJQY3BKdGtOTDBWc2xGY01CTWlibVVpR1RCT3N4d3oyVnBxc2NjZDhDQThRM2hwUlZGc25hckNaVGNPNFBWRVphRXZsS1owNFptTHBsUVB5ZlpIRTZEM3p1T05PU1U5dzVTVndCa09TQkFGS2V0TU1wVlM2a1FCYVV0UWVhbWtab3o5RElDZUZKN3BRSkNnclBneFNVYlNDRVJaS0dpNGg0N1h5amdJUXpjWElBdzNHRERaWE1iSW1hUmlyRDFSS01vNEFwdTRzcTZtS2JjMU9CTEdPQVl5QXpnam02U2pOazF4aldsRjVqd0l4OEE2MERxZ0FmQSs2eVMwZG5MV0VnK2hwZVNIaWJYbWtsV3FRME1XU2pPbEVZU1U2em9CTnZZNUpxZUFXQlJpTzkwanBFb1dCUFk4RGVIQkhoTVhwWlFKaTNMU0FBRmtuQStyUUtzWUFEWTBTVUhCQTJ4YTdwbTE3RTNEYUhnZTd3Ujd0a0hha2c5UmEzdWdBMHNWQVpqRXFPM0lsZ2dBNHR1MUE0SkJwN3NXaHdIQlB4V3ByVzJtWUF4QW82Q0JtZkhlbUFQNUNYdWt4UW1QOGtSaUdFR2xLbWVoc3Q5YkpHWXJUWm1LTURGSFBxQnlYUU54Qm8zc0dIZXN3LUFxRUFCa3pEMEZRSkVWQUFCNUFVWGhCWnlmay1HV00yMDRKMFlZemNaTVhHTXl4aXpLWVFNQ1lERXVFRE9ZdHFJNW5TYnBTQksrTmVDeFFTbW5UWTA5UEJneGtlODdNZEQyeHd6OGdUU0tUei1FeU9IMHBtRmp6VUJ4VDhRNkthNTB3WDdnNW5kaWNUcDZwdk9MbDgtNW5HRHRhSGJHOW1mZk0yV1lCUmZXV1ZpNEZXa3NwYWxHbHRhR1czUFVoc0xTTUFzQlpDUUI2Rk8xTHhXZUN2c2lQVVBrWm95WkRiT0dZTnJoZ05nOEFQYXNIclBCK0k4RTY5c0krWkhxc3JkZ0MxbGVzeGpSd0ZOT2FTMEd0UU9rRzZ4QUhvVXlGU0ZjVHJxV01YSTJvQUdJZUN4cklKaXM4WVR1M2ZGK1A4UUV3SlFUT2pNRmhjMEYxcURrRzRJRDRIcG9WdGVKeEw0MHBnVG5SZzhRcVFEQWU0VXloQjZySVBxY2dBQkN0Um56TkVSSGo5SDF3Q0JyV3h6MFBIQk9pY2s5eGhqZ2dIUktmVThKOFQzSHBQUWowbDZsVC1Ick82ZEVRWjd2Wm52UGFmcy1wMlRnQXJNTG1uYk9PY0VBMnRMdm5ZdUJkazRaSXIwWGN2R2pxOWwrTDBJQUJPYlgtUDlwazdXbGo3bkxPTmU2LUp4VDgzSXVkY3E5Q0FnU25ESkVTdThSTTBIcUhQQjZ5SDZTNTNNWGg1VHVjVFg4RG5wQXpjNDd0MGIzTUFvSGlZOWtHSDJRazBtMUZpYkZkeHdUVWZXU1QzREh0eU51RS0rZ1EyUVB4MEJ4QnArTHRRZVdVbGNZNTlDRXo3a1p1ay1BWlQ2WHlwR2ZLLVo5andRTG4rZkc5RitiMlh0dldmcStkNkYtWHhQaGZTd2w0SHhYb2ZSRWE4RUNsMlBndnllcCt0NW4xWHVmbmUxZEw5NzVQMVBhLU04YjQ3UFByWE8rSi1GLTM4QXdmUi1vK2Q0TjJmbGZsLUVqbDhQeDMzUFp1ZS1uLTd3Zjl2dy1jOTU0YnktMVh5djNYMUQzRHg2QmR6ZHc5emYwZDNqMEFNZnhieEFOZjNweU9YejBhVUZuWWhYWFIyZUh6eDZsV0REM1dCZ085d2YyQTBBamlCN0dDM1IxUUxOekVRRmhVRmNXd0tYendJSU5EeHQwR2g2elR4bVJnUHp5OW5IeWJVNlZZT3gxRHpyMDkxMTNQaUVOeGk4QUx5aGhtbEdUaGlSeUFLZjNUM1h6UnpFSnQxRUlkMUlCRU5EeTV6amtrT2tPaGpvRmhubWlsRjN6Z0RJT0FtYlV0aGdGVU0wUFVPRU5rRDBNMEs1dzBJN0NrTWhrTU9NUGhsTVBQMDZWc09OMjVIc0xFTHJ5Y0lDUEVPT1NvTGhCb0xJZzVIb1B0RVlPSUx3TUhrSVAwSThOa0ktZ1VLYldxVnFVNFA4TkxXdUY0SWlPQ0lrT2NKS0xjSU1QU1BrSjhLYlIyVDJULVNvRTJqeU1KQXgwS05DUHlMTGpLUGFQQ0xhTUpIY0tta3FKTU1KRE1KUlVRR3FCcVhxS2FOWkFLSnR4NkttSTZLS05LTjZqM0Q2SmtKaGprTUdKMkRTTFdJLWttTTR5aU02TG1JZ0czejExN2dZazhuaU4yeDJFOFc4VG9IaDJrUTVsMk9xQ1gxb05pS29BWUlZbkVCd1BVUHdKTlJIQWpXbVBqeG1KSEJhTHIzWUl1MDRMOXgyQUZBN1VDUGp6cnpNT3lQWWdFSVlnSUMrT3h4K0pTSTdEQUhFaVh4UlJIR3hOaE1kMkJJS0pDSTJtQkk0RUpsMktDMVFDTUhDTUtLMEtpaHp3QUM4ZTQrRGdOYWlZQjZpNEJOcEdUTnc3QWw5Q2poaWlZRUF4aWFTQmhTQW9vQ1Q2VFhEOW9jQ3pkK0pHZ01UVW9DaVhDSUMzZDNjaDVHVFk5NlN1Y3hzRUJpU21DRFRDaVpTNWl0Q0RpU1FWVHpTOWpTQlI4VFRxU0pTVjVBY2JseUJuUVhqeFMwOXdRekJIZ3VBRVFUVDBEd29RTVN4UFR2UzZBRVJCb1YxSVRITXBRMlJuU2prN2dIaG5oWTAraG1oNEY5UkRoVEIreGRBRlNDSXpBQmdFdzlOOVJFWTJSRHNCUXVRRXllQmNkc0pWZ2VKWXlOSlpCZ0JTQXZRcEJ3Ui1VRUFSU29BNVJBa0xBT0F2SlNCK0pGZ1ZNd0JUQlVOK3RyRExsc0lXUk10WmdJMFd3NHdFd0R0c0piUWR4dk0yUlhJeXluZ2tRWnhxejV5U3k2ejdnZHh0STVWQ2dZeDRoUm9rZ2FaSXc0QUV5LUV0elhKQ0pNdE10eXlHZ1doMmdPZ2poY0FRQjVoK1JrQk1CUUJDWkFrQ0JmelB5NGh2eUp3ZlU1Qk1CU0JrTThBdnpka3dLSUJhaElMb0xnS1lCUUw1Sm53a0xhVVlLUUs0TDVKRVJNTEV3VUswS2ZWQkFDTHNMVUxjS2ZWWDB5S2lMS0tJQlZBYUxZS2V4NUorQWFLQmhVSm13Q0FPQXZDaFFlZ2FLdUxrY1lSRUFzUVc0NEJxVnhCYVVXQStwSUMzZEVLOEJzUS1FT1FBQkhYTkNnTkFGZ0RvQ1hFQVFaRUFkS1dnYVpYOG5TLVVjbEdwUUNqQVlBTFFTeW9BQQ==" target="_blank">Assistant Link</a>
 
-3.  Convert the following C functions to assembly code, using the program stack to store local variables.
+3.  Convert the following C functions to assembly code.
 
     ```c
     void reverse_str(char *str, int start, int end) {
+        mystery_function();
         if (start >= end) return;
         char temp = str[start];
         str[start] = str[end];
         str[end] = temp;
-        reverse(str, start + 1, end - 1);
+        reverse_str(str, start + 1, end - 1);
     }
     ```
 
@@ -66,13 +68,13 @@ The memory space between `sp` and `fp` encompasses the stack frame of the curren
     } Node;
 
    int tree_depth(Node *root){
-        mysterious_function(root);
+        mystery_function();
         if (root == NULL){
             return 0;
         }
         int left = tree_depth(root->left);
         int right = tree_depth(root->right);
-        int max = left > right ? left : right
+        int max = (left > right) ? left : right;
         return max + 1;
     }
    ```
@@ -96,7 +98,7 @@ The memory space between `sp` and `fp` encompasses the stack frame of the curren
         }
 
         int i = 0, j = 0, k = left;
-        while (i < n1 && j < n2) {
+        while (i < n_left && j < n_right) {
             if (L[i] <= R[j]){
                 array[k++] = L[i++];
             } else {
@@ -104,15 +106,16 @@ The memory space between `sp` and `fp` encompasses the stack frame of the curren
             }
         }
 
-        while (i < n1) {
+        while (i < n_left) {
             array[k++] = L[i++];
         }
-        while (j < n2){
+        while (j < n_right){
             array[k++] = R[j++];
         }
     }
 
     void merge_sort(int* array, int left, int right) {
+        mystery_function();
         if (left < right) {
             int mid = left + (right - left) / 2;
             merge_sort(array, left, mid);
